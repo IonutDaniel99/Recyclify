@@ -3,7 +3,7 @@ import { StyleSheet, View, Alert, Text, Dimensions } from 'react-native'
 import BarcodeMask from 'react-native-barcode-mask'
 import { RNCamera } from 'react-native-camera'
 
-const CamperaBarcodeScanner = () => {
+const CamperaBarcodeScanner = ({ navigation }) => {
   const [globalbarcodes, setGlobalBarcodes] = useState()
   const [isCamDisable, setIsCamDisable] = useState(false)
   const viewfinderHeight = 200
@@ -28,8 +28,7 @@ const CamperaBarcodeScanner = () => {
       x: barcode.bounds.origin.x,
       y: barcode.bounds.origin.y,
     })
-    setGlobalBarcodes(`${barcode.data} / ${barcode.format} / ${barcode.type}`)
-    console.warn('Camera is Disabled')
+    setGlobalBarcodes(barcode)
     setIsCamDisable(true)
   }
 
@@ -39,7 +38,7 @@ const CamperaBarcodeScanner = () => {
   return (
     <View style={styles.container}>
       {isCamDisable ? (
-        <Text>{globalbarcodes}</Text>
+        () => navigation.navigate('ProductDetailsScreen', { globalbarcodes })
       ) : (
         <>
           <RNCamera

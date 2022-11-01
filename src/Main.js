@@ -8,7 +8,7 @@ export default function Main({ navigation }) {
   }
 
   const handleInsertBarCode = () => {
-    console.log('dadwa')
+    navigation.navigate('ProductDetailsScreen', { text: 'hello' })
   }
 
   return (
