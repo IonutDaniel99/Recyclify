@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "804203372642",
+    "project_id": "recyclify-10410",
+    "storage_bucket": "recyclify-10410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804203372642:android:087adf10fbe6a62f67313b",
+        "android_client_info": {
+          "package_name": "com.ionutdaniel.recyclify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804203372642-tg9h6nm30tmqlm8p5p0kg89cm2vkaj14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionutdaniel.recyclify",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "804203372642-40slgemmask7bfccfqus38anq5h1knpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkrDrf1xW2XFC1lofGmF1vbYMvV8PCaQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804203372642-40slgemmask7bfccfqus38anq5h1knpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

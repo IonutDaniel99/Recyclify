@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+// apply plugin: 'com.google.gms.google-services' // Uncomment this will generate gradle errors
 import com.android.build.OutputFile
 
 /**
@@ -140,7 +140,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
-missingDimensionStrategy 'react-native-camera', 'mlkit'
+        missingDimensionStrategy 'react-native-camera', 'mlkit'
 
         if (isNewArchitectureEnabled()) {
             // We configure the NDK build only if you decide to opt-in for the New Architecture.
@@ -233,7 +233,8 @@ missingDimensionStrategy 'react-native-camera', 'mlkit'
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            crunchPngs false
+            signingConfig signingConfigs.debug  
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -261,7 +262,7 @@ dependencies {
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
@@ -319,3 +320,5 @@ def isNewArchitectureEnabled() {
     // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
+
+
