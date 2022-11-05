@@ -1,13 +1,14 @@
 import { View, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
+import auth from '@react-native-firebase/auth'
 
 const LoginScreen = ({ navigation }) => {
   const [userInfoData, setUserInfoData] = useState()
 
   useEffect(() => {
     if (!userInfoData) return
-    navigation.navigate('MainScreen', { options: { userData: userInfoData } })
+    navigation.navigate('MainScreen', { userData: userInfoData })
   }, [userInfoData])
 
   GoogleSignin.configure({
@@ -22,6 +23,8 @@ const LoginScreen = ({ navigation }) => {
       console.log('reached google sign in')
       const userInfo = await GoogleSignin.signIn()
       setUserInfoData(userInfo)
+      const credential = auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
+      await auth().signInWithCredential(credential)
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log('error occured SIGN_IN_CANCELLED')

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, View, Text } from 'react-native'
 
-export default function Main({ navigation, route }) {
-  const { userData } = route.params.options
+const MainScreen = ({ navigation, route }) => {
+  const [userDetails, setUserDetails] = useState()
+
+  useEffect(() => {
+    setUserDetails(route.params.userData)
+    console.log(route.params.userData)
+  }, [])
+
   const handleScanBarCode = () => {
-    console.log('test')
     navigation.navigate('CameraBarcodeScanner')
   }
 
@@ -19,7 +24,7 @@ export default function Main({ navigation, route }) {
       <View style={styles.container}>
         <Button title='Scan BarCode' onPress={handleScanBarCode} />
         <Button title='Insert BarCode' onPress={handleInsertBarCode} />
-        {userData && <Text style={{ color: 'black' }}>{userData.user.name}</Text>}
+        {userDetails?.user ? <Text> {userDetails?.user.name} </Text> : <Text> {userDetails?.displayName} </Text>}
       </View>
     </View>
   )
@@ -44,3 +49,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 })
+
+export default MainScreen
