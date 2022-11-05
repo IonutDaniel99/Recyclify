@@ -1,4 +1,4 @@
-package com.recyclify.newarchitecture;
+package com.ionutdaniel.recyclify.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.recyclify.BuildConfig;
-import com.recyclify.newarchitecture.components.MainComponentsRegistry;
-import com.recyclify.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.ionutdaniel.recyclify.BuildConfig;
+import com.ionutdaniel.recyclify.newarchitecture.components.MainComponentsRegistry;
+import com.ionutdaniel.recyclify.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.recyclify.newarchitecture.components;
+package com.ionutdaniel.recyclify.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
