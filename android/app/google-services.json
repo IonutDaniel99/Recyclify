@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "804203372642-tg9h6nm30tmqlm8p5p0kg89cm2vkaj14.apps.googleusercontent.com",
+          "client_id": "804203372642-69p82vrqi230nm713d5iqnaks3557ium.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ionutdaniel.recyclify",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "273ba2dcb8d6d12af45c8e219b35d9393f3ee1cb"
           }
         },
         {
