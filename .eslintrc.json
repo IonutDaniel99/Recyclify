@@ -1,37 +1,46 @@
+// .eslintrc.json
 {
-  "extends": ["airbnb", "plugin:prettier/recommended"],
   "env": {
-    "jest": true,
-    "browser": true
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "react-native/react-native": true
   },
-  "rules": {
-    "import/no-extraneous-dependencies": "warn",
-    "import/prefer-default-export": "error",
-    "react/no-unused-prop-types": "error",
-    "react/prop-types": "error",
-    "react/react-in-jsx-scope": "error",
-    "react/jsx-pascal-case": "warn",
-    "no-confusing-arrow": "off",
-    "linebreak-style": "off",
-    "arrow-parens": ["error", "as-needed"],
-    "comma-dangle": [
-      "error",
-      {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "ignore"
-      }
-    ],
-    "no-plusplus": "off"
-  },
-  "parser": "babel-eslint",
-  "plugins": ["react"],
+  "extends": ["eslint:recommended", "airbnb", "airbnb-base"],
   "globals": {
-    "browser": true,
-    "$": true,
-    "before": true,
-    "document": true
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "react", "react-native"
+  ],
+  "rules": {
+    "semi":"off",
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "max-len": 0,
+    "no-use-before-define": 0,
+    "implicit-arrow-linebreak": 0,
+    "react/function-component-definition": 0,
+    "react-native/no-unused-styles": 2,
+    "object-curly-newline": 0,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 0,
+    "react-native/no-raw-text": 2,
+    "react-native/sort-styles": [
+      "error",
+      "desc",
+       {
+         "ignoreClassNames": false,
+         "ignoreStyleProperties": false
+       }
+     ]
   }
 }

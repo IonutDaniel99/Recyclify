@@ -4,7 +4,7 @@ import { useTailwind } from 'tailwind-rn'
 
 const ProductDetails = ({ route }) => {
   const tw = useTailwind()
-  const { text, ...otherParams } = route.params
+  const { text } = route.params
 
   console.log(route)
   return (

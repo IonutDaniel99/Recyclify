@@ -10,8 +10,9 @@
   "bracketSpacing": true,
   "bracketSameLine": false,
   "arrowParens": "always",
-  "endOfLine": "auto",
+  "endOfLine": "lf",
   "proseWrap": "always",
   "singleAttributePerLine": false,
   "embeddedLanguageFormatting": "auto"
+  
 }

@@ -1,9 +1,14 @@
-import { View, Text, Button } from 'react-native'
-import React, { useState } from 'react'
+import { View, Button } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 
 const LoginScreen = ({ navigation }) => {
   const [userInfoData, setUserInfoData] = useState()
+
+  useEffect(() => {
+    if (!userInfoData) return
+    navigation.navigate('MainScreen', { options: { userData: userInfoData } })
+  }, [userInfoData])
 
   GoogleSignin.configure({
     webClientId: '804203372642-40slgemmask7bfccfqus38anq5h1knpt.apps.googleusercontent.com',
@@ -34,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Button title='Google Sign-In' onPress={() => onGoogleButtonPress().then(() => navigation.navigate('MainScreen'))} />
+      <Button title='Google Sign-In' onPress={() => onGoogleButtonPress()} />
     </View>
   )
 }

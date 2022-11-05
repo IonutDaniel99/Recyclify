@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Button, StyleSheet, View, Text } from 'react-native'
 
-export default function Main({ navigation }) {
+export default function Main({ navigation, route }) {
+  const { userData } = route.params.options
   const handleScanBarCode = () => {
     console.log('test')
     navigation.navigate('CameraBarcodeScanner')
@@ -18,6 +19,7 @@ export default function Main({ navigation }) {
       <View style={styles.container}>
         <Button title='Scan BarCode' onPress={handleScanBarCode} />
         <Button title='Insert BarCode' onPress={handleInsertBarCode} />
+        {userData && <Text style={{ color: 'black' }}>{userData.user.name}</Text>}
       </View>
     </View>
   )
@@ -25,20 +27,20 @@ export default function Main({ navigation }) {
 
 const styles = StyleSheet.create({
   fullScreen: {
+    justifyContent: 'space-evenly',
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    flexDirection: 'column',
   },
 
   container: {
+    width: 200,
+    maxHeight: 150,
+    justifyContent: 'space-around',
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'column',
-    maxHeight: 150,
-    width: 200,
   },
 })

@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react'
-import { StyleSheet, View, Alert, Text, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import BarcodeMask from 'react-native-barcode-mask'
 import { RNCamera } from 'react-native-camera'
 
@@ -18,7 +18,7 @@ const CamperaBarcodeScanner = ({ navigation }) => {
   }
 
   const barcodeRecognizedGoogle = (detectedBarcodes) => {
-    if (detectedBarcodes.barcodes.length == 0) {
+    if (detectedBarcodes.barcodes.length === 0) {
       return
     }
     const barcode = detectedBarcodes.barcodes[0]
@@ -28,6 +28,7 @@ const CamperaBarcodeScanner = ({ navigation }) => {
       x: barcode.bounds.origin.x,
       y: barcode.bounds.origin.y,
     })
+    console.log(collidingBarcodes)
     setGlobalBarcodes(barcode)
     setIsCamDisable(true)
   }
@@ -43,12 +44,9 @@ const CamperaBarcodeScanner = ({ navigation }) => {
         <>
           <RNCamera
             style={{ flex: 1, alignItems: 'center' }}
-            ref={(ref) => {
-              this.camera = ref
-            }}
             onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
             captureAudio={false}
-            autoFocus={'on'}
+            autoFocus='on'
           />
 
           <BarcodeMask width={viewfinderWidth} height={viewfinderHeight} showAnimatedLine={false} transparency={0.8} />

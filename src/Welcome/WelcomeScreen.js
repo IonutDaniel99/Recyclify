@@ -1,7 +1,5 @@
-import React, { Component, useState } from 'react'
-import { StyleSheet, View, Alert, Text, Dimensions, Button } from 'react-native'
-import BarcodeMask from 'react-native-barcode-mask'
-import { RNCamera } from 'react-native-camera'
+import React from 'react'
+import { View, Text, Button } from 'react-native'
 
 const WelcomeScreen = ({ navigation }) => {
   const handleScanBarCode = () => {
