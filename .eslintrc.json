@@ -5,8 +5,12 @@
     "browser": true
   },
   "rules": {
-    "import/no-extraneous-dependencies": "off",
-    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "warn",
+    "import/prefer-default-export": "error",
+    "react/no-unused-prop-types": "error",
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/jsx-pascal-case": "warn",
     "no-confusing-arrow": "off",
     "linebreak-style": "off",
     "arrow-parens": ["error", "as-needed"],
