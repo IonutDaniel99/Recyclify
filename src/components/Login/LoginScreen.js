@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
       console.log('reached google sign in')
       const userInfo = await GoogleSignin.signIn()
       setUserInfoData(userInfo)
-      const credential = auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
+      const credential = auth.GoogleAuthProvider.credential(userInfo.idToken)
       await auth().signInWithCredential(credential)
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

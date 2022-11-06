@@ -9,7 +9,7 @@ const ProductDetails = ({ route }) => {
   console.log(route)
   return (
     <View style={tw('flex justify-center items-center w-full h-full')}>
-      <Text style={tw('text-red-400 text-4xl')}>{text}</Text>
+      <Text style={{ fontSize: 20, color: 'black' }}>{text}</Text>
     </View>
   )
 }

@@ -1,44 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import auth, { firebase } from '@react-native-firebase/auth'
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyA-grsnwv37u2G0mvHeoew4A14PsblAP-A',
-  authDomain: 'recyclify-10410.firebaseapp.com',
-  databaseURL: 'https://recyclify-10410-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'recyclify-10410',
-  storageBucket: 'recyclify-10410.appspot.com',
-  messagingSenderId: '804203372642',
-  appId: '1:804203372642:web:5402e04b70c37f4167313b',
-}
+import recyclifyLogo from '../../assets/images/appLogo.png'
+import firebaseConfig from '../../configs/firebase/firebaseWebConfig'
 
 const WelcomeScreen = ({ navigation }) => {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig)
-  }
+  // Initialization
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
+
+  // Constants
   const [users, setUsers] = useState()
+
+  // Effects
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged)
-    return subscriber // unsubscribe on unmount
+    return subscriber
   }, [])
 
+  // Functions
   function onAuthStateChanged(user) {
     setUsers(user)
   }
 
-  const handleLoginScreenRedirect = () => {
-    // console.log('Catre LoginScreen')
-    navigation.navigate('LoginScreen')
-  }
-
-  const handleMainScreen = () => {
-    // console.log('Catre LoginScreen')
-    navigation.navigate('MainScreen', { userData: users })
+  const handlePressToContinue = () => {
+    if (!users) {
+      navigation.navigate('LoginScreen')
+    } else {
+      navigation.navigate('MainScreen', { userData: users })
+    }
   }
 
   // const signOut = async () => {
   //   try {
-  //     console.log('avem')
   //     await GoogleSignin.revokeAccess()
   //     await GoogleSignin.signOut()
   //     auth()
@@ -49,14 +43,71 @@ const WelcomeScreen = ({ navigation }) => {
   //     console.error(error)
   //   }
   // }
-
   return (
-    <View>
-      {!users && <Button title='Catre Login' onPress={handleLoginScreenRedirect} />}
-      {users && <Button title='Catre Main' onPress={handleMainScreen} />}
-      <Text>Salut</Text>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.continueButton} onPress={handlePressToContinue}>
+        <View style={styles.continueView}>
+          <Text style={styles.continueText}>Press Here to Continue</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.logoView}>
+        <Image style={styles.logoImage} source={recyclifyLogo} />
+        <Text style={styles.logoText}>Recyclify</Text>
+      </View>
+      {/* {!users && <Button title='Catre Login' onPress={handleLoginScreenRedirect} />}
+      {users && <Button title='Catre Main' onPress={handleMainScreen} />} */}
     </View>
   )
 }
 
 export default WelcomeScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    height: '100%',
+    width: '100%',
+  },
+  continueButton: {
+    backgroundColor: '#f1f1f1',
+    height: '100%',
+    position: 'absolute',
+    width: '100%',
+  },
+  continueText: {
+    alignItems: 'flex-end',
+    color: 'black',
+    display: 'flex',
+    fontSize: 20,
+    fontWeight: '600',
+    margin: 24,
+  },
+  continueView: {
+    alignItems: 'center',
+    display: 'flex',
+    position: 'relative',
+    top: '65%',
+  },
+  logoImage: {
+    height: 120,
+    width: 120,
+    zIndex: 10,
+  },
+  logoText: {
+    alignItems: 'flex-end',
+    color: 'black',
+    display: 'flex',
+    fontSize: 24,
+    fontWeight: '500',
+    margin: 24,
+  },
+  logoView: {
+    alignItems: 'center',
+    display: 'flex',
+    height: 200,
+    justifyContent: 'center',
+    top: '20%',
+    width: '100%',
+  },
+})

@@ -9,7 +9,7 @@ import utilities from '../tailwind.json'
 
 import ProductDetails from './components/ProductDetailsComponent/ProductDetails'
 import WelcomeScreen from './components/Welcome/WelcomeScreen'
-import LoginScreen from './components/LoginScreen/LoginScreen'
+import LoginScreen from './components/Login/LoginScreen'
 import MainScreen from './components/Main/MainScreen'
 
 const Stack = createNativeStackNavigator()
@@ -34,6 +34,8 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
+            animation: 'fade',
+            animationTypeForReplace: 'pop',
           }}
         >
           <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />

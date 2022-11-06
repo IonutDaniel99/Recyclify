@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, View, Text } from 'react-native'
+import { firebase } from '@react-native-firebase/auth'
 
 const MainScreen = ({ navigation, route }) => {
   const [userDetails, setUserDetails] = useState()
 
   useEffect(() => {
     setUserDetails(route.params.userData)
-    console.log(route.params.userData)
   }, [])
 
   const handleScanBarCode = () => {
@@ -14,9 +14,8 @@ const MainScreen = ({ navigation, route }) => {
   }
 
   const handleInsertBarCode = () => {
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+    navigation.navigate('ProductDetailsScreen', { text: '156181351531' })
+    // console.log(firebase.auth().currentUser.uid)
   }
 
   return (
