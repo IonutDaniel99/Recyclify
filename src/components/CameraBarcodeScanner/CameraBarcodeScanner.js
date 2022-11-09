@@ -28,9 +28,11 @@ const CamperaBarcodeScanner = ({ navigation }) => {
       x: barcode.bounds.origin.x,
       y: barcode.bounds.origin.y,
     })
-    console.log(collidingBarcodes)
+
     setGlobalBarcodes(barcode)
     setIsCamDisable(true)
+    const { data, dataRaw, format, type } = barcode
+    navigation.navigate('ProductDetailsScreen', { barcodeData: { data, dataRaw, format, type } })
   }
 
   const aabb = (obj1, obj2) =>
@@ -38,9 +40,7 @@ const CamperaBarcodeScanner = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {isCamDisable ? (
-        () => navigation.navigate('ProductDetailsScreen', { globalbarcodes })
-      ) : (
+      {!isCamDisable && (
         <>
           <RNCamera
             style={{ flex: 1, alignItems: 'center' }}

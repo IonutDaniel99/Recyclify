@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, View, Text } from 'react-native'
 import { firebase } from '@react-native-firebase/auth'
 
-const MainScreen = ({ navigation, route }) => {
-  const [userDetails, setUserDetails] = useState()
+const mockData = { 'data': '59418720001542', 'dataRaw': 'TestData', 'format': 'EAN_13', 'type': 'PRODUCT' }
 
-  useEffect(() => {
-    setUserDetails(route.params.userData)
-  }, [])
+const MainScreen = ({ navigation }) => {
+  const [userDetails] = useState(firebase.auth().currentUser)
+
+  // useEffect(() => {
+  //   console.log('ConsoleLogUser', userDetails)
+  // }, [])
 
   const handleScanBarCode = () => {
     navigation.navigate('CameraBarcodeScanner')
   }
 
   const handleInsertBarCode = () => {
-    navigation.navigate('ProductDetailsScreen', { text: '156181351531' })
-    // console.log(firebase.auth().currentUser.uid)
+    navigation.navigate('ProductDetailsScreen', {
+      barcodeData: mockData,
+    })
   }
 
   return (
@@ -23,7 +26,7 @@ const MainScreen = ({ navigation, route }) => {
       <View style={styles.container}>
         <Button title='Scan BarCode' onPress={handleScanBarCode} />
         <Button title='Insert BarCode' onPress={handleInsertBarCode} />
-        {userDetails?.user ? <Text> {userDetails?.user.name} </Text> : <Text> {userDetails?.displayName} </Text>}
+        <Text style={styles.text}> {userDetails?.displayName} </Text>
       </View>
     </View>
   )
@@ -46,6 +49,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fff',
     alignItems: 'center',
+  },
+  text: {
+    color: 'black',
+    fontSize: 24,
   },
 })
 
