@@ -1,0 +1,31 @@
+module.exports = {
+  root: true,
+  extends: '@react-native-community',
+  'rules': {
+    'semi': 'off',
+    'max-len': 0,
+    'no-use-before-define': 0,
+    'implicit-arrow-linebreak': 0,
+    'react/function-component-definition': 0,
+    'react-native/no-unused-styles': 2,
+    'object-curly-newline': 0,
+    'no-shadow': 0,
+    'no-trailing-spaces': 0,
+    'react/prop-types': 0,
+    'import/no-named-as-default': 0,
+    'import/no-named-as-default-member': 0,
+    'react/jsx-filename-extension': 0,
+    'react/jsx-one-expression-per-line': 0,
+    'react-native/split-platform-components': 2,
+    'react-native/no-inline-styles': 0,
+    'react-native/no-raw-text': 2,
+    'react-native/sort-styles': [
+      'warn',
+      'asc',
+      {
+        'ignoreClassNames': false,
+        'ignoreStyleProperties': false,
+      },
+    ],
+  },
+}

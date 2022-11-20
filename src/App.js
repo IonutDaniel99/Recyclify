@@ -1,11 +1,9 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { TailwindProvider } from 'tailwind-rn'
 import { firebase } from '@react-native-firebase/auth'
 import { LogBox } from 'react-native'
 import CamperaBarcodeScanner from './components/CameraBarcodeScanner/CameraBarcodeScanner'
-import utilities from '../tailwind.json'
 
 import ProductDetails from './components/ProductDetailsComponent/ProductDetails'
 import WelcomeScreen from './components/Welcome/WelcomeScreen'
@@ -29,23 +27,21 @@ const App = () => {
     firebase.initializeApp(firebaseConfig)
   }
   return (
-    <TailwindProvider utilities={utilities}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            animation: 'fade',
-            animationTypeForReplace: 'pop',
-          }}
-        >
-          <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
-          <Stack.Screen name='LoginScreen' component={LoginScreen} />
-          <Stack.Screen name='MainScreen' component={MainScreen} />
-          <Stack.Screen name='CameraBarcodeScanner' component={CamperaBarcodeScanner} />
-          <Stack.Screen name='ProductDetailsScreen' component={ProductDetails} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </TailwindProvider>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: 'fade',
+          animationTypeForReplace: 'pop',
+        }}
+      >
+        <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
+        <Stack.Screen name='LoginScreen' component={LoginScreen} />
+        <Stack.Screen name='MainScreen' component={MainScreen} />
+        <Stack.Screen name='CameraBarcodeScanner' component={CamperaBarcodeScanner} />
+        <Stack.Screen name='ProductDetailsScreen' component={ProductDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
