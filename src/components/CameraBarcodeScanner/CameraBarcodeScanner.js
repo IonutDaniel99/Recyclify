@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Dimensions } from 'react-native'
 import BarcodeMask from 'react-native-barcode-mask'
 import { RNCamera } from 'react-native-camera'
+import { barcodeMockData } from '../../mocks/mocks'
 
 const CamperaBarcodeScanner = ({ navigation }) => {
   const [globalbarcodes, setGlobalBarcodes] = useState()
-  const [isCamDisable, setIsCamDisable] = useState(false)
+  const [isCamDisable, setIsCamDisable] = useState(true)
+  useEffect(() => {
+    const timeout = setTimeout(() => navigation.navigate('ProductDetailsScreen', { barcodeData: barcodeMockData }), 400)
+    return () => {
+      setIsCamDisable(true)
+      clearTimeout(timeout)
+    }
+  }, [])
+
   const viewfinderHeight = 200
   const viewfinderWidth = 300
 

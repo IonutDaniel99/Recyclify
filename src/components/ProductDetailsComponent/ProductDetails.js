@@ -1,14 +1,27 @@
-import { View, Text } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import React from 'react'
+import { ProductDetailsStyle } from './ProductDetailsStyle'
+import { barcodeMockData } from '../../mocks/mocks'
 
 const ProductDetails = ({ route }) => {
-  const { data, dataRaw, format, type } = route.params.barcodeData
+  // const { data, dataRaw, format, type } = route.params.barcodeData
+  const { data, dataRaw, format, type } = barcodeMockData
+  const [number, onChangeNumber] = React.useState(data)
+  const style = ProductDetailsStyle
   return (
-    <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
-      <Text style={{ fontSize: 20, color: 'black' }}>barcode: {data}</Text>
-      <Text style={{ fontSize: 20, color: 'black' }}>dataRaw: {dataRaw}</Text>
-      <Text style={{ fontSize: 20, color: 'black' }}>format: {format}</Text>
-      <Text style={{ fontSize: 20, color: 'black' }}>type: {type}</Text>
+    <View style={style.screenContainer}>
+      <View style={style.searchContainer}>
+        <View style={style.searchInput}>
+          <TextInput
+            onChangeText={(val) => onChangeNumber(val.replace(/[^0-9]/g, ''))}
+            value={number}
+            keyboardType='numeric'
+          />
+        </View>
+        <View style={style.searchButton}>
+          <Text>Search 🔍</Text>
+        </View>
+      </View>
     </View>
   )
 }

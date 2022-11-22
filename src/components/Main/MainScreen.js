@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, View, Text } from 'react-native'
 import { firebase } from '@react-native-firebase/auth'
-
-const mockData = { 'data': '59418720001542', 'dataRaw': 'TestData', 'format': 'EAN_13', 'type': 'PRODUCT' }
+import { barcodeMockData } from '../../mocks/mocks'
 
 const MainScreen = ({ navigation }) => {
   const [userDetails] = useState(firebase.auth().currentUser)
@@ -17,7 +16,7 @@ const MainScreen = ({ navigation }) => {
 
   const handleInsertBarCode = () => {
     navigation.navigate('ProductDetailsScreen', {
-      barcodeData: mockData,
+      barcodeData: barcodeMockData,
     })
   }
 

@@ -10,8 +10,9 @@ module.exports = {
   bracketSpacing: true,
   bracketSameLine: false,
   arrowParens: 'always',
-  endOfLine: 'lf',
+  endOfLine: 'crlf',
   proseWrap: 'always',
   singleAttributePerLine: false,
   embeddedLanguageFormatting: 'auto',
-};
+}
+

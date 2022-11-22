@@ -10,21 +10,21 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-navigation/native": "^6.0.13",
-    "@react-navigation/native-stack": "^6.9.1",
     "@react-native-firebase/app": "^16.4.1",
     "@react-native-firebase/auth": "^16.4.2",
     "@react-native-google-signin/google-signin": "^8.1.0",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.1",
+    "deprecated-react-native-prop-types": "^2.3.0",
     "react": "18.0.0",
     "react-native": "0.69.0",
     "react-native-barcode-mask": "^1.2.4",
     "react-native-camera": "^4.2.1",
+    "react-native-linear-gradient": "^2.6.2",
     "react-native-safe-area-context": "^4.4.1",
-    "react-native-screens": "^3.18.2",
-    "deprecated-react-native-prop-types": "^2.3.0"
+    "react-native-screens": "^3.18.2"
   },
   "devDependencies": {
-    "patch-package": "^6.5.0",
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
@@ -32,6 +32,7 @@
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.70.3",
+    "patch-package": "^6.5.0",
     "react-test-renderer": "18.0.0"
   },
   "jest": {

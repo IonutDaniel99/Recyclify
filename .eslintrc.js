@@ -19,9 +19,8 @@ module.exports = {
     'react-native/split-platform-components': 2,
     'react-native/no-inline-styles': 0,
     'react-native/no-raw-text': 2,
+    'jsx-quotes': 0,
     'react-native/sort-styles': [
-      'warn',
-      'asc',
       {
         'ignoreClassNames': false,
         'ignoreStyleProperties': false,

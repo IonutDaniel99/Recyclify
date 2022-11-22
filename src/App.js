@@ -9,17 +9,10 @@ import ProductDetails from './components/ProductDetailsComponent/ProductDetails'
 import WelcomeScreen from './components/Welcome/WelcomeScreen'
 import LoginScreen from './components/Login/LoginScreen'
 import MainScreen from './components/Main/MainScreen'
+import firebaseConfig from './configs/firebase/firebaseWebConfig'
 
 const Stack = createNativeStackNavigator()
-const firebaseConfig = {
-  apiKey: 'AIzaSyA-grsnwv37u2G0mvHeoew4A14PsblAP-A',
-  authDomain: 'recyclify-10410.firebaseapp.com',
-  databaseURL: 'https://recyclify-10410-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'recyclify-10410',
-  storageBucket: 'recyclify-10410.appspot.com',
-  messagingSenderId: '804203372642',
-  appId: '1:804203372642:web:5402e04b70c37f4167313b',
-}
+
 LogBox.ignoreLogs(['Non-serializable values were found in the navigation state'])
 
 const App = () => {
@@ -31,7 +24,7 @@ const App = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          animation: 'fade',
+          animation: 'slide_from_right',
           animationTypeForReplace: 'pop',
         }}
       >
