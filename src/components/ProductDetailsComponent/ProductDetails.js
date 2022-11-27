@@ -7,6 +7,7 @@ const ProductDetails = ({ route }) => {
   const style = ProductDetailsStyle
   const { data, dataRaw, format, type } = route.params.barcodeData
   const [number, onChangeNumber] = useState(null || dataRaw)
+  const [isLoading, setIsLoading] = useState(true)
   const [text, setText] = useState('')
 
   useEffect(() => {
@@ -15,7 +16,10 @@ const ProductDetails = ({ route }) => {
   }, [])
 
   const getProduct = async () => {
-    await getProductOrNull(number).then((res) => (res.val() !== null ? setText(res.val()) : setText('error')))
+    setIsLoading(true)
+    await getProductOrNull(number)
+      .then((res) => (res.val() !== null ? setText(res.val()) : setText('error')))
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -27,9 +31,7 @@ const ProductDetails = ({ route }) => {
         <Button title='Search 🔍' style={style.searchButton} onPress={() => getProduct()} />
       </View>
 
-      <View>
-        <Text>Data: {text}</Text>
-      </View>
+      <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {text}</Text>}</View>
     </View>
   )
 }

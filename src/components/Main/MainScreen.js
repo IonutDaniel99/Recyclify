@@ -17,7 +17,7 @@ const MainScreen = ({ navigation }) => {
 
   const handleInsertBarCode = () => {
     navigation.navigate('ProductDetailsScreen', {
-      barcodeData: barcodeMockData,
+      barcodeData: { 'data': null, 'dataRaw': null, 'format': null, 'type': null },
     })
   }
 
