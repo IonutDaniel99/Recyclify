@@ -1,26 +1,34 @@
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
-import { barcodeMockData } from '../../mocks/mocks'
+import { getAllDb, getProductOrNull } from '../../configs/firebase/firebaseHelpers'
 
 const ProductDetails = ({ route }) => {
-  // const { data, dataRaw, format, type } = route.params.barcodeData
-  const { data, dataRaw, format, type } = barcodeMockData
-  const [number, onChangeNumber] = React.useState(data)
   const style = ProductDetailsStyle
+  const { data, dataRaw, format, type } = route.params.barcodeData
+  const [number, onChangeNumber] = useState(null || dataRaw)
+  const [text, setText] = useState('')
+
+  useEffect(() => {
+    if (!number) return
+    getProduct()
+  }, [])
+
+  const getProduct = async () => {
+    await getProductOrNull(number).then((res) => (res.val() !== null ? setText(res.val()) : setText('error')))
+  }
+
   return (
     <View style={style.screenContainer}>
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
-          <TextInput
-            onChangeText={(val) => onChangeNumber(val.replace(/[^0-9]/g, ''))}
-            value={number}
-            keyboardType='numeric'
-          />
+          <TextInput onChangeText={(val) => onChangeNumber(val.replace(/[^0-9]/g, ''))} value={number} keyboardType='numeric' />
         </View>
-        <View style={style.searchButton}>
-          <Text>Search 🔍</Text>
-        </View>
+        <Button title='Search 🔍' style={style.searchButton} onPress={() => getProduct()} />
+      </View>
+
+      <View>
+        <Text>Data: {text}</Text>
       </View>
     </View>
   )

@@ -3,19 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth'
 
+import { GoogleSingInConfigs } from '../../configs/google/googleSignInConfig'
+
 const LoginScreen = ({ navigation }) => {
+  GoogleSignin.configure(GoogleSingInConfigs)
+
   const [userInfoData, setUserInfoData] = useState()
 
   useEffect(() => {
-    if (!userInfoData) return
-    navigation.navigate('MainScreen', { userData: userInfoData })
+    if (userInfoData) navigation.navigate('MainScreen', { userData: userInfoData })
   }, [userInfoData])
-
-  GoogleSignin.configure({
-    webClientId: '804203372642-40slgemmask7bfccfqus38anq5h1knpt.apps.googleusercontent.com',
-    androidClientId: '804203372642-69p82vrqi230nm713d5iqnaks3557ium.apps.googleusercontent.com',
-    offlineAccess: true,
-  })
 
   async function onGoogleButtonPress() {
     try {
@@ -48,3 +45,4 @@ const LoginScreen = ({ navigation }) => {
 }
 
 export default LoginScreen
+

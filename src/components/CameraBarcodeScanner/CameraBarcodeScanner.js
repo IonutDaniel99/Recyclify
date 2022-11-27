@@ -5,12 +5,9 @@ import { RNCamera } from 'react-native-camera'
 import { barcodeMockData } from '../../mocks/mocks'
 
 const CamperaBarcodeScanner = ({ navigation }) => {
-  const [globalbarcodes, setGlobalBarcodes] = useState()
-  const [isCamDisable, setIsCamDisable] = useState(true)
   useEffect(() => {
     const timeout = setTimeout(() => navigation.navigate('ProductDetailsScreen', { barcodeData: barcodeMockData }), 400)
     return () => {
-      setIsCamDisable(true)
       clearTimeout(timeout)
     }
   }, [])
@@ -38,8 +35,6 @@ const CamperaBarcodeScanner = ({ navigation }) => {
       y: barcode.bounds.origin.y,
     })
 
-    setGlobalBarcodes(barcode)
-    setIsCamDisable(true)
     const { data, dataRaw, format, type } = barcode
     navigation.navigate('ProductDetailsScreen', { barcodeData: { data, dataRaw, format, type } })
   }
@@ -49,18 +44,15 @@ const CamperaBarcodeScanner = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {!isCamDisable && (
-        <>
-          <RNCamera
-            style={{ flex: 1, alignItems: 'center' }}
-            onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
-            captureAudio={false}
-            autoFocus='on'
-          />
-
-          <BarcodeMask width={viewfinderWidth} height={viewfinderHeight} showAnimatedLine={false} transparency={0.8} />
-        </>
-      )}
+      <>
+        <RNCamera
+          style={{ flex: 1, alignItems: 'center' }}
+          onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
+          captureAudio={false}
+          autoFocus='on'
+        />
+        <BarcodeMask width={viewfinderWidth} height={viewfinderHeight} showAnimatedLine={false} transparency={0.8} />
+      </>
     </View>
   )
 }
@@ -73,3 +65,4 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 })
+

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, View, Text } from 'react-native'
 import { firebase } from '@react-native-firebase/auth'
 import { barcodeMockData } from '../../mocks/mocks'
+import { nullOrCreateCollectionsOnFirebase, writeDataToFirebase } from '../../configs/firebase/firebaseHelpers'
 
 const MainScreen = ({ navigation }) => {
-  const [userDetails] = useState(firebase.auth().currentUser)
+  const [userDetails] = useState('ngBXQ1ASgcMS6PrHgekw6HZNX5s2')
+  // const [userDetails] = useState(firebase.auth().currentUser)
 
-  // useEffect(() => {
-  //   console.log('ConsoleLogUser', userDetails)
-  // }, [])
+  //Initialization if none
+  nullOrCreateCollectionsOnFirebase()
 
   const handleScanBarCode = () => {
     navigation.navigate('CameraBarcodeScanner')
@@ -25,7 +26,7 @@ const MainScreen = ({ navigation }) => {
       <View style={styles.container}>
         <Button title='Scan BarCode' onPress={handleScanBarCode} />
         <Button title='Insert BarCode' onPress={handleInsertBarCode} />
-        <Text style={styles.text}> {userDetails?.displayName} </Text>
+        <Text style={styles.text}> {userDetails} </Text>
       </View>
     </View>
   )
@@ -51,8 +52,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 24,
+    fontSize: 14,
   },
 })
 
 export default MainScreen
+

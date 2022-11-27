@@ -1,3 +1,7 @@
+import app from '@react-native-firebase/app'
+import database from '@react-native-firebase/database'
+import auth from '@react-native-firebase/auth'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyA-grsnwv37u2G0mvHeoew4A14PsblAP-A',
   authDomain: 'recyclify-10410.firebaseapp.com',
@@ -8,4 +12,8 @@ const firebaseConfig = {
   appId: '1:804203372642:web:5402e04b70c37f4167313b',
 }
 
-export default firebaseConfig
+export const firebaseApp = app
+export const firebaseAppInit = app.initializeApp(firebaseConfig)
+export const firebaseDb = database
+export const firebaseAuth = auth
+

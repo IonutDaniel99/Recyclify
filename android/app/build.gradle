@@ -272,6 +272,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation platform('com.google.firebase:firebase-bom:31.0.2')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    // implementation project(path: ":@react-native-firebase/database")
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
