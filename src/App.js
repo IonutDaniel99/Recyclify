@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { LogBox } from 'react-native'
+import { LogBox, Text, View } from 'react-native'
 import CamperaBarcodeScanner from './components/CameraBarcodeScanner/CameraBarcodeScanner'
 
 import ProductDetails from './components/ProductDetailsComponent/ProductDetails'
@@ -28,11 +28,26 @@ const App = () => {
           animationTypeForReplace: 'pop',
         }}
       >
-        {/* <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} /> */}
-        {/* <Stack.Screen name='LoginScreen' component={LoginScreen} /> */}
-        <Stack.Screen name='MainScreen' component={MainScreen} />
-        <Stack.Screen name='CameraBarcodeScanner' component={CamperaBarcodeScanner} />
-        <Stack.Screen name='ProductDetailsScreen' component={ProductDetails} />
+        <Stack.Screen
+          name='WelcomeScreen'
+          component={WelcomeScreen}
+        />
+        <Stack.Screen
+          name='LoginScreen'
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name='MainScreen'
+          component={MainScreen}
+        />
+        <Stack.Screen
+          name='CameraBarcodeScanner'
+          component={CamperaBarcodeScanner}
+        />
+        <Stack.Screen
+          name='ProductDetailsScreen'
+          component={ProductDetails}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

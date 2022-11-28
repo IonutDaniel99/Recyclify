@@ -4,11 +4,15 @@ module.exports = {
   'rules': {
     'semi': 'off',
     'max-len': 0,
+    'curly': 0,
     'no-use-before-define': 0,
     'implicit-arrow-linebreak': 0,
+    'react-hooks/exhaustive-deps': 0,
     'react/function-component-definition': 0,
     'react-native/no-unused-styles': 2,
     'object-curly-newline': 0,
+    'react/jsx-curly-spacing': 2,
+    'react-native/split-platform-components': 0,
     'no-shadow': 0,
     'no-trailing-spaces': 0,
     'react/prop-types': 0,
@@ -16,15 +20,9 @@ module.exports = {
     'import/no-named-as-default-member': 0,
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
-    'react-native/split-platform-components': 2,
     'react-native/no-inline-styles': 0,
     'react-native/no-raw-text': 2,
     'jsx-quotes': 0,
-    'react-native/sort-styles': [
-      {
-        'ignoreClassNames': false,
-        'ignoreStyleProperties': false,
-      },
-    ],
+    'react-native/sort-styles': 0,
   },
 }

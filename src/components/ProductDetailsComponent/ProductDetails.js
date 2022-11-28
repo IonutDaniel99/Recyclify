@@ -1,23 +1,27 @@
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
-import { getAllDb, getProductOrNull } from '../../configs/firebase/firebaseHelpers'
+import { getProductOrNull } from '../../configs/firebase/firebaseHelpers'
 
 const ProductDetails = ({ route }) => {
   const style = ProductDetailsStyle
   const { data, dataRaw, format, type } = route.params.barcodeData
-  const [number, onChangeNumber] = useState(null || dataRaw)
+
+  const [productCodeNumber, setProductCodeNumber] = useState(null || dataRaw)
   const [isLoading, setIsLoading] = useState(true)
+
   const [text, setText] = useState('')
+  const [isInitialView, setIsInitialView] = useState(true)
 
   useEffect(() => {
-    if (!number) return
+    if (!productCodeNumber) return
     getProduct()
   }, [])
 
   const getProduct = async () => {
+    setIsInitialView(false)
     setIsLoading(true)
-    await getProductOrNull(number)
+    await getProductOrNull(productCodeNumber)
       .then((res) => (res.val() !== null ? setText(res.val()) : setText('error')))
       .finally(() => setIsLoading(false))
   }
@@ -26,12 +30,19 @@ const ProductDetails = ({ route }) => {
     <View style={style.screenContainer}>
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
-          <TextInput onChangeText={(val) => onChangeNumber(val.replace(/[^0-9]/g, ''))} value={number} keyboardType='numeric' />
+          <TextInput
+            onChangeText={(val) => setProductCodeNumber(val.replace(/[^0-9]/g, ''))}
+            value={productCodeNumber}
+            keyboardType='numeric'
+          />
         </View>
-        <Button title='Search 🔍' style={style.searchButton} onPress={() => getProduct()} />
+        <Button
+          title='Search 🔍'
+          style={style.searchButton}
+          onPress={() => getProduct()}
+        />
       </View>
-
-      <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {text}</Text>}</View>
+      {isInitialView ? <Text> Initial View </Text> : <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {text}</Text>}</View>}
     </View>
   )
 }

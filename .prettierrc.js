@@ -12,7 +12,6 @@ module.exports = {
   arrowParens: 'always',
   endOfLine: 'crlf',
   proseWrap: 'always',
-  singleAttributePerLine: false,
+  singleAttributePerLine: true,
   embeddedLanguageFormatting: 'auto',
 }
-
