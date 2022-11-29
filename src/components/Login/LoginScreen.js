@@ -6,7 +6,8 @@ import auth from '@react-native-firebase/auth'
 import { GoogleSingInConfigs } from '../../configs/google/googleSignInConfig'
 import { LoginScreenStyle } from './LoginScreenStyle'
 
-import DropShadow from 'react-native-drop-shadow'
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
+import IconFeather from 'react-native-vector-icons/Feather'
 
 const LoginScreen = ({ navigation }) => {
   const style = LoginScreenStyle
@@ -14,12 +15,24 @@ const LoginScreen = ({ navigation }) => {
 
   const [userInfoData, setUserInfoData] = useState()
 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [isPassSecured, setIsPassSecured] = useState(true)
+
   useEffect(() => {
     if (userInfoData) navigation.navigate('MainScreen', { userData: userInfoData })
   }, [userInfoData])
 
   const showToast = (message) => {
     ToastAndroid.show(message, ToastAndroid.SHORT)
+  }
+
+  const handleForgotPassword = () => {
+    console.log('Forgot Password')
+  }
+
+  const handleEmailAndPasswordLogin = () => {
+    console.log(`username: ${username} / password: ${password}`)
   }
 
   async function onGoogleButtonPress() {
@@ -45,25 +58,68 @@ const LoginScreen = ({ navigation }) => {
     }
   }
 
+  async function onFacebookButtonPress() {
+    console.log('on Facebook login')
+  }
+
+  async function onMicrosoftButtonPress() {
+    console.log('on Microsoft login')
+  }
+
+  async function onAppleButtonPress() {
+    console.log('on Apple login')
+  }
+  async function onAccountCreate() {
+    console.log('on account Create')
+  }
   return (
     <View style={style.container}>
       <Text style={style.loginText}>Login</Text>
       <View style={style.inputsContainer}>
         <View style={style.inputFieldContainer}>
-          <TextInput
-            value='user'
-            style={style.userInput}
-          />
-          <TextInput
-            value='pass'
-            style={style.passInput}
-          />
+          <View style={style.userInputContainer}>
+            <Icon
+              name='user'
+              style={style.userIcon}
+            />
+            <TextInput
+              style={style.userInput}
+              value={username}
+              keyboardType='email-address'
+              placeholder='E-mail'
+              onChangeText={(val) => setUsername(val)}
+            />
+          </View>
+          <View style={style.userInputContainer}>
+            <Icon
+              name='lock'
+              style={style.passIcon}
+            />
+            <TextInput
+              style={style.passInput}
+              value={password}
+              placeholder='Password'
+              secureTextEntry={isPassSecured}
+              onChangeText={(val) => setPassword(val)}
+            />
+            <IconFeather
+              name={isPassSecured ? 'eye' : 'eye-off'}
+              style={style.eyeIcon}
+              onPress={() => setIsPassSecured(!isPassSecured)}
+            />
+          </View>
         </View>
-        <Text style={style.textInput}>Forgot password?</Text>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => handleForgotPassword()}
+        >
+          <Text style={style.textInput}>Forgot password?</Text>
+        </TouchableOpacity>
       </View>
       <TouchableOpacity
+        activeOpacity={0.8}
         style={style.loginButtonContainer}
-        onPress={(e) => console.log('f')}
+        onPress={() => handleEmailAndPasswordLogin()}
       >
         <Text style={style.loginButtonText}>Login</Text>
       </TouchableOpacity>
@@ -71,35 +127,44 @@ const LoginScreen = ({ navigation }) => {
         <Text style={style.socialText}>Or Sign Up Using</Text>
         <View style={style.socialButtons}>
           <TouchableOpacity
+            activeOpacity={0.8}
             style={style.appButtonContainer}
-            onPress={(e) => onGoogleButtonPress()}
+            onPress={() => onGoogleButtonPress()}
           >
             <Image source={require('../../assets/images/Google.png')} />
           </TouchableOpacity>
           <TouchableOpacity
+            activeOpacity={0.8}
             style={style.appButtonContainer}
-            onPress={(e) => console.log('g')}
+            onPress={() => onFacebookButtonPress()}
           >
             <Image source={require('../../assets/images/Facebook.png')} />
           </TouchableOpacity>
           <TouchableOpacity
+            activeOpacity={0.8}
             style={style.appButtonContainer}
-            onPress={(e) => console.log('m')}
+            onPress={() => onMicrosoftButtonPress()}
           >
             <Image source={require('../../assets/images/Microsoft.png')} />
           </TouchableOpacity>
           <TouchableOpacity
+            activeOpacity={0.8}
             style={style.appButtonContainer}
-            onPress={(e) => console.log('a')}
+            onPress={() => onAppleButtonPress()}
           >
             <Image source={require('../../assets/images/Apple.png')} />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={style.noAccount}>
-        <Text>Dont have an account?</Text>
-        <Text style={style.create}>Create</Text>
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => onAccountCreate()}
+      >
+        <View style={style.noAccount}>
+          <Text>Dont have an account?</Text>
+          <Text style={style.create}>Create</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -34,7 +34,10 @@ export const LoginScreenStyle = StyleSheet.create({
     height: 120,
   },
 
-  userInput: {
+  userInputContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     height: 50,
     borderWidth: 2,
     borderRadius: 20,
@@ -47,17 +50,46 @@ export const LoginScreenStyle = StyleSheet.create({
     paddingLeft: 20,
   },
 
+  userIcon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.75,
+    width: 24,
+    height: 24,
+    fontSize: 22,
+    marginRight: 10,
+  },
+
+  userInput: {
+    width: '70%',
+  },
+
+  passIcon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.75,
+    width: 24,
+    height: 24,
+    fontSize: 22,
+    marginRight: 10,
+  },
+
   passInput: {
-    height: 50,
-    borderWidth: 2,
-    borderRadius: 20,
-    borderColor: '#E8E8E8',
-    paddingLeft: 20,
+    width: '70%',
+  },
+  eyeIcon: {
+    fontSize: 22,
+    width: 24,
+    height: 24,
+    marginLeft: 10,
+    opacity: 0.75,
   },
 
   textInput: {
     textAlign: 'right',
-    color: 'rgba(102, 102, 102, 0.5)',
+    color: 'rgba(100, 100, 100, 0.5)',
     fontWeight: '500',
     fontSize: 14,
   },

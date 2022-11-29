@@ -47,11 +47,23 @@ const WelcomeScreen = ({ navigation }) => {
   //   }
   // }
   return (
-    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#BBFF62', '#1D6000']} style={style.container}>
-      <TouchableOpacity activeOpacity={1} style={style.TouchableOpacity} onPress={handlePressToContinue}>
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      colors={['#BBFF62', '#1D6000']}
+      style={style.container}
+    >
+      <TouchableOpacity
+        activeOpacity={1}
+        style={style.TouchableOpacity}
+        onPress={handlePressToContinue}
+      >
         <View style={style.logoContainer}>
           <View style={style.logoView}>
-            <Image style={style.logoImage} source={recyclifyLogo} />
+            <Image
+              style={style.logoImage}
+              source={recyclifyLogo}
+            />
           </View>
           <Text style={style.logoText}>Welcome to Recyclify</Text>
         </View>
@@ -65,4 +77,3 @@ const WelcomeScreen = ({ navigation }) => {
 }
 
 export default WelcomeScreen
-

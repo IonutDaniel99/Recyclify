@@ -13,6 +13,7 @@ import com.ionutdaniel.recyclify.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

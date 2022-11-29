@@ -1,3 +1,4 @@
+const unixDate = Math.floor(new Date().getTime())
 export const mockProduct = {
   prodName: 'Denis',
   ecoType: 'plastic',
@@ -8,6 +9,8 @@ export const mockProduct = {
     fats: 40,
     sugars: 10,
   },
+  createdAt: unixDate,
+  modifiedAt: unixDate,
 }
 
 const mockContainers = ['e-waste', 'plastic', 'metal', 'glass', 'paper', 'organic']

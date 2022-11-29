@@ -22,7 +22,7 @@ const ProductDetails = ({ route }) => {
     setIsInitialView(false)
     setIsLoading(true)
     await getProductOrNull(productCodeNumber)
-      .then((res) => (res.val() !== null ? setText(res.val()) : setText('error')))
+      .then((res) => (res.val() !== null ? setText(res.val()) : setText('Produsul nu exista')))
       .finally(() => setIsLoading(false))
   }
 

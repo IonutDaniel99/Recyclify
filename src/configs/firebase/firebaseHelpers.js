@@ -1,11 +1,9 @@
 import { mockProduct } from '../../mocks/mockProd'
 import { firebaseDb } from './firebaseWebConfig'
 
-// export const getAllDbRef = firebaseDb().ref
-
 export const nullOrCreateCollectionsOnFirebase = () => {
-  firebaseDb().ref(`users/`).update({ '_0': 0 })
-  firebaseDb().ref(`products/`).update({ 'mockProduct': mockProduct })
+  firebaseDb().ref('users/').update({ 'mockUser': 0 })
+  firebaseDb().ref('products/').update({ 'mockProduct': mockProduct })
 }
 
 export const writeDataToFirebase = (path, data) => {

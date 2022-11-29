@@ -24,8 +24,14 @@ const MainScreen = ({ navigation }) => {
   return (
     <View style={styles.fullScreen}>
       <View style={styles.container}>
-        <Button title='Scan BarCode' onPress={handleScanBarCode} />
-        <Button title='Insert BarCode' onPress={handleInsertBarCode} />
+        <Button
+          title='Scan BarCode'
+          onPress={handleScanBarCode}
+        />
+        <Button
+          title='Insert BarCode'
+          onPress={handleInsertBarCode}
+        />
         <Text style={styles.text}> {userDetails} </Text>
       </View>
     </View>
@@ -57,4 +63,3 @@ const styles = StyleSheet.create({
 })
 
 export default MainScreen
-
