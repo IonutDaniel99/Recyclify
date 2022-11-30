@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
   const [isPassSecured, setIsPassSecured] = useState(true)
 
   useEffect(() => {
-    if (userInfoData) navigation.navigate('MainScreen', { userData: userInfoData })
+    if (userInfoData) navigation.navigate('TabsNavigator', { userData: userInfoData })
   }, [userInfoData])
 
   const showToast = (message) => {
