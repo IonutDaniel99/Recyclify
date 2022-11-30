@@ -6,7 +6,7 @@ import { mockProduct } from '../../mocks/mockProd'
 
 const ProductDetails = ({ route }) => {
   const style = ProductDetailsStyle
-  const { data, dataRaw, format, type } = route?.params?.barcodeData || mockProduct
+  const { data, dataRaw, format, type } = route.params.barcodeData
 
   const [productCodeNumber, setProductCodeNumber] = useState(null || dataRaw)
   const [isLoading, setIsLoading] = useState(true)

@@ -23,6 +23,8 @@ const TabsNavigatorComponent = ({ navigation }) => {
           animationTypeForReplace: 'pop',
         }}
         initialRouteName='HomeScreen'
+        backBehavior='none'
+        sceneAnimationEnabled='true'
         barStyle={{ backgroundColor: '#007500' }}
       >
         <Tab.Screen
