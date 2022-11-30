@@ -2,10 +2,11 @@ import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getProductOrNull } from '../../configs/firebase/firebaseHelpers'
+import { mockProduct } from '../../mocks/mockProd'
 
 const ProductDetails = ({ route }) => {
   const style = ProductDetailsStyle
-  const { data, dataRaw, format, type } = route.params.barcodeData
+  const { data, dataRaw, format, type } = route?.params?.barcodeData || mockProduct
 
   const [productCodeNumber, setProductCodeNumber] = useState(null || dataRaw)
   const [isLoading, setIsLoading] = useState(true)

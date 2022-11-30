@@ -4,7 +4,7 @@ import BarcodeMask from 'react-native-barcode-mask'
 import { RNCamera } from 'react-native-camera'
 import { barcodeMockData } from '../../mocks/mocks'
 
-const CamperaBarcodeScanner = ({ navigation }) => {
+const CameraBarcodeScanner = ({ navigation }) => {
   useEffect(() => {
     const timeout = setTimeout(() => navigation.navigate('ProductDetailsScreen', { barcodeData: barcodeMockData }), 400)
     return () => {
@@ -51,13 +51,18 @@ const CamperaBarcodeScanner = ({ navigation }) => {
           captureAudio={false}
           autoFocus='on'
         />
-        <BarcodeMask width={viewfinderWidth} height={viewfinderHeight} showAnimatedLine={false} transparency={0.8} />
+        <BarcodeMask
+          width={viewfinderWidth}
+          height={viewfinderHeight}
+          showAnimatedLine={false}
+          transparency={0.8}
+        />
       </>
     </View>
   )
 }
 
-export default CamperaBarcodeScanner
+export default CameraBarcodeScanner
 
 const styles = StyleSheet.create({
   container: {
@@ -65,4 +70,3 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 })
-

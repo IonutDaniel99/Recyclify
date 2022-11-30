@@ -1,16 +1,12 @@
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { LogBox, Text, View } from 'react-native'
-import CamperaBarcodeScanner from './components/CameraBarcodeScanner/CameraBarcodeScanner'
+import React, { useEffect } from 'react'
 
-import ProductDetails from './components/ProductDetailsComponent/ProductDetails'
-import WelcomeScreen from './components/Welcome/WelcomeScreen'
-import LoginScreen from './components/Login/LoginScreen'
-import MainScreen from './components/Main/MainScreen'
+import { Alert, BackHandler, LogBox } from 'react-native'
+
 import { firebaseApp, firebaseAppInit } from './configs/firebase/firebaseWebConfig'
 
-const Stack = createNativeStackNavigator()
+import { NavigationContainer } from '@react-navigation/native'
+import ScreenNavigatorComponent from './common/ScreenNavigatorComponent'
+import { handleHardwareBackAction } from './helpers/handleBackButton'
 
 LogBox.ignoreLogs(['Non-serializable values were found in the navigation state'])
 
@@ -18,37 +14,14 @@ const App = () => {
   if (!firebaseApp.apps.length) {
     firebaseAppInit()
   }
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleHardwareBackAction)
+    return () => BackHandler.removeEventListener('hardwareBackPress', handleHardwareBackAction)
+  }, [])
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          animation: 'slide_from_right',
-          animationTypeForReplace: 'pop',
-        }}
-      >
-        <Stack.Screen
-          name='WelcomeScreen'
-          component={WelcomeScreen}
-        />
-        <Stack.Screen
-          name='LoginScreen'
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name='MainScreen'
-          component={MainScreen}
-        />
-        <Stack.Screen
-          name='CameraBarcodeScanner'
-          component={CamperaBarcodeScanner}
-        />
-        <Stack.Screen
-          name='ProductDetailsScreen'
-          component={ProductDetails}
-        />
-      </Stack.Navigator>
+      <ScreenNavigatorComponent />
     </NavigationContainer>
   )
 }

@@ -30,7 +30,7 @@ const WelcomeScreen = ({ navigation }) => {
     if (!users) {
       navigation.navigate('LoginScreen')
     } else {
-      navigation.navigate('MainScreen', { userData: users })
+      navigation.navigate('TabsNavigator', { userData: users })
     }
   }
 
