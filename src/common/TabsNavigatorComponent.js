@@ -9,6 +9,7 @@ import CameraBarcodeScanner from '../components/CameraBarcodeScanner/CameraBarco
 import SettingsScreen from '../components/Settings/SettingsScreen'
 import Home from '../components/Home/HomeScreen'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import HomeScreen from '../components/Home/HomeScreen'
 
 // const Tab = createBottomTabNavigator()
 const Tab = createMaterialBottomTabNavigator()
@@ -57,7 +58,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
         />
         <Tab.Screen
           name='HomeScreen'
-          component={Home}
+          component={HomeScreen}
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (

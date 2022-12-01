@@ -16,4 +16,3 @@ export const firebaseApp = app
 export const firebaseAppInit = app.initializeApp(firebaseConfig)
 export const firebaseDb = database
 export const firebaseAuth = auth
-

@@ -1,18 +1,28 @@
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
-import { getProductOrNull } from '../../configs/firebase/firebaseHelpers'
-import { mockProduct } from '../../mocks/mockProd'
+import { getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
+import { barcodeMockData } from '../../mocks/mocks'
+import { useFocusEffect } from '@react-navigation/native'
+import { firebase } from '@react-native-firebase/auth'
 
 const ProductDetails = ({ route }) => {
   const style = ProductDetailsStyle
-  const { data, dataRaw, format, type } = route.params.barcodeData
-
-  const [productCodeNumber, setProductCodeNumber] = useState(null || dataRaw)
+  const { uid } = firebase.auth().currentUser
+  const [productCodeNumber, setProductCodeNumber] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
-  const [text, setText] = useState('')
+  const [product, setProduct] = useState('')
   const [isInitialView, setIsInitialView] = useState(true)
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (!route.params) return
+      const { data, dataRaw, format, type } = route.params?.barcodeData
+      setProductCodeNumber(dataRaw)
+      return () => {}
+    }, [route.params]),
+  )
 
   useEffect(() => {
     if (!productCodeNumber) return
@@ -23,10 +33,18 @@ const ProductDetails = ({ route }) => {
     setIsInitialView(false)
     setIsLoading(true)
     await getProductOrNull(productCodeNumber)
-      .then((res) => (res.val() !== null ? setText(res.val()) : setText('Produsul nu exista')))
-      .finally(() => setIsLoading(false))
+      .then((res) => {
+        if (res.val() !== null) {
+          setProduct(res.val())
+          writeDataToUser(uid, res.val())
+        } else {
+          setProduct({ prodName: 'Produsul nu exista' })
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
-
   return (
     <View style={style.screenContainer}>
       <View style={style.searchContainer}>
@@ -43,7 +61,11 @@ const ProductDetails = ({ route }) => {
           onPress={() => getProduct()}
         />
       </View>
-      {isInitialView ? <Text> Initial View </Text> : <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {text}</Text>}</View>}
+      {isInitialView ? (
+        <Text> Initial View </Text>
+      ) : (
+        <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {product.prodName}</Text>}</View>
+      )}
     </View>
   )
 }

@@ -6,7 +6,7 @@ import { barcodeMockData } from '../../mocks/mocks'
 
 const CameraBarcodeScanner = ({ navigation }) => {
   useEffect(() => {
-    const timeout = setTimeout(() => navigation.navigate('ProductDetailsScreen', { barcodeData: barcodeMockData }), 400)
+    const timeout = setTimeout(() => navigation.navigate('ProductDetailsScreen', { barcodeData: barcodeMockData }), 1000)
     return () => {
       clearTimeout(timeout)
     }
