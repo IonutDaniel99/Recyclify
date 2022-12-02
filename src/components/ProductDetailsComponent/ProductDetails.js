@@ -20,19 +20,25 @@ const ProductDetails = ({ route }) => {
       if (!route.params) return
       const { data, dataRaw, format, type } = route.params?.barcodeData
       setProductCodeNumber(dataRaw)
-      return () => {}
+      getProductFromFirebase(dataRaw)
+      return () => {
+        console.log('d', product)
+        setProductCodeNumber('')
+        setProduct('')
+        route.params = undefined
+      }
     }, [route.params]),
   )
 
   useEffect(() => {
     if (!productCodeNumber) return
-    getProduct()
+    getProductFromFirebase()
   }, [])
 
-  const getProduct = async () => {
+  const getProductFromFirebase = async (barcodeNumber) => {
     setIsInitialView(false)
     setIsLoading(true)
-    await getProductOrNull(productCodeNumber)
+    await getProductOrNull(productCodeNumber || barcodeNumber)
       .then((res) => {
         if (res.val() !== null) {
           setProduct(res.val())
@@ -58,13 +64,13 @@ const ProductDetails = ({ route }) => {
         <Button
           title='Search 🔍'
           style={style.searchButton}
-          onPress={() => getProduct()}
+          onPress={() => getProductFromFirebase()}
         />
       </View>
       {isInitialView ? (
         <Text> Initial View </Text>
       ) : (
-        <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {product.prodName}</Text>}</View>
+        <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {product.prodName ? 'da' : 'nu'}</Text>}</View>
       )}
     </View>
   )
