@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Dimensions } from 'react-native'
 import BarcodeMask from 'react-native-barcode-mask'
@@ -5,15 +6,19 @@ import { RNCamera } from 'react-native-camera'
 import { barcodeMockData } from '../../mocks/mocks'
 
 const CameraBarcodeScanner = ({ navigation }) => {
-  useEffect(() => {
-    const timeout = setTimeout(() => navigation.navigate('ProductDetailsScreen', { barcodeData: barcodeMockData }), 1000)
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [])
-
   const viewfinderHeight = 200
   const viewfinderWidth = 300
+
+  const [isCameraEnable, setIsCameraEnable] = useState(true)
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setIsCameraEnable(true)
+      return () => {
+        console.log('test', new Date().getSeconds())
+      }
+    }, []),
+  )
 
   const { height: windowHeight, width: windowWidth } = Dimensions.get('window')
   const viewFinderBounds = {
@@ -34,7 +39,7 @@ const CameraBarcodeScanner = ({ navigation }) => {
       x: barcode.bounds.origin.x,
       y: barcode.bounds.origin.y,
     })
-
+    setIsCameraEnable(false)
     const { data, dataRaw, format, type } = barcode
     navigation.navigate('ProductDetailsScreen', { barcodeData: { data, dataRaw, format, type } })
   }
@@ -44,20 +49,22 @@ const CameraBarcodeScanner = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <>
-        <RNCamera
-          style={{ flex: 1, alignItems: 'center' }}
-          onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
-          captureAudio={false}
-          autoFocus='on'
-        />
-        <BarcodeMask
-          width={viewfinderWidth}
-          height={viewfinderHeight}
-          showAnimatedLine={false}
-          transparency={0.8}
-        />
-      </>
+      {isCameraEnable && (
+        <>
+          <RNCamera
+            style={{ flex: 1, alignItems: 'center' }}
+            onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
+            captureAudio={false}
+            autoFocus='on'
+          />
+          <BarcodeMask
+            width={viewfinderWidth}
+            height={viewfinderHeight}
+            showAnimatedLine={false}
+            transparency={0.8}
+          />
+        </>
+      )}
     </View>
   )
 }

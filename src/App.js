@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { Alert, BackHandler, LogBox } from 'react-native'
+import { BackHandler, LogBox } from 'react-native'
 
 import { firebaseApp, firebaseAppInit } from './configs/firebase/firebaseWebConfig'
 

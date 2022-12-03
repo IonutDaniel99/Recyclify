@@ -6,13 +6,14 @@ import { barcodeMockData } from '../../mocks/mocks'
 import { useFocusEffect } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
 
-const ProductDetails = ({ route }) => {
+const ProductDetails = ({ route, navigation }) => {
   const style = ProductDetailsStyle
   const { uid } = firebase.auth().currentUser
-  const [productCodeNumber, setProductCodeNumber] = useState(0)
+  const [productCodeNumber, setProductCodeNumber] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isSearchDisable, setIsSearchDisabled] = useState(false)
 
-  const [product, setProduct] = useState('')
+  const [product, setProduct] = useState({})
   const [isInitialView, setIsInitialView] = useState(true)
 
   useFocusEffect(
@@ -20,31 +21,56 @@ const ProductDetails = ({ route }) => {
       if (!route.params) return
       const { data, dataRaw, format, type } = route.params?.barcodeData
       setProductCodeNumber(dataRaw)
-      return () => {}
-    }, [route.params]),
+      setIsSearchDisabled(false)
+      getProduct(dataRaw)
+      return () => setProductCodeNumber('')
+    }, [route.params?.barcodeData]),
   )
 
   useEffect(() => {
-    if (!productCodeNumber) return
-    getProduct()
-  }, [])
+    productCodeNumber === '' ? setIsSearchDisabled(true) : setIsSearchDisabled(false)
+  }, [productCodeNumber])
 
-  const getProduct = async () => {
-    setIsInitialView(false)
+  const handleSearchButton = () => {
+    if (productCodeNumber === '') return
+    getProduct(productCodeNumber)
+  }
+
+  const handleResetProductsView = () => {
+    setProductCodeNumber('')
+    setIsInitialView(true)
+  }
+  const handleAddNewItemScreen = () => {
+    Alert.alert('', 'This product doesnt exist! Would u like to add?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      { text: 'YES', onPress: () => navigation.navigate('ProductAdd', { barcode: productCodeNumber }) },
+    ])
+    return true
+  }
+
+  const getProduct = async (barcode) => {
     setIsLoading(true)
-    await getProductOrNull(productCodeNumber)
+    await getProductOrNull(barcode)
       .then((res) => {
         if (res.val() !== null) {
           setProduct(res.val())
           writeDataToUser(uid, res.val())
         } else {
-          setProduct({ prodName: 'Produsul nu exista' })
+          handleAddNewItemScreen()
+          setIsInitialView(true)
+          return
         }
       })
       .finally(() => {
+        setIsInitialView(false)
         setIsLoading(false)
       })
   }
+
   return (
     <View style={style.screenContainer}>
       <View style={style.searchContainer}>
@@ -58,13 +84,33 @@ const ProductDetails = ({ route }) => {
         <Button
           title='Search 🔍'
           style={style.searchButton}
-          onPress={() => getProduct()}
+          onPress={() => handleSearchButton()}
+          disabled={isSearchDisable}
+        />
+        <Button
+          title='Reset'
+          style={style.searchButton}
+          onPress={() => handleResetProductsView()}
         />
       </View>
       {isInitialView ? (
         <Text> Initial View </Text>
       ) : (
-        <View>{isLoading ? <Text>Loading</Text> : <Text>Data: {product.prodName}</Text>}</View>
+        <View>
+          {isLoading ? (
+            <Text>Loading</Text>
+          ) : (
+            <View>
+              {Object.entries(product).map((v) => {
+                if (typeof v[1] === 'object') {
+                  Object.entries(v[1]).map((y) => <Text>{y}</Text>)
+                } else {
+                  return <Text>{v[1]}</Text>
+                }
+              })}
+            </View>
+          )}
+        </View>
       )}
     </View>
   )

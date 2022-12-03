@@ -30,6 +30,21 @@ export const mockProduct = {
     createdAt: unixDate,
     modifiedAt: unixDate,
   },
+  59418720001542: {
+    barCode: 59418720001542,
+    prodName: '59418720001542',
+    ecoType: 'plastic',
+    containeFoodOrLiquid: true,
+    manufacturer: 'Coca Cola',
+    ingredients: ['sugar', 'milk', 'water'],
+    nutritioalValues: {
+      carbohydrates: 40,
+      fats: 40,
+      sugars: 10,
+    },
+    createdAt: unixDate,
+    modifiedAt: unixDate,
+  },
 }
 
 const mockContainers = ['e-waste', 'plastic', 'metal', 'glass', 'paper', 'organic']

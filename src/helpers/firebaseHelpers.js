@@ -26,3 +26,5 @@ export const writeDataToUser = (uid, product) => {
 }
 
 export const getProductOrNull = (productCodeNumber) => firebaseDb().ref(`products/${productCodeNumber}`).once('value')
+
+export const saveProductToFirebase = (productObject) => firebaseDb().ref('products/').update(productObject)
