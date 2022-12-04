@@ -101,11 +101,11 @@ const ProductDetails = ({ route, navigation }) => {
             <Text>Loading</Text>
           ) : (
             <View>
-              {Object.entries(product).map((v) => {
+              {Object.entries(product).map((v, id) => {
                 if (typeof v[1] === 'object') {
-                  Object.entries(v[1]).map((y) => <Text>{y}</Text>)
+                  Object.entries(v[1]).map((y) => <Text key={id}>{y}</Text>)
                 } else {
-                  return <Text>{v[1]}</Text>
+                  return <Text key={id}>{v[1]}</Text>
                 }
               })}
             </View>
