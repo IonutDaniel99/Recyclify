@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button, Alert, InteractionManager } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
@@ -18,14 +18,29 @@ const ProductDetails = ({ route, navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (!route.params) return
-      const { data, dataRaw, format, type } = route.params?.barcodeData
-      setProductCodeNumber(dataRaw)
-      setIsSearchDisabled(false)
-      getProduct(dataRaw)
-      return () => setProductCodeNumber('')
+      const task = InteractionManager.runAfterInteractions(() => {
+        if (!route.params) return
+        const { data, dataRaw, format, type } = route.params?.barcodeData
+        setProductCodeNumber(dataRaw)
+        setIsSearchDisabled(false)
+        getProduct(dataRaw)
+        // Expensive task
+      })
+
+      return () =>
+        setTimeout(() => {
+          resetScreen(task)
+        }, 1000)
     }, [route.params?.barcodeData]),
   )
+
+  const resetScreen = (task) => {
+    route.params = null
+    setIsInitialView(true)
+    setIsLoading(false)
+    setProductCodeNumber('')
+    task.cancel()
+  }
 
   useEffect(() => {
     productCodeNumber === '' ? setIsSearchDisabled(true) : setIsSearchDisabled(false)
@@ -59,14 +74,14 @@ const ProductDetails = ({ route, navigation }) => {
         if (res.val() !== null) {
           setProduct(res.val())
           writeDataToUser(uid, res.val())
+          setIsInitialView(false)
         } else {
-          handleAddNewItemScreen()
           setIsInitialView(true)
+          handleAddNewItemScreen()
           return
         }
       })
       .finally(() => {
-        setIsInitialView(false)
         setIsLoading(false)
       })
   }

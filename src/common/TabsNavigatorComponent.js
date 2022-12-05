@@ -10,9 +10,10 @@ import SettingsScreen from '../components/Settings/SettingsScreen'
 import Home from '../components/Home/HomeScreen'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import HomeScreen from '../components/Home/HomeScreen'
+import { Text } from 'react-native'
 
-// const Tab = createBottomTabNavigator()
-const Tab = createMaterialBottomTabNavigator()
+const Tab = createBottomTabNavigator()
+// const Tab = createMaterialBottomTabNavigator()
 
 const TabsNavigatorComponent = ({ navigation }) => {
   return (
@@ -22,6 +23,14 @@ const TabsNavigatorComponent = ({ navigation }) => {
           headerShown: false,
           animation: 'slide_from_right',
           animationTypeForReplace: 'pop',
+          tabBarStyle: {
+            marginBottom: 25,
+            marginHorizontal: 20,
+            paddingHorizontal: 20,
+            paddingBottom: 5,
+            borderRadius: 50,
+            height: 60,
+          },
         }}
         initialRouteName='HomeScreen'
         backBehavior='none'
@@ -32,7 +41,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='ProfileScreen'
           component={PorfileScreen}
           options={{
-            tabBarLabel: 'Profile',
+            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Profile</Text>,
             tabBarIcon: ({ color }) => (
               <Icon
                 name='user'
@@ -46,7 +55,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='CameraBarcodeScanner'
           component={CameraBarcodeScanner}
           options={{
-            tabBarLabel: 'Scan',
+            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Scan</Text>,
             tabBarIcon: ({ color }) => (
               <Icon
                 name='camera'
@@ -60,7 +69,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='HomeScreen'
           component={HomeScreen}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Home</Text>,
             tabBarIcon: ({ color }) => (
               <Icon
                 name='home'
@@ -74,10 +83,10 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='ProductDetailsScreen'
           component={ProductDetails}
           options={{
-            tabBarLabel: 'Products',
+            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Product</Text>,
             tabBarIcon: ({ color }) => (
               <Icon
-                name='file'
+                name='box'
                 color={color}
                 size={24}
               />
@@ -88,7 +97,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='SettingsScreen'
           component={SettingsScreen}
           options={{
-            tabBarLabel: 'Settings',
+            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Settings</Text>,
             tabBarIcon: ({ color }) => (
               <Icon
                 name='settings'
