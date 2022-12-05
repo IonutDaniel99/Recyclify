@@ -3,45 +3,35 @@ import React from 'react'
 import ProductDetails from '../components/ProductDetailsComponent/ProductDetails'
 
 import Icon from 'react-native-vector-icons/Feather'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import PorfileScreen from '../components/Profile/ProfileScreen'
 import CameraBarcodeScanner from '../components/CameraBarcodeScanner/CameraBarcodeScanner'
 import SettingsScreen from '../components/Settings/SettingsScreen'
-import Home from '../components/Home/HomeScreen'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import HomeScreen from '../components/Home/HomeScreen'
-import { Text } from 'react-native'
+import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar'
 
-const Tab = createBottomTabNavigator()
-// const Tab = createMaterialBottomTabNavigator()
+const Tab = AnimatedTabBarNavigator()
 
 const TabsNavigatorComponent = ({ navigation }) => {
   return (
     <>
       <Tab.Navigator
-        screenOptions={{
-          headerShown: false,
-          animation: 'slide_from_right',
-          animationTypeForReplace: 'pop',
-          tabBarStyle: {
-            marginBottom: 25,
-            marginHorizontal: 20,
-            paddingHorizontal: 20,
-            paddingBottom: 5,
-            borderRadius: 50,
-            height: 60,
-          },
+        tabBarOptions={{
+          activeBackgroundColor: '#00B000',
+          activeTintColor: '#FEFCF3',
+        }}
+        appearance={{
+          floating: true,
+          whenInactiveShow: 'icon-only',
         }}
         initialRouteName='HomeScreen'
         backBehavior='none'
         sceneAnimationEnabled='true'
-        barStyle={{ backgroundColor: '#007500' }}
       >
         <Tab.Screen
           name='ProfileScreen'
           component={PorfileScreen}
           options={{
-            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Profile</Text>,
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
               <Icon
                 name='user'
@@ -55,7 +45,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='CameraBarcodeScanner'
           component={CameraBarcodeScanner}
           options={{
-            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Scan</Text>,
+            tabBarLabel: 'Scan',
             tabBarIcon: ({ color }) => (
               <Icon
                 name='camera'
@@ -69,7 +59,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='HomeScreen'
           component={HomeScreen}
           options={{
-            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Home</Text>,
+            tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (
               <Icon
                 name='home'
@@ -83,7 +73,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='ProductDetailsScreen'
           component={ProductDetails}
           options={{
-            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Product</Text>,
+            tabBarLabel: 'Product',
             tabBarIcon: ({ color }) => (
               <Icon
                 name='box'
@@ -97,7 +87,7 @@ const TabsNavigatorComponent = ({ navigation }) => {
           name='SettingsScreen'
           component={SettingsScreen}
           options={{
-            tabBarLabel: ({ focused }) => focused && <Text style={{ fontSize: 10 }}>Settings</Text>,
+            tabBarLabel: 'Settings',
             tabBarIcon: ({ color }) => (
               <Icon
                 name='settings'
