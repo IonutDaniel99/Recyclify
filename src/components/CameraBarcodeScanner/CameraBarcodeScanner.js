@@ -15,7 +15,7 @@ const CameraBarcodeScanner = ({ navigation }) => {
     React.useCallback(() => {
       setIsCameraEnable(true)
       return () => {
-        console.log('test', new Date().getSeconds())
+        setIsCameraEnable(false)
       }
     }, []),
   )
