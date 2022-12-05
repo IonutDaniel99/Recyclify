@@ -29,20 +29,20 @@ const CameraBarcodeScanner = ({ navigation }) => {
   }
 
   const barcodeRecognizedGoogle = (detectedBarcodes) => {
-    if (detectedBarcodes.barcodes.length === 0) {
-      return
-    }
+    if (detectedBarcodes.barcodes.length === 0) return
     const barcode = detectedBarcodes.barcodes[0]
-    const collidingBarcodes = !aabb(viewFinderBounds, {
+    if (!collidingBarcodes(barcode)) return
+    setIsCameraEnable(false)
+    navigation.navigate('ProductDetailsScreen', { barcodeData: barcode })
+  }
+
+  const collidingBarcodes = (barcode) =>
+    !aabb(viewFinderBounds, {
       height: barcode.bounds.size.height,
       width: barcode.bounds.size.width,
       x: barcode.bounds.origin.x,
       y: barcode.bounds.origin.y,
     })
-    setIsCameraEnable(false)
-    const { data, dataRaw, format, type } = barcode
-    navigation.navigate('ProductDetailsScreen', { barcodeData: { data, dataRaw, format, type } })
-  }
 
   const aabb = (obj1, obj2) =>
     obj1.x < obj2.x + obj2.width && obj1.x + obj1.width > obj2.x && obj1.y < obj2.y + obj2.height && obj1.y + obj1.height > obj2.y

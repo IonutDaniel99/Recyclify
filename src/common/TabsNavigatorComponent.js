@@ -8,7 +8,6 @@ import CameraBarcodeScanner from '../components/CameraBarcodeScanner/CameraBarco
 import SettingsScreen from '../components/Settings/SettingsScreen'
 import HomeScreen from '../components/Home/HomeScreen'
 import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Tab = AnimatedTabBarNavigator()
 

@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-
+import com.horcrux.svg.SvgPackage;
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =

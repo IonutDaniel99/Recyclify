@@ -1,13 +1,17 @@
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 import React, { useState } from 'react'
 import { Checkbox } from 'react-native-paper'
 import { saveProductToFirebase } from '../../helpers/firebaseHelpers'
 import DropDownPicker from 'react-native-dropdown-picker'
+import { ProductAddStyle } from './ProductAddStyle'
+import Icon from 'react-native-vector-icons/Feather'
+import Barcode from '@kichiyaki/react-native-barcode-generator'
 
 const ProductAdd = ({ route, navigation }) => {
-  const rawCode = route.params.barcode
-
-  const [barcode, setBarCode] = useState(rawCode)
+  const style = ProductAddStyle
+  const rawCode = route?.params?.barcode
+  console.log(rawCode)
+  const [barcode, setBarCode] = useState(rawCode) //TODO: change to rawCode
   const [containFoodOrLiquid, setContainFoodOrLiquid] = useState(false)
   const [createdAt, setCreatedAt] = useState(Math.floor(new Date().getTime()))
   const [ecoType, setEcoType] = useState(null)
@@ -55,10 +59,28 @@ const ProductAdd = ({ route, navigation }) => {
   }
 
   return (
-    <View>
-      <Button
-        title='Back'
-        onPress={() => navigation.goBack()}
+    <View style={style.screenContainer}>
+      <View style={style.BackAndTitleContainer}>
+        <TouchableOpacity
+          style={style.BackIconStyle}
+          onPress={() => navigation.goBack()}
+        >
+          <Icon
+            name='arrow-left'
+            color={'#fff'}
+            size={28}
+          />
+        </TouchableOpacity>
+        <View style={style.AddProductTextView}>
+          <Text style={style.AddProductText}>Add Product</Text>
+        </View>
+      </View>
+      <Barcode
+        format='EAN13'
+        value={rawCode}
+        text={rawCode}
+        height={40}
+        maxWidth={Dimensions.get('window').width / 2}
       />
       <TextInput
         onChangeText={(val) => setBarCode(val.replace(/[^0-9]/g, ''))}
