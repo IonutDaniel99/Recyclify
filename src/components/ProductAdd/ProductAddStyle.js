@@ -40,6 +40,7 @@ export const ProductAddStyle = StyleSheet.create({
   ScrollViewZone: {
     marginHorizontal: 10,
     paddingVertical: 20,
+    display: 'flex',
   },
 
   barCodeView: {
@@ -47,6 +48,7 @@ export const ProductAddStyle = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
+
   barCodeText: {
     background: 'blue',
     textAlign: 'center',
@@ -58,5 +60,36 @@ export const ProductAddStyle = StyleSheet.create({
   barCodeZone: {
     backgroundColor: 'green',
     width: '50%',
+  },
+
+  ProductNameStyle: {
+    marginTop: 20,
+    borderWidth: 1,
+    borderRadius: 6,
+    borderColor: '#D0D0D0',
+    paddingLeft: 20,
+  },
+
+  ManufactureNameStyle: {
+    marginTop: 20,
+    borderWidth: 1,
+    borderRadius: 6,
+    borderColor: '#D0D0D0',
+    paddingLeft: 20,
+  },
+
+  ProductTypeTextStyle: {
+    marginTop: 20,
+    color: '#000',
+  },
+
+  ProductTypeZoneStyle: {
+    height: 180,
+    display: 'flex',
+  },
+  ProductContainerStyle: {
+    backgroundColor: 'gray',
+    width: 80,
+    height: 80,
   },
 })

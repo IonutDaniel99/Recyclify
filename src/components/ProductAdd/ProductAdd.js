@@ -93,6 +93,27 @@ const ProductAdd = ({ route, navigation }) => {
             <Text style={style.barCodeText}>{data}</Text>
           )}
         </View>
+        <TextInput
+          style={style.ProductNameStyle}
+          onChangeText={(val) => setProdName(val)}
+          value={prodName}
+          placeholder='Product Name'
+        />
+
+        <TextInput
+          style={style.ManufactureNameStyle}
+          onChangeText={(val) => setManufacture(val)}
+          value={manufacture}
+          placeholder='Company Name'
+        />
+        <Text style={style.ProductTypeTextStyle}>Product Eco Type</Text>
+        <View style={style.ProductTypeZoneStyle}>
+          {items.map((x) => (
+            <View style={style.ProductContainerStyle}>
+              <Text>{x.label}</Text>
+            </View>
+          ))}
+        </View>
 
         <Checkbox
           status={containFoodOrLiquid ? 'checked' : 'unchecked'}
@@ -101,20 +122,6 @@ const ProductAdd = ({ route, navigation }) => {
           }}
         />
         <Text>Contain Food or Liquid?</Text>
-        <TextInput
-          onChangeText={(val) => setEcoType(val)}
-          value={ecoType}
-          placeholder='ecoType'
-        />
-        <DropDownPicker
-          open={open}
-          value={ecoType}
-          items={items}
-          setOpen={setOpen}
-          setValue={setEcoType}
-          setItems={setItems}
-          maxHeight={300}
-        />
         <TextInput
           value={ingredient}
           onChangeText={(val) => setIngredient(val)}
@@ -129,16 +136,6 @@ const ProductAdd = ({ route, navigation }) => {
             <Text key={index}>{x}</Text>
           ))}
         </View>
-        <TextInput
-          onChangeText={(val) => setManufacture(val)}
-          value={manufacture}
-          placeholder='manufacture'
-        />
-        <TextInput
-          onChangeText={(val) => setProdName(val)}
-          value={prodName}
-          placeholder='product name'
-        />
 
         <Button
           title='Save'
