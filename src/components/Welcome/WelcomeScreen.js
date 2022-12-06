@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import auth, { firebase } from '@react-native-firebase/auth'
 import LinearGradient from 'react-native-linear-gradient'
 
-import recyclifyLogo from '../../assets/images/appLogo.png'
+import recyclifyLogo from '../../assets/images/Login/appLogo.png'
 import firebaseConfig from '../../configs/firebase/firebaseWebConfig'
 import { WelcomeScreenStyle } from './WelcomeScreenStyle'
 

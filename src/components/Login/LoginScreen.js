@@ -131,28 +131,28 @@ const LoginScreen = ({ navigation }) => {
             style={style.appButtonContainer}
             onPress={() => onGoogleButtonPress()}
           >
-            <Image source={require('../../assets/images/Google.png')} />
+            <Image source={require('../../assets/images/Login/Google.png')} />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
             style={style.appButtonContainer}
             onPress={() => onFacebookButtonPress()}
           >
-            <Image source={require('../../assets/images/Facebook.png')} />
+            <Image source={require('../../assets/images/Login/Facebook.png')} />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
             style={style.appButtonContainer}
             onPress={() => onMicrosoftButtonPress()}
           >
-            <Image source={require('../../assets/images/Microsoft.png')} />
+            <Image source={require('../../assets/images/Login/Microsoft.png')} />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
             style={style.appButtonContainer}
             onPress={() => onAppleButtonPress()}
           >
-            <Image source={require('../../assets/images/Apple.png')} />
+            <Image source={require('../../assets/images/Login/Apple.png')} />
           </TouchableOpacity>
         </View>
       </View>

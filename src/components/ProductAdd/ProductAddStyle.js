@@ -38,8 +38,8 @@ export const ProductAddStyle = StyleSheet.create({
   },
 
   ScrollViewZone: {
-    marginHorizontal: 10,
-    paddingVertical: 20,
+    paddingHorizontal: 30,
+    marginTop: 20,
     display: 'flex',
   },
 
@@ -81,15 +81,18 @@ export const ProductAddStyle = StyleSheet.create({
   ProductTypeTextStyle: {
     marginTop: 20,
     color: '#000',
+    fontSize: 20,
   },
 
   ProductTypeZoneStyle: {
-    height: 180,
-    display: 'flex',
+    marginTop: 10,
   },
+
   ProductContainerStyle: {
-    backgroundColor: 'gray',
-    width: 80,
-    height: 80,
+    borderRadius: 5,
+    height: 90,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
