@@ -36,4 +36,27 @@ export const ProductAddStyle = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Poppins',
   },
+
+  ScrollViewZone: {
+    marginHorizontal: 10,
+    paddingVertical: 20,
+  },
+
+  barCodeView: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  barCodeText: {
+    background: 'blue',
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 18,
+    marginBottom: 10,
+    fontWeight: '600',
+  },
+  barCodeZone: {
+    backgroundColor: 'green',
+    width: '50%',
+  },
 })

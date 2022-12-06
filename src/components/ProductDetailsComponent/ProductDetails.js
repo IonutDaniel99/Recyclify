@@ -2,14 +2,22 @@ import { View, Text, TextInput, StyleSheet, Button, Alert, InteractionManager } 
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
-import { barcodeMockData } from '../../mocks/mocks'
 import { useFocusEffect } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
+
+const barcodeObject = (data, dataRaw, format, type) => {
+  return {
+    'data': data || null,
+    'dataRaw': dataRaw || null,
+    'format': format || null,
+    'type': type || null,
+  }
+}
 
 const ProductDetails = ({ route, navigation }) => {
   const style = ProductDetailsStyle
   const { uid } = firebase.auth().currentUser
-  const [productCodeNumber, setProductCodeNumber] = useState('')
+  const [productCodeData, setProductCodeData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [isSearchDisable, setIsSearchDisabled] = useState(false)
 
@@ -20,11 +28,11 @@ const ProductDetails = ({ route, navigation }) => {
     React.useCallback(() => {
       const task = InteractionManager.runAfterInteractions(() => {
         if (!route.params) return
-        const { data, dataRaw, format, type } = route.params?.barcodeData
-        setProductCodeNumber(dataRaw)
+        const { data, dataRaw, format, type } = route.params.barcodeData
+        const obj = barcodeObject(data, dataRaw, format, type)
+        setProductCodeData(obj)
         setIsSearchDisabled(false)
-        getProduct(dataRaw)
-        // Expensive task
+        getProduct(obj)
       })
 
       return () =>
@@ -38,38 +46,38 @@ const ProductDetails = ({ route, navigation }) => {
     route.params = null
     setIsInitialView(true)
     setIsLoading(false)
-    setProductCodeNumber('')
+    setProductCodeData(barcodeObject())
     task.cancel()
   }
 
   useEffect(() => {
-    productCodeNumber === '' ? setIsSearchDisabled(true) : setIsSearchDisabled(false)
-  }, [productCodeNumber])
+    productCodeData.data === null ? setIsSearchDisabled(true) : setIsSearchDisabled(false)
+  }, [productCodeData.data])
 
   const handleSearchButton = () => {
-    if (productCodeNumber === '') return
-    getProduct(productCodeNumber)
+    if (productCodeData.data === null) return
+    getProduct(productCodeData)
   }
 
   const handleResetProductsView = () => {
-    setProductCodeNumber('')
+    setProductCodeData(barcodeObject())
     setIsInitialView(true)
   }
-  const handleAddNewItemScreen = () => {
+  const handleAddNewItemScreen = (barcode) => {
     Alert.alert('', 'This product doesnt exist! Would u like to add?', [
       {
         text: 'Cancel',
         onPress: () => null,
         style: 'cancel',
       },
-      { text: 'YES', onPress: () => navigation.navigate('ProductAdd', { barcode: productCodeNumber }) },
+      { text: 'YES', onPress: () => navigation.navigate('ProductAdd', { barcode }) },
     ])
     return true
   }
 
   const getProduct = async (barcode) => {
     setIsLoading(true)
-    await getProductOrNull(barcode)
+    await getProductOrNull(barcode.data)
       .then((res) => {
         if (res.val() !== null) {
           setProduct(res.val())
@@ -77,7 +85,7 @@ const ProductDetails = ({ route, navigation }) => {
           setIsInitialView(false)
         } else {
           setIsInitialView(true)
-          handleAddNewItemScreen()
+          handleAddNewItemScreen(barcode)
           return
         }
       })
@@ -91,8 +99,8 @@ const ProductDetails = ({ route, navigation }) => {
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
           <TextInput
-            onChangeText={(val) => setProductCodeNumber(val.replace(/[^0-9]/g, ''))}
-            value={productCodeNumber}
+            onChangeText={(val) => setProductCodeData(barcodeObject(val.replace(/[^0-9]/g, '')))}
+            value={productCodeData.data}
             keyboardType='numeric'
           />
         </View>

@@ -9,9 +9,7 @@ import Barcode from '@kichiyaki/react-native-barcode-generator'
 
 const ProductAdd = ({ route, navigation }) => {
   const style = ProductAddStyle
-  const rawCode = route?.params?.barcode
-  console.log(rawCode)
-  const [barcode, setBarCode] = useState(rawCode) //TODO: change to rawCode
+  const { data, rawData, format, type } = route?.params?.barcode
   const [containFoodOrLiquid, setContainFoodOrLiquid] = useState(false)
   const [createdAt, setCreatedAt] = useState(Math.floor(new Date().getTime()))
   const [ecoType, setEcoType] = useState(null)
@@ -28,8 +26,8 @@ const ProductAdd = ({ route, navigation }) => {
 
   const handleSaveProduct = () => {
     const productObject = {
-      [rawCode]: {
-        barCode: rawCode,
+      [data]: {
+        barCode: data,
         containFoodOrLiquid: containFoodOrLiquid,
         createdAt: createdAt,
         ecoType: ecoType,
@@ -75,70 +73,79 @@ const ProductAdd = ({ route, navigation }) => {
           <Text style={style.AddProductText}>Add Product</Text>
         </View>
       </View>
-      <Barcode
-        format='EAN13'
-        value={rawCode}
-        text={rawCode}
-        height={40}
-        maxWidth={Dimensions.get('window').width / 2}
-      />
-      <TextInput
-        onChangeText={(val) => setBarCode(val.replace(/[^0-9]/g, ''))}
-        value={rawCode || barcode}
-        keyboardType='numeric'
-        placeholder='barcode'
-      />
-      <Checkbox
-        status={containFoodOrLiquid ? 'checked' : 'unchecked'}
-        onPress={() => {
-          setContainFoodOrLiquid(!containFoodOrLiquid)
-        }}
-      />
-      <Text>Contain Food or Liquid?</Text>
-      <TextInput
-        onChangeText={(val) => setEcoType(val)}
-        value={ecoType}
-        placeholder='ecoType'
-      />
-      <DropDownPicker
-        open={open}
-        value={ecoType}
-        items={items}
-        setOpen={setOpen}
-        setValue={setEcoType}
-        setItems={setItems}
-        maxHeight={300}
-      />
-      <TextInput
-        value={ingredient}
-        onChangeText={(val) => setIngredient(val)}
-        placeholder='Ingredients'
-      />
-      <Button
-        title='Add Ingredient'
-        onPress={() => handleAddIngredients()}
-      />
-      <View>
-        {ingredients.map((x, index) => (
-          <Text key={index}>{x}</Text>
-        ))}
-      </View>
-      <TextInput
-        onChangeText={(val) => setManufacture(val)}
-        value={manufacture}
-        placeholder='manufacture'
-      />
-      <TextInput
-        onChangeText={(val) => setProdName(val)}
-        value={prodName}
-        placeholder='product name'
-      />
+      <ScrollView style={style.ScrollViewZone}>
+        <View style={style.barCodeView}>
+          <Text style={style.barCodeText}>Product Bar Code{format && ` (${format.replace('_', '')})`}</Text>
+          {format ? (
+            <View style={style.barCodeZone}>
+              <Barcode
+                format={format.replace('_', '')}
+                value={data}
+                text={data}
+                textStyle={{
+                  fontSize: 14,
+                  fontWeight: '600',
+                }}
+                height={40}
+              />
+            </View>
+          ) : (
+            <Text style={style.barCodeText}>{data}</Text>
+          )}
+        </View>
 
-      <Button
-        title='Save'
-        onPress={() => handleSaveProduct()}
-        disabled={!barcode || !ecoType || !ingredients || !nutritionalValues || !manufacture || !prodName}
-      />
+        <Checkbox
+          status={containFoodOrLiquid ? 'checked' : 'unchecked'}
+          onPress={() => {
+            setContainFoodOrLiquid(!containFoodOrLiquid)
+          }}
+        />
+        <Text>Contain Food or Liquid?</Text>
+        <TextInput
+          onChangeText={(val) => setEcoType(val)}
+          value={ecoType}
+          placeholder='ecoType'
+        />
+        <DropDownPicker
+          open={open}
+          value={ecoType}
+          items={items}
+          setOpen={setOpen}
+          setValue={setEcoType}
+          setItems={setItems}
+          maxHeight={300}
+        />
+        <TextInput
+          value={ingredient}
+          onChangeText={(val) => setIngredient(val)}
+          placeholder='Ingredients'
+        />
+        <Button
+          title='Add Ingredient'
+          onPress={() => handleAddIngredients()}
+        />
+        <View>
+          {ingredients.map((x, index) => (
+            <Text key={index}>{x}</Text>
+          ))}
+        </View>
+        <TextInput
+          onChangeText={(val) => setManufacture(val)}
+          value={manufacture}
+          placeholder='manufacture'
+        />
+        <TextInput
+          onChangeText={(val) => setProdName(val)}
+          value={prodName}
+          placeholder='product name'
+        />
+
+        <Button
+          title='Save'
+          onPress={() => handleSaveProduct()}
+          disabled={!data || !ecoType || !ingredients || !nutritionalValues || !manufacture || !prodName}
+        />
+      </ScrollView>
     </View>
   )
 }
