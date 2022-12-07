@@ -95,4 +95,89 @@ export const ProductAddStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  AdditionalDetailsContainerStyle: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingBottom: 10,
+  },
+
+  AdditionalDetailsTextStyle: {
+    fontWeight: '600',
+    fontSize: 18,
+    color: '#000',
+    paddingBottom: 4,
+  },
+
+  AdditionalDetailsBorderStyle: {
+    width: '75%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#2f2f2f99',
+  },
+
+  containFoodOrLiquidContainerStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  containFoodOrLiquidTextStyle: {
+    color: '#000',
+  },
+
+  IngredientsContainerStyle: {
+    marginHorizontal: 'auto',
+  },
+
+  IngredientContainerStyle: {
+    padding: 3,
+    backgroundColor: '#2980b9C6',
+    borderWidth: 1.5,
+    color: '#fff',
+    borderColor: '#fff',
+    borderRadius: 6,
+    maxWidth: 300,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'relative',
+  },
+
+  IngredientTextStyle: {
+    marginHorizontal: 15,
+    fontWeight: '600',
+    color: '#fff',
+  },
+
+  IngredientDeleteIconStyle: {
+    marginRight: 5,
+    color: '#fff',
+  },
+
+  AddIngredientContainerStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+
+  AddIngredientInputStyle: {
+    width: '70%',
+    height: 42,
+    borderWidth: 1,
+    borderRadius: 6,
+    borderColor: '#D0D0D0',
+    paddingLeft: 20,
+  },
+
+  AddIngredientButtonStyle: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 })
