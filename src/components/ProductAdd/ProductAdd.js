@@ -1,23 +1,10 @@
-import {
-  View,
-  Text,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  SafeAreaView,
-  Image,
-  LogBox,
-  FlatList,
-} from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, Image, LogBox } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Checkbox } from 'react-native-paper'
 import { saveProductToFirebase } from '../../helpers/firebaseHelpers'
-import DropDownPicker from 'react-native-dropdown-picker'
 import { ProductAddStyle } from './ProductAddStyle'
 import Barcode from '@kichiyaki/react-native-barcode-generator'
-import { FlatGrid, SectionGrid } from 'react-native-super-grid'
+import { FlatGrid } from 'react-native-super-grid'
 
 import Bottle from '../../assets/images/AddProduct/bottle.png'
 import Metal from '../../assets/images/AddProduct/can.png'
@@ -25,9 +12,7 @@ import Microchip from '../../assets/images/AddProduct/microchip.png'
 import Organic from '../../assets/images/AddProduct/apple.png'
 import Paper from '../../assets/images/AddProduct/document.png'
 import Plastic from '../../assets/images/AddProduct/plastic.png'
-import Plus from '../../assets/images/AddProduct/plus.png'
 
-// import Icon from 'react-native-vector-icons/Feather'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 const items = [
@@ -37,27 +22,6 @@ const items = [
   { label: 'Electronic', value: 'ewaste', code: '#34495e', id: 4, icon: Microchip },
   { label: 'Glass', value: 'glass', code: '#a8ccd7', id: 5, icon: Bottle },
   { label: 'Organic', value: 'organic', code: '#e67e22', id: 6, icon: Organic },
-]
-
-const bigIngredientsList = [
-  'Tomato',
-  'Potato',
-  'Chicken',
-  'Fish',
-  'Cucumber',
-  'Beef Meat',
-  'Tomato',
-  'Potato',
-  'Chicken',
-  'Cheese and Wine',
-  'Tomatoes and Cheese',
-  'Beef Meat',
-  'Potatoes and Cucumbers',
-  'Potato',
-  'Chicken',
-  'Fish',
-  'Cucumber',
-  'Beef Meat',
 ]
 
 const ProductAdd = ({ route, navigation }) => {
@@ -216,25 +180,9 @@ const ProductAdd = ({ route, navigation }) => {
         {showFoodSection && (
           <View>
             <View style={style.AdditionalDetailsContainerStyle}>
-              <Text style={style.AdditionalDetailsTextStyle}>Additional Details</Text>
+              <Text style={style.AdditionalDetailsTextStyle}>Ingredients Details</Text>
               <View style={style.AdditionalDetailsBorderStyle} />
             </View>
-            {/* <FlatGrid
-              itemDimension={20}
-              spacing={10}
-              staticDimension={120}
-              style={style.IngredientsContainerStyle}
-              horizontal
-              data={ingredientsList.slice(0, 333)}
-              renderItem={({ item, index }) => (
-                <Text
-                  onPress={() => removeIngredient(index)}
-                  style={style.IngredientContainerStyle}
-                >
-                  {item}
-                </Text>
-              )}
-            /> */}
             <FlatGrid
               key={ingredientsList.length * Math.random()}
               data={ingredientsList}
@@ -259,7 +207,7 @@ const ProductAdd = ({ route, navigation }) => {
               )}
             />
 
-            <View style={style.AddIngredientContainerStyle}>
+            <View style={[{ marginTop: ingredientsList.length !== 0 ? 10 : 20 }, style.AddIngredientContainerStyle]}>
               <TextInput
                 style={style.AddIngredientInputStyle}
                 value={ingredient}
@@ -270,25 +218,110 @@ const ProductAdd = ({ route, navigation }) => {
               />
               <TouchableOpacity
                 disabled={!ingredient}
+                activeOpacity={1}
                 style={style.AddIngredientButtonStyle}
                 onPress={() => handleAddIngredients()}
               >
-                <Image
-                  style={[{ opacity: !ingredient ? 0.5 : 1 }, style.AddIngredientButtonStyle]}
-                  source={Plus}
-                />
+                <Text
+                  style={[
+                    {
+                      backgroundColor: !ingredient ? '#32CD32A1' : '#32CD32',
+                    },
+                    style.AddIngredientButtonStyle,
+                  ]}
+                >
+                  Add
+                </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
+
+            <View style={style.AdditionalDetailsContainerStyle}>
+              <Text style={style.AdditionalDetailsTextStyle}>Nutritional Values</Text>
+              <View style={style.AdditionalDetailsBorderStyle} />
+            </View>
+            <View style={style.NutritionalValuesContainerStyle}>
+              <View style={style.NutritionalValuesTextsContainerStyle}>
+                <Text style={style.NutritionalValuesCaloriesStyle}>Calories</Text>
+                <View>
+                  <Text style={style.NutritionalValuesTextsStyle}>Total Fat</Text>
+                  <Text style={style.NutritionalValuesSubTextsStyle}>Saturated Fat</Text>
+                </View>
+                <Text style={style.NutritionalValuesTextsStyle}>Sodium</Text>
+
+                <View>
+                  <Text style={style.NutritionalValuesTextsStyle}>Total Carbohydrate</Text>
+                  <Text style={style.NutritionalValuesSubTextsStyle}>Dietary Fiber</Text>
+                  <Text style={style.NutritionalValuesSubTextsStyle}>Sugar</Text>
+                </View>
+                <Text style={style.NutritionalValuesTextsStyle}>Protein</Text>
+              </View>
+              <View style={style.NutritionalValuesInputsContainerStyle}>
+                <Text style={style.NutritionalValuesCaloriesStyle}>Per 100g</Text>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+                <View style={style.NutritionalValuesCaloriesInputsStyle}>
+                  <TextInput
+                    placeholder='10'
+                    style={style.NutritionalValuesCaloriesInputStyle}
+                  />
+                  <Text>g</Text>
+                </View>
+              </View>
+            </View>
+            {/* <TouchableOpacity
               activeOpacity={1}
               style={style.containFoodOrLiquidContainerStyle}
               onPress={() => {
                 setContainFoodOrLiquid(!containFoodOrLiquid)
+                console.log(items[ecoTypeSelected])
               }}
             >
-              <Checkbox status={containFoodOrLiquid ? 'checked' : 'unchecked'} />
+              <Checkbox
+                color={items[ecoTypeSelected - 1].code}
+                status={containFoodOrLiquid ? 'checked' : 'unchecked'}
+              />
               <Text style={style.containFoodOrLiquidTextStyle}>Contain Food or Liquid?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         )}
         <Button

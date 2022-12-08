@@ -112,17 +112,7 @@ export const ProductAddStyle = StyleSheet.create({
   AdditionalDetailsBorderStyle: {
     width: '75%',
     borderBottomWidth: 1,
-    borderBottomColor: '#2f2f2f99',
-  },
-
-  containFoodOrLiquidContainerStyle: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  containFoodOrLiquidTextStyle: {
-    color: '#000',
+    borderBottomColor: '#2f2f2f55',
   },
 
   IngredientContainerStyle: {
@@ -153,9 +143,8 @@ export const ProductAddStyle = StyleSheet.create({
   AddIngredientContainerStyle: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 10,
-    marginBottom: 5,
+    justifyContent: 'space-evenly',
+    marginBottom: 25,
     alignItems: 'center',
   },
 
@@ -169,11 +158,78 @@ export const ProductAddStyle = StyleSheet.create({
   },
 
   AddIngredientButtonStyle: {
-    width: 36,
+    width: 56,
     height: 36,
     borderRadius: 10,
+    color: '#fff',
+    marginHorizontal: 10,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+
+  containFoodOrLiquidContainerStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+
+  containFoodOrLiquidTextStyle: {
+    color: '#000',
+  },
+
+  NutritionalValuesContainerStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  NutritionalValuesTextsContainerStyle: {
+    display: 'flex',
+    width: '70%',
+  },
+  NutritionalValuesCaloriesStyle: {
+    fontWeight: '700',
+    fontSize: 18,
+    textDecorationLine: 'underline',
+    marginBottom: 10,
+  },
+  NutritionalValuesTextsStyle: {
+    marginVertical: 10,
+    fontWeight: '800',
+    borderBottomWidth: 1,
+    borderBottomColor: '#2f2f2f99',
+  },
+  NutritionalValuesSubTextsStyle: {
+    marginLeft: 20,
+    marginVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#2f2f2f99',
+  },
+  NutritionalValuesInputsContainerStyle: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    width: '30%',
+  },
+  NutritionalValuesCaloriesInputsStyle: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginLeft: 10,
+    marginBottom: 10,
+  },
+  NutritionalValuesCaloriesInputStyle: {
+    height: 30,
+    width: 40,
+    padding: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: '#2f2f2f99',
+    textAlign: 'right',
+    marginRight: 5,
   },
 })
