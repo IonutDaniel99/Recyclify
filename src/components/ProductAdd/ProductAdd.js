@@ -49,10 +49,10 @@ const bigIngredientsList = [
   'Tomato',
   'Potato',
   'Chicken',
-  'Fishdddddddddd',
-  'Cucumber',
+  'Cheese and Wine',
+  'Tomatoes and Cheese',
   'Beef Meat',
-  'Tomato',
+  'Potatoes and Cucumbers',
   'Potato',
   'Chicken',
   'Fish',
@@ -100,7 +100,7 @@ const ProductAdd = ({ route, navigation }) => {
         containFoodOrLiquid: containFoodOrLiquid,
         createdAt: Math.floor(new Date().getTime()),
         ecoType: ecoType,
-        ingredients: ingredients,
+        ingredients: ingredientsList,
         companyName: companyName,
         modifiedAt: Math.floor(new Date().getTime()),
         nutrionalValues: nutritionalValues,
@@ -142,7 +142,10 @@ const ProductAdd = ({ route, navigation }) => {
           <Text style={style.AddProductText}>Add Product</Text>
         </View>
       </View>
-      <ScrollView style={style.ScrollViewZone}>
+      <ScrollView
+        style={style.ScrollViewZone}
+        keyboardShouldPersistTaps='handled'
+      >
         <View style={style.barCodeView}>
           <Text style={style.barCodeText}>Product Bar Code{format && barTitleFormat(format)}</Text>
           {format ? (
@@ -232,12 +235,13 @@ const ProductAdd = ({ route, navigation }) => {
                 </Text>
               )}
             /> */}
-            <FlatList
+            <FlatGrid
               key={ingredientsList.length * Math.random()}
               data={ingredientsList}
-              style={style.IngredientsContainerStyle}
-              contentContainerStyle={{ display: 'flex', alignItems: 'center' }}
-              numColumns={2}
+              itemDimension={40}
+              staticDimension={52}
+              spacing={8}
+              horizontal
               renderItem={({ item, index }) => (
                 <TouchableOpacity
                   key={index}
@@ -254,6 +258,7 @@ const ProductAdd = ({ route, navigation }) => {
                 </TouchableOpacity>
               )}
             />
+
             <View style={style.AddIngredientContainerStyle}>
               <TextInput
                 style={style.AddIngredientInputStyle}
@@ -261,6 +266,7 @@ const ProductAdd = ({ route, navigation }) => {
                 onChangeText={(val) => setIngredient(val)}
                 placeholder='Add Ingredient'
                 maxLength={20}
+                onSubmitEditing={() => handleAddIngredients()}
               />
               <TouchableOpacity
                 disabled={!ingredient}

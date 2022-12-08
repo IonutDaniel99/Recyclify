@@ -9,7 +9,6 @@ import ScreenNavigatorComponent from './common/ScreenNavigatorComponent'
 import { handleHardwareBackAction } from './helpers/handleBackButton'
 
 LogBox.ignoreLogs(['Non-serializable values were found in the navigation state'])
-LogBox.ignoreLogs(['VirtualizedLists'])
 
 const App = () => {
   if (!firebaseApp.apps.length) {

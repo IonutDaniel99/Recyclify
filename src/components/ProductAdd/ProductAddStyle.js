@@ -99,7 +99,7 @@ export const ProductAddStyle = StyleSheet.create({
   AdditionalDetailsContainerStyle: {
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: 10,
+    paddingBottom: 4,
   },
 
   AdditionalDetailsTextStyle: {
@@ -125,10 +125,6 @@ export const ProductAddStyle = StyleSheet.create({
     color: '#000',
   },
 
-  IngredientsContainerStyle: {
-    marginHorizontal: 'auto',
-  },
-
   IngredientContainerStyle: {
     padding: 3,
     backgroundColor: '#2980b9C6',
@@ -136,12 +132,11 @@ export const ProductAddStyle = StyleSheet.create({
     color: '#fff',
     borderColor: '#fff',
     borderRadius: 6,
-    maxWidth: 300,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'relative',
+    height: 30,
   },
 
   IngredientTextStyle: {
@@ -159,7 +154,8 @@ export const ProductAddStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 5,
     alignItems: 'center',
   },
 
