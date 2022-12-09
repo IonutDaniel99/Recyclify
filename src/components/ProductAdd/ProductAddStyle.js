@@ -183,53 +183,35 @@ export const ProductAddStyle = StyleSheet.create({
   },
 
   NutritionalValuesContainerStyle: {
-    display: 'flex',
-    flexDirection: 'row',
     marginVertical: 10,
-    alignItems: 'center',
+    marginHorizontal: 4,
   },
   NutritionalValuesTextsContainerStyle: {
     display: 'flex',
-    width: '70%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   NutritionalValuesCaloriesStyle: {
-    fontWeight: '700',
-    fontSize: 18,
-    textDecorationLine: 'underline',
-    marginBottom: 10,
+    width: '70%',
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#000',
   },
   NutritionalValuesTextsStyle: {
-    marginVertical: 10,
-    fontWeight: '800',
-    borderBottomWidth: 1,
-    borderBottomColor: '#2f2f2f99',
-  },
-  NutritionalValuesSubTextsStyle: {
-    marginLeft: 20,
-    marginVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#2f2f2f99',
-  },
-  NutritionalValuesInputsContainerStyle: {
-    display: 'flex',
-    alignItems: 'flex-end',
     width: '30%',
-  },
-  NutritionalValuesCaloriesInputsStyle: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    marginLeft: 10,
-    marginBottom: 10,
-  },
-  NutritionalValuesCaloriesInputStyle: {
-    height: 30,
-    width: 40,
-    padding: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: '#2f2f2f99',
     textAlign: 'right',
-    marginRight: 5,
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#000',
+  },
+  NutritionalValuesCaloriesContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  NutritionalValuesCaloriesTextStyle: {
+    width: '70%',
+    backgroundColor: 'red',
   },
 })

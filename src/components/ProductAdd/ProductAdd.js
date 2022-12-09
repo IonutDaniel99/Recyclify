@@ -1,10 +1,12 @@
-import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, Image, LogBox } from 'react-native'
+import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, Image, LogBox, Alert, ToastAndroid } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Checkbox } from 'react-native-paper'
 import { saveProductToFirebase } from '../../helpers/firebaseHelpers'
 import { ProductAddStyle } from './ProductAddStyle'
 import Barcode from '@kichiyaki/react-native-barcode-generator'
 import { FlatGrid } from 'react-native-super-grid'
+
+import { NutritionalValueContainer } from './NutritionalValueContainer'
 
 import Bottle from '../../assets/images/AddProduct/bottle.png'
 import Metal from '../../assets/images/AddProduct/can.png'
@@ -35,11 +37,7 @@ const ProductAdd = ({ route, navigation }) => {
   const [containFoodOrLiquid, setContainFoodOrLiquid] = useState(false)
   const [ingredient, setIngredient] = useState('')
   const [ingredientsList, setIngredientsList] = useState([])
-  const [nutritionalValues, setNutritionalValues] = useState({
-    'carbohidrates': 30,
-    'fats': 45,
-    'sugar': Math.random() * 100,
-  })
+  const [nutritionalValues, setNutritionalValues] = useState()
 
   const [ecoTypeSelected, setEcoTypeSelected] = useState(0)
   const [showFoodSection, setFoodSection] = useState(false)
@@ -50,9 +48,9 @@ const ProductAdd = ({ route, navigation }) => {
   useEffect(() => {
     if ([1, 2, 3, 5].includes(ecoTypeSelected)) {
       setFoodSection(true)
-      setNutritionalValues({ a: 1 }) //Is Reverted
+      setNutritionalValues([])
     } else {
-      setNutritionalValues(null)
+      setNutritionalValues([])
       setFoodSection(false)
     }
   }, [ecoTypeSelected])
@@ -71,7 +69,7 @@ const ProductAdd = ({ route, navigation }) => {
         productName: productName,
       },
     }
-    // console.log(productObject)
+    console.log(productObject)
     saveProductToFirebase(productObject)
   }
 
@@ -84,7 +82,6 @@ const ProductAdd = ({ route, navigation }) => {
     const newIngredientList = [...ingredientsList]
     newIngredientList.splice(index, 1)
     setIngredientsList(newIngredientList)
-    console.log(newIngredientList)
   }
 
   const barTitleFormat = (format) => `(${format.replace('_', '')})`
@@ -242,71 +239,87 @@ const ProductAdd = ({ route, navigation }) => {
             <View style={style.NutritionalValuesContainerStyle}>
               <View style={style.NutritionalValuesTextsContainerStyle}>
                 <Text style={style.NutritionalValuesCaloriesStyle}>Calories</Text>
-                <View>
-                  <Text style={style.NutritionalValuesTextsStyle}>Total Fat</Text>
-                  <Text style={style.NutritionalValuesSubTextsStyle}>Saturated Fat</Text>
-                </View>
-                <Text style={style.NutritionalValuesTextsStyle}>Sodium</Text>
-
-                <View>
-                  <Text style={style.NutritionalValuesTextsStyle}>Total Carbohydrate</Text>
-                  <Text style={style.NutritionalValuesSubTextsStyle}>Dietary Fiber</Text>
-                  <Text style={style.NutritionalValuesSubTextsStyle}>Sugar</Text>
-                </View>
-                <Text style={style.NutritionalValuesTextsStyle}>Protein</Text>
+                <Text style={style.NutritionalValuesTextsStyle}>Per 100g</Text>
               </View>
-              <View style={style.NutritionalValuesInputsContainerStyle}>
-                <Text style={style.NutritionalValuesCaloriesStyle}>Per 100g</Text>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-                <View style={style.NutritionalValuesCaloriesInputsStyle}>
-                  <TextInput
-                    placeholder='10'
-                    style={style.NutritionalValuesCaloriesInputStyle}
-                  />
-                  <Text>g</Text>
-                </View>
-              </View>
+              <NutritionalValueContainer
+                mainText={'Total Fat'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    totalFat: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                subText={'Saturated Fat'}
+                editable={nutritionalValues.totalFat == null}
+                parentValue={nutritionalValues.totalFat}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    saturatedFat: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                mainText={'Cholesterol'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    cholesterol: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                mainText={'Sodium'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    sodium: val,
+                  })
+                }
+                isMg
+              />
+              <NutritionalValueContainer
+                mainText={'Total Carbohydrate'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    totalCarbohydrate: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                subText={'Dietary Fiber'}
+                editable={nutritionalValues.totalCarbohydrate == null}
+                parentValue={nutritionalValues.totalCarbohydrate}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    dietaryFiber: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                subText={'Sugar'}
+                editable={nutritionalValues.totalCarbohydrate == null}
+                parentValue={nutritionalValues.totalCarbohydrate}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    sugar: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                mainText={'Protein'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    protein: val,
+                  })
+                }
+              />
             </View>
             {/* <TouchableOpacity
               activeOpacity={1}
