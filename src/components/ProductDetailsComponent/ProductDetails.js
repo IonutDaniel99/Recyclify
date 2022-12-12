@@ -22,12 +22,13 @@ const ProductDetails = ({ route, navigation }) => {
   const [isSearchDisable, setIsSearchDisabled] = useState(false)
 
   const [product, setProduct] = useState({})
+  const [fromAddProducts, setFromAddProducts] = useState(false)
   const [isInitialView, setIsInitialView] = useState(true)
 
   useFocusEffect(
     React.useCallback(() => {
       const task = InteractionManager.runAfterInteractions(() => {
-        if (!route.params) return
+        if (!route.params?.barcodeData) return
         const { data, dataRaw, format, type } = route.params.barcodeData
         const obj = barcodeObject(data, dataRaw, format, type)
         setProductCodeData(obj)
@@ -41,6 +42,20 @@ const ProductDetails = ({ route, navigation }) => {
         }, 1000)
     }, [route.params?.barcodeData]),
   )
+
+  useEffect(() => {
+    if (!route.params?.productDetailsCallback) return
+
+    const { data, format } = route.params.productDetailsCallback
+    const obj = barcodeObject(data, data, format, null)
+    setIsLoading(true)
+    setIsInitialView(false)
+
+    setTimeout(() => {
+      setProductCodeData(obj)
+      getProduct(obj)
+    }, 1000)
+  }, [route.params?.productDetailsCallback])
 
   const resetScreen = (task) => {
     route.params = null

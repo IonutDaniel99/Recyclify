@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Text, TextInput, ToastAndroid, View } from 'react-native'
 import React from 'react'
 export const NutritionalValueContainer = ({ mainText, subText, editable, parentValue, isMg, onValChange }) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(null)
 
   useEffect(() => {
     onValChange(value)
@@ -12,7 +12,7 @@ export const NutritionalValueContainer = ({ mainText, subText, editable, parentV
     if (value === null) return
     if (parseInt(value, 10) > parseInt(parentValue, 10)) {
       setValue(null)
-      ToastAndroid.showWithGravityAndOffset(`Current value can't be higher than its parent!`, 3, 3, 10, 20)
+      ToastAndroid.showWithGravityAndOffset("Current value can't be higher than its parent!", 3, 3, 10, 20)
       return
     }
   }, [parentValue, value])

@@ -175,7 +175,7 @@ export const ProductAddStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
   },
 
   containFoodOrLiquidTextStyle: {
@@ -183,7 +183,8 @@ export const ProductAddStyle = StyleSheet.create({
   },
 
   NutritionalValuesContainerStyle: {
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 20,
     marginHorizontal: 4,
   },
   NutritionalValuesTextsContainerStyle: {
@@ -213,5 +214,18 @@ export const ProductAddStyle = StyleSheet.create({
   NutritionalValuesCaloriesTextStyle: {
     width: '70%',
     backgroundColor: 'red',
+  },
+  SaveButton: {
+    position: 'absolute',
+    width: 64,
+    height: 64,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    bottom: 25,
+    right: 25,
+    borderWidth: 1,
+    borderColor: '#00000066',
   },
 })

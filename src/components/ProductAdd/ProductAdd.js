@@ -16,6 +16,9 @@ import Paper from '../../assets/images/AddProduct/document.png'
 import Plastic from '../../assets/images/AddProduct/plastic.png'
 
 import Icon from 'react-native-vector-icons/AntDesign'
+import IconEntypo from 'react-native-vector-icons/MaterialIcons'
+
+import SwitchToggle from 'react-native-switch-toggle'
 
 const items = [
   { label: 'Plastic', value: 'plastic', code: '#3498db', id: 1, icon: Plastic },
@@ -25,6 +28,20 @@ const items = [
   { label: 'Glass', value: 'glass', code: '#a8ccd7', id: 5, icon: Bottle },
   { label: 'Organic', value: 'organic', code: '#e67e22', id: 6, icon: Organic },
 ]
+
+const barCodeMapper = {
+  'CODE_128': 'CODE128',
+  'CODE_39': 'CODE39',
+  'CODABAR': 'codabar',
+  'DATA_MATRIX': '',
+  'EAN_13': 'EAN13',
+  'EAN_8': 'EAN8',
+  'ITF': 'ITF',
+  'QR_CODE': 'QRCODE',
+  'UPC_A': 'UPC',
+  'UPC_E': 'UPC',
+  'ALL': '',
+}
 
 const ProductAdd = ({ route, navigation }) => {
   const style = ProductAddStyle
@@ -49,8 +66,10 @@ const ProductAdd = ({ route, navigation }) => {
     if ([1, 2, 3, 5].includes(ecoTypeSelected)) {
       setFoodSection(true)
       setNutritionalValues([])
+      setIngredientsList([])
     } else {
       setNutritionalValues([])
+      setIngredientsList([])
       setFoodSection(false)
     }
   }, [ecoTypeSelected])
@@ -59,6 +78,7 @@ const ProductAdd = ({ route, navigation }) => {
     const productObject = {
       [data]: {
         barCode: data,
+        barCodeType: format,
         containFoodOrLiquid: containFoodOrLiquid,
         createdAt: Math.floor(new Date().getTime()),
         ecoType: ecoType,
@@ -69,8 +89,17 @@ const ProductAdd = ({ route, navigation }) => {
         productName: productName,
       },
     }
-    console.log(productObject)
     saveProductToFirebase(productObject)
+    navigation.navigate({
+      name: 'ProductDetailsScreen',
+      params: {
+        productDetailsCallback: {
+          data: data,
+          format: format,
+        },
+      },
+      merge: true,
+    })
   }
 
   const handleAddIngredients = () => {
@@ -108,11 +137,11 @@ const ProductAdd = ({ route, navigation }) => {
         keyboardShouldPersistTaps='handled'
       >
         <View style={style.barCodeView}>
-          <Text style={style.barCodeText}>Product Bar Code{format && barTitleFormat(format)}</Text>
-          {format ? (
+          <Text style={style.barCodeText}>Product Bar Code{barCodeMapper[format] && barTitleFormat(format)}</Text>
+          {barCodeMapper[format] ? (
             <View style={style.barCodeZone}>
               <Barcode
-                format={format.replace('_', '')}
+                format={barCodeMapper[format]}
                 value={data}
                 text={data}
                 textStyle={{
@@ -321,28 +350,61 @@ const ProductAdd = ({ route, navigation }) => {
                 }
               />
             </View>
-            {/* <TouchableOpacity
+            <View style={style.AdditionalDetailsContainerStyle}>
+              <Text style={style.AdditionalDetailsTextStyle}>Other Details</Text>
+              <View style={style.AdditionalDetailsBorderStyle} />
+            </View>
+            <TouchableOpacity
               activeOpacity={1}
               style={style.containFoodOrLiquidContainerStyle}
-              onPress={() => {
-                setContainFoodOrLiquid(!containFoodOrLiquid)
-                console.log(items[ecoTypeSelected])
-              }}
+              onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
             >
-              <Checkbox
-                color={items[ecoTypeSelected - 1].code}
-                status={containFoodOrLiquid ? 'checked' : 'unchecked'}
+              <SwitchToggle
+                switchOn={containFoodOrLiquid ? true : false}
+                circleColorOff={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
+                circleColorOn='#fff'
+                backgroundColorOn={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
+                backgroundColorOff='#fff'
+                containerStyle={{
+                  marginTop: 4,
+                  width: 48,
+                  height: 24,
+                  borderRadius: 25,
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  padding: 5,
+                  marginRight: 10,
+                }}
+                circleStyle={{
+                  width: 14,
+                  height: 14,
+                  borderRadius: 20,
+                }}
+                onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
               />
               <Text style={style.containFoodOrLiquidTextStyle}>Contain Food or Liquid?</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         )}
-        <Button
-          title='Save'
-          onPress={() => handleSaveProduct()}
-          disabled={!productName || !companyName || ecoTypeSelected === 0}
-        />
+        <View style={{ height: 100 }} />
       </ScrollView>
+      <TouchableOpacity
+        style={[
+          {
+            backgroundColor: ecoTypeSelected === 0 ? '#2f2f2f99' : items[ecoTypeSelected - 1].code,
+            opacity: !productName || !companyName || ecoTypeSelected === 0 ? 0.5 : 1,
+          },
+          style.SaveButton,
+        ]}
+        disabled={!productName || !companyName || ecoTypeSelected === 0}
+        onPress={() => handleSaveProduct()}
+      >
+        <IconEntypo
+          name='save'
+          size={36}
+          color={'#fff'}
+        />
+      </TouchableOpacity>
     </View>
   )
 }
