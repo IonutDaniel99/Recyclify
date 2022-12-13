@@ -46,5 +46,3 @@ export const mockProduct = {
     modifiedAt: unixDate,
   },
 }
-
-const mockContainers = ['e-waste', 'plastic', 'metal', 'glass', 'paper', 'organic']

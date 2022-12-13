@@ -61,13 +61,12 @@ export const NutritionalValueContainer = ({ mainText, subText, editable, parentV
         }}
       >
         <TextInput
-          placeholder='___'
-          onChangeText={(e) => setValue(e || null)}
-          value={value}
-          maxLength={4}
           editable={!editable}
-          selectTextOnFocus={!editable}
           keyboardType='numeric'
+          maxLength={4}
+          onChangeText={(e) => setValue(e || null)}
+          placeholder='___'
+          selectTextOnFocus={!editable}
           style={{
             height: 24,
             padding: 0,
@@ -76,6 +75,7 @@ export const NutritionalValueContainer = ({ mainText, subText, editable, parentV
             alignItems: 'flex-end',
             paddingRight: 5,
           }}
+          value={value}
         />
         <Text>{isMg ? 'mg' : 'g'}</Text>
       </View>

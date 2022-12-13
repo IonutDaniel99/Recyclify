@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, Button, Alert, InteractionManager } from 'react-native'
+import { View, Text, TextInput, Button, Alert, InteractionManager } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
@@ -22,7 +22,6 @@ const ProductDetails = ({ route, navigation }) => {
   const [isSearchDisable, setIsSearchDisabled] = useState(false)
 
   const [product, setProduct] = useState({})
-  const [fromAddProducts, setFromAddProducts] = useState(false)
   const [isInitialView, setIsInitialView] = useState(true)
 
   useFocusEffect(
@@ -114,21 +113,21 @@ const ProductDetails = ({ route, navigation }) => {
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
           <TextInput
+            keyboardType='numeric'
             onChangeText={(val) => setProductCodeData(barcodeObject(val.replace(/[^0-9]/g, '')))}
             value={productCodeData.data}
-            keyboardType='numeric'
           />
         </View>
         <Button
-          title='Search 🔍'
-          style={style.searchButton}
-          onPress={() => handleSearchButton()}
           disabled={isSearchDisable}
+          onPress={() => handleSearchButton()}
+          style={style.searchButton}
+          title='Search 🔍'
         />
         <Button
-          title='Reset'
-          style={style.searchButton}
           onPress={() => handleResetProductsView()}
+          style={style.searchButton}
+          title='Reset'
         />
       </View>
       {isInitialView ? (

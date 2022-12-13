@@ -1,9 +1,8 @@
 import { useFocusEffect } from '@react-navigation/native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Dimensions } from 'react-native'
 import BarcodeMask from 'react-native-barcode-mask'
 import { RNCamera } from 'react-native-camera'
-import { barcodeMockData } from '../../mocks/mocks'
 
 const CameraBarcodeScanner = ({ navigation }) => {
   const viewfinderHeight = 200
@@ -52,16 +51,16 @@ const CameraBarcodeScanner = ({ navigation }) => {
       {isCameraEnable && (
         <>
           <RNCamera
-            style={{ flex: 1, alignItems: 'center' }}
-            onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
-            captureAudio={false}
             autoFocus='on'
+            captureAudio={false}
+            onGoogleVisionBarcodesDetected={barcodeRecognizedGoogle}
+            style={{ flex: 1, alignItems: 'center' }}
           />
           <BarcodeMask
-            width={viewfinderWidth}
             height={viewfinderHeight}
             showAnimatedLine={false}
             transparency={0.8}
+            width={viewfinderWidth}
           />
         </>
       )}

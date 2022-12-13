@@ -8,31 +8,31 @@ import TabsNavigatorComponent from './TabsNavigatorComponent'
 import ProductAdd from '../components/ProductAdd/ProductAdd'
 const Stack = createNativeStackNavigator()
 
-const ScreenNavigatorComponent = ({ navigation }) => {
+const ScreenNavigatorComponent = () => {
   return (
     <Stack.Navigator
+      initialRouteName='WelcomeScreen'
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
         animationTypeForReplace: 'pop',
       }}
-      initialRouteName='WelcomeScreen'
     >
       <Stack.Screen
-        name='WelcomeScreen'
         component={WelcomeScreen}
+        name='WelcomeScreen'
       />
       <Stack.Screen
-        name='LoginScreen'
         component={LoginScreen}
+        name='LoginScreen'
       />
       <Stack.Screen
-        name='TabsNavigator'
         component={TabsNavigatorComponent}
+        name='TabsNavigator'
       />
       <Stack.Screen
-        name='ProductAdd'
         component={ProductAdd}
+        name='ProductAdd'
       />
     </Stack.Navigator>
   )

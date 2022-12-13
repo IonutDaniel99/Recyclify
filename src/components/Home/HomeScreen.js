@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { firebase } from '@react-native-firebase/auth'
 import { nullOrCreateCollectionsOnFirebase } from '../../helpers/firebaseHelpers'
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   const {
     displayName,
     email,
@@ -52,22 +52,22 @@ const HomeScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  fullScreen: {
-    justifyContent: 'space-evenly',
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    justifyContent: 'space-around',
+    maxHeight: 150,
+    width: 200,
   },
 
-  container: {
-    width: 200,
-    maxHeight: 150,
-    justifyContent: 'space-around',
+  fullScreen: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   text: {
     color: 'black',

@@ -12,6 +12,7 @@ module.exports = {
     'react-native/no-unused-styles': 2,
     'object-curly-newline': 0,
     'react/jsx-curly-spacing': 2,
+    'react/jsx-sort-props': 2,
     'react-native/split-platform-components': 0,
     'no-shadow': 0,
     'no-trailing-spaces': 0,
@@ -23,6 +24,7 @@ module.exports = {
     'react-native/no-inline-styles': 0,
     'react-native/no-raw-text': 2,
     'jsx-quotes': 0,
-    'react-native/sort-styles': 0,
+    'react-native/sort-styles': 2,
+    'no-unused-vars': ['error', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }],
   },
 }

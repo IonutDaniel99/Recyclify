@@ -1,4 +1,4 @@
-import { View, Button, ToastAndroid, TextInput, Text, TouchableOpacity, Image } from 'react-native'
+import { View, ToastAndroid, TextInput, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth'
@@ -83,11 +83,11 @@ const LoginScreen = ({ navigation }) => {
               style={style.userIcon}
             />
             <TextInput
+              keyboardType='email-address'
+              onChangeText={(val) => setUsername(val)}
+              placeholder='E-mail'
               style={style.userInput}
               value={username}
-              keyboardType='email-address'
-              placeholder='E-mail'
-              onChangeText={(val) => setUsername(val)}
             />
           </View>
           <View style={style.userInputContainer}>
@@ -96,16 +96,16 @@ const LoginScreen = ({ navigation }) => {
               style={style.passIcon}
             />
             <TextInput
-              style={style.passInput}
-              value={password}
+              onChangeText={(val) => setPassword(val)}
               placeholder='Password'
               secureTextEntry={isPassSecured}
-              onChangeText={(val) => setPassword(val)}
+              style={style.passInput}
+              value={password}
             />
             <IconFeather
               name={isPassSecured ? 'eye' : 'eye-off'}
-              style={style.eyeIcon}
               onPress={() => setIsPassSecured(!isPassSecured)}
+              style={style.eyeIcon}
             />
           </View>
         </View>
@@ -118,8 +118,8 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <TouchableOpacity
         activeOpacity={0.8}
-        style={style.loginButtonContainer}
         onPress={() => handleEmailAndPasswordLogin()}
+        style={style.loginButtonContainer}
       >
         <Text style={style.loginButtonText}>Login</Text>
       </TouchableOpacity>
@@ -128,29 +128,29 @@ const LoginScreen = ({ navigation }) => {
         <View style={style.socialButtons}>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={style.appButtonContainer}
             onPress={() => onGoogleButtonPress()}
+            style={style.appButtonContainer}
           >
             <Image source={require('../../assets/images/Login/Google.png')} />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={style.appButtonContainer}
             onPress={() => onFacebookButtonPress()}
+            style={style.appButtonContainer}
           >
             <Image source={require('../../assets/images/Login/Facebook.png')} />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={style.appButtonContainer}
             onPress={() => onMicrosoftButtonPress()}
+            style={style.appButtonContainer}
           >
             <Image source={require('../../assets/images/Login/Microsoft.png')} />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={style.appButtonContainer}
             onPress={() => onAppleButtonPress()}
+            style={style.appButtonContainer}
           >
             <Image source={require('../../assets/images/Login/Apple.png')} />
           </TouchableOpacity>

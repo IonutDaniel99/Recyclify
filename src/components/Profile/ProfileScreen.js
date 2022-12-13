@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { firebase } from '@react-native-firebase/auth'
 
-const PorfileScreen = ({ route }) => {
+const PorfileScreen = () => {
   const { uid } = firebase.auth().currentUser
   return (
     <View>

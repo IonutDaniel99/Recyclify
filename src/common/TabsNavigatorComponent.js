@@ -11,87 +11,87 @@ import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar'
 
 const Tab = AnimatedTabBarNavigator()
 
-const TabsNavigatorComponent = ({ navigation }) => {
+const TabsNavigatorComponent = () => {
   return (
     <>
       <Tab.Navigator
-        tabBarOptions={{
-          activeBackgroundColor: '#00B000',
-          activeTintColor: '#FEFCF3',
-        }}
         appearance={{
           floating: true,
           whenInactiveShow: 'icon-only',
         }}
-        initialRouteName='HomeScreen'
         backBehavior='none'
+        initialRouteName='HomeScreen'
         sceneAnimationEnabled='true'
+        tabBarOptions={{
+          activeBackgroundColor: '#00B000',
+          activeTintColor: '#FEFCF3',
+        }}
       >
         <Tab.Screen
-          name='ProfileScreen'
           component={PorfileScreen}
+          name='ProfileScreen'
           options={{
             tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
               <Icon
-                name='user'
                 color={color}
+                name='user'
                 size={24}
               />
             ),
           }}
         />
         <Tab.Screen
-          name='CameraBarcodeScanner'
           component={CameraBarcodeScanner}
+          name='CameraBarcodeScanner'
           options={{
             tabBarLabel: 'Scan',
             tabBarIcon: ({ color }) => (
               <Icon
-                name='camera'
                 color={color}
+                name='camera'
                 size={24}
               />
             ),
           }}
         />
         <Tab.Screen
-          name='HomeScreen'
           component={HomeScreen}
+          name='HomeScreen'
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (
               <Icon
-                name='home'
                 color={color}
+                name='home'
                 size={24}
               />
             ),
           }}
         />
         <Tab.Screen
-          name='ProductDetailsScreen'
           component={ProductDetails}
+          name='ProductDetailsScreen'
           options={{
             tabBarLabel: 'Product',
             tabBarIcon: ({ color }) => (
               <Icon
-                name='box'
                 color={color}
+                name='box'
                 size={24}
               />
             ),
           }}
         />
         <Tab.Screen
-          name='SettingsScreen'
           component={SettingsScreen}
+          name='SettingsScreen'
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color }) => (
               <Icon
-                name='settings'
                 color={color}
+                name='settings'
                 size={24}
               />
             ),

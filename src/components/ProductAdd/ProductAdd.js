@@ -1,6 +1,5 @@
-import { View, Text, Button, TextInput, TouchableOpacity, ScrollView, Image, LogBox, Alert, ToastAndroid } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, LogBox } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Checkbox } from 'react-native-paper'
 import { saveProductToFirebase } from '../../helpers/firebaseHelpers'
 import { ProductAddStyle } from './ProductAddStyle'
 import Barcode from '@kichiyaki/react-native-barcode-generator'
@@ -45,10 +44,11 @@ const barCodeMapper = {
 
 const ProductAdd = ({ route, navigation }) => {
   const style = ProductAddStyle
-  const { data, rawData, format, type } = route?.params?.barcode
+  const { data, format } = route?.params?.barcode
 
   const [productName, setProductName] = useState('')
   const [companyName, setCompanyName] = useState('')
+  const [description, setDescription] = useState('')
   const [ecoType, setEcoType] = useState('')
 
   const [containFoodOrLiquid, setContainFoodOrLiquid] = useState(false)
@@ -58,15 +58,14 @@ const ProductAdd = ({ route, navigation }) => {
 
   const [ecoTypeSelected, setEcoTypeSelected] = useState(0)
   const [showFoodSection, setFoodSection] = useState(false)
+
   useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+    LogBox.ignoreAllLogs(true)
   }, [])
 
   useEffect(() => {
     if ([1, 2, 3, 5].includes(ecoTypeSelected)) {
       setFoodSection(true)
-      setNutritionalValues([])
-      setIngredientsList([])
     } else {
       setNutritionalValues([])
       setIngredientsList([])
@@ -87,6 +86,7 @@ const ProductAdd = ({ route, navigation }) => {
         modifiedAt: Math.floor(new Date().getTime()),
         nutrionalValues: nutritionalValues,
         productName: productName,
+        description: description,
       },
     }
     saveProductToFirebase(productObject)
@@ -119,12 +119,12 @@ const ProductAdd = ({ route, navigation }) => {
     <View style={style.screenContainer}>
       <View style={style.BackAndTitleContainer}>
         <TouchableOpacity
-          style={style.BackIconStyle}
           onPress={() => navigation.goBack()}
+          style={style.BackIconStyle}
         >
           <Icon
-            name='arrowleft'
             color={'#fff'}
+            name='arrowleft'
             size={28}
           />
         </TouchableOpacity>
@@ -133,8 +133,8 @@ const ProductAdd = ({ route, navigation }) => {
         </View>
       </View>
       <ScrollView
-        style={style.ScrollViewZone}
         keyboardShouldPersistTaps='handled'
+        style={style.ScrollViewZone}
       >
         <View style={style.barCodeView}>
           <Text style={style.barCodeText}>Product Bar Code{barCodeMapper[format] && barTitleFormat(format)}</Text>
@@ -142,13 +142,13 @@ const ProductAdd = ({ route, navigation }) => {
             <View style={style.barCodeZone}>
               <Barcode
                 format={barCodeMapper[format]}
-                value={data}
+                height={40}
                 text={data}
                 textStyle={{
                   fontSize: 14,
                   fontWeight: '600',
                 }}
-                height={40}
+                value={data}
               />
             </View>
           ) : (
@@ -156,33 +156,38 @@ const ProductAdd = ({ route, navigation }) => {
           )}
         </View>
         <TextInput
-          style={style.ProductNameStyle}
+          multiline
           onChangeText={(val) => setProductName(val)}
-          value={productName}
           placeholder='Product Name'
+          style={style.ProductNameStyle}
+          value={productName}
         />
 
         <TextInput
-          style={style.ManufactureNameStyle}
+          multiline
           onChangeText={(val) => setCompanyName(val)}
-          value={companyName}
           placeholder='Company Name'
+          style={style.ManufactureNameStyle}
+          value={companyName}
         />
-        {/* <Text style={style.ProductTypeTextStyle}>Product Eco Type</Text> */}
+        <TextInput
+          maxLength={600}
+          multiline
+          onChangeText={(val) => setDescription(val)}
+          placeholder='Description'
+          style={style.DescriptionInputStyle}
+        />
         <FlatGrid
-          itemDimension={90}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
           data={items.slice(0, 6)}
-          style={style.ProductTypeZoneStyle}
+          itemDimension={90}
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={1}
+              key={item.id}
               onPress={() => {
                 setEcoTypeSelected((prev) => (item.id === prev ? 0 : item.id))
                 setEcoType(item.value)
               }}
-              key={item.id}
               style={[
                 style.ProductContainerStyle,
                 {
@@ -191,17 +196,20 @@ const ProductAdd = ({ route, navigation }) => {
               ]}
             >
               <Image
+                source={item.icon}
                 style={{
                   width: ecoTypeSelected === item.id ? 36 : 28,
                   height: ecoTypeSelected === item.id ? 36 : 28,
                 }}
-                source={item.icon}
               />
               <Text style={{ fontSize: ecoTypeSelected === item.id ? 16 : 14, color: '#fff', fontWeight: '600', marginTop: 5 }}>
                 {item.label}
               </Text>
             </TouchableOpacity>
           )}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={style.ProductTypeZoneStyle}
         />
         {showFoodSection && (
           <View>
@@ -210,43 +218,43 @@ const ProductAdd = ({ route, navigation }) => {
               <View style={style.AdditionalDetailsBorderStyle} />
             </View>
             <FlatGrid
-              key={ingredientsList.length * Math.random()}
               data={ingredientsList}
-              itemDimension={40}
-              staticDimension={52}
-              spacing={8}
               horizontal
+              itemDimension={40}
+              key={ingredientsList.length * Math.random()}
               renderItem={({ item, index }) => (
                 <TouchableOpacity
-                  key={index}
                   activeOpacity={1}
+                  key={index}
                   onPress={() => removeIngredient(index)}
                   style={style.IngredientContainerStyle}
                 >
                   <Text style={style.IngredientTextStyle}>{item}</Text>
                   <Icon
-                    style={style.IngredientDeleteIconStyle}
                     name='close'
                     size={14}
+                    style={style.IngredientDeleteIconStyle}
                   />
                 </TouchableOpacity>
               )}
+              spacing={8}
+              staticDimension={52}
             />
 
             <View style={[{ marginTop: ingredientsList.length !== 0 ? 10 : 20 }, style.AddIngredientContainerStyle]}>
               <TextInput
+                maxLength={20}
+                onChangeText={(val) => setIngredient(val)}
+                onSubmitEditing={() => handleAddIngredients()}
+                placeholder='Add Ingredient'
                 style={style.AddIngredientInputStyle}
                 value={ingredient}
-                onChangeText={(val) => setIngredient(val)}
-                placeholder='Add Ingredient'
-                maxLength={20}
-                onSubmitEditing={() => handleAddIngredients()}
               />
               <TouchableOpacity
-                disabled={!ingredient}
                 activeOpacity={1}
-                style={style.AddIngredientButtonStyle}
+                disabled={!ingredient}
                 onPress={() => handleAddIngredients()}
+                style={style.AddIngredientButtonStyle}
               >
                 <Text
                   style={[
@@ -280,15 +288,15 @@ const ProductAdd = ({ route, navigation }) => {
                 }
               />
               <NutritionalValueContainer
-                subText={'Saturated Fat'}
                 editable={nutritionalValues.totalFat == null}
-                parentValue={nutritionalValues.totalFat}
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
                     saturatedFat: val,
                   })
                 }
+                parentValue={nutritionalValues.totalFat}
+                subText={'Saturated Fat'}
               />
               <NutritionalValueContainer
                 mainText={'Cholesterol'}
@@ -300,6 +308,7 @@ const ProductAdd = ({ route, navigation }) => {
                 }
               />
               <NutritionalValueContainer
+                isMg
                 mainText={'Sodium'}
                 onValChange={(val) =>
                   setNutritionalValues({
@@ -307,7 +316,6 @@ const ProductAdd = ({ route, navigation }) => {
                     sodium: val,
                   })
                 }
-                isMg
               />
               <NutritionalValueContainer
                 mainText={'Total Carbohydrate'}
@@ -319,26 +327,26 @@ const ProductAdd = ({ route, navigation }) => {
                 }
               />
               <NutritionalValueContainer
-                subText={'Dietary Fiber'}
                 editable={nutritionalValues.totalCarbohydrate == null}
-                parentValue={nutritionalValues.totalCarbohydrate}
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
                     dietaryFiber: val,
                   })
                 }
+                parentValue={nutritionalValues.totalCarbohydrate}
+                subText={'Dietary Fiber'}
               />
               <NutritionalValueContainer
-                subText={'Sugar'}
                 editable={nutritionalValues.totalCarbohydrate == null}
-                parentValue={nutritionalValues.totalCarbohydrate}
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
                     sugar: val,
                   })
                 }
+                parentValue={nutritionalValues.totalCarbohydrate}
+                subText={'Sugar'}
               />
               <NutritionalValueContainer
                 mainText={'Protein'}
@@ -356,15 +364,19 @@ const ProductAdd = ({ route, navigation }) => {
             </View>
             <TouchableOpacity
               activeOpacity={1}
-              style={style.containFoodOrLiquidContainerStyle}
               onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
+              style={style.containFoodOrLiquidContainerStyle}
             >
               <SwitchToggle
-                switchOn={containFoodOrLiquid ? true : false}
+                backgroundColorOff='#fff'
+                backgroundColorOn={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
                 circleColorOff={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
                 circleColorOn='#fff'
-                backgroundColorOn={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
-                backgroundColorOff='#fff'
+                circleStyle={{
+                  width: 14,
+                  height: 14,
+                  borderRadius: 20,
+                }}
                 containerStyle={{
                   marginTop: 4,
                   width: 48,
@@ -375,12 +387,8 @@ const ProductAdd = ({ route, navigation }) => {
                   padding: 5,
                   marginRight: 10,
                 }}
-                circleStyle={{
-                  width: 14,
-                  height: 14,
-                  borderRadius: 20,
-                }}
                 onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
+                switchOn={containFoodOrLiquid ? true : false}
               />
               <Text style={style.containFoodOrLiquidTextStyle}>Contain Food or Liquid?</Text>
             </TouchableOpacity>
@@ -389,6 +397,8 @@ const ProductAdd = ({ route, navigation }) => {
         <View style={{ height: 100 }} />
       </ScrollView>
       <TouchableOpacity
+        disabled={!productName || !companyName || ecoTypeSelected === 0}
+        onPress={() => handleSaveProduct()}
         style={[
           {
             backgroundColor: ecoTypeSelected === 0 ? '#2f2f2f99' : items[ecoTypeSelected - 1].code,
@@ -396,13 +406,11 @@ const ProductAdd = ({ route, navigation }) => {
           },
           style.SaveButton,
         ]}
-        disabled={!productName || !companyName || ecoTypeSelected === 0}
-        onPress={() => handleSaveProduct()}
       >
         <IconEntypo
+          color={'#fff'}
           name='save'
           size={36}
-          color={'#fff'}
         />
       </TouchableOpacity>
     </View>

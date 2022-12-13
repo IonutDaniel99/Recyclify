@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, Image, Text, TouchableOpacity } from 'react-native'
 import auth, { firebase } from '@react-native-firebase/auth'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -48,21 +48,21 @@ const WelcomeScreen = ({ navigation }) => {
   // }
   return (
     <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
       colors={['#BBFF62', '#1D6000']}
+      end={{ x: 1, y: 1 }}
+      start={{ x: 0, y: 0 }}
       style={style.container}
     >
       <TouchableOpacity
         activeOpacity={1}
-        style={style.TouchableOpacity}
         onPress={handlePressToContinue}
+        style={style.TouchableOpacity}
       >
         <View style={style.logoContainer}>
           <View style={style.logoView}>
             <Image
-              style={style.logoImage}
               source={recyclifyLogo}
+              style={style.logoImage}
             />
           </View>
           <Text style={style.logoText}>Welcome to Recyclify</Text>

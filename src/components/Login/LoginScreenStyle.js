@@ -1,110 +1,62 @@
 import { StyleSheet } from 'react-native'
 
 export const LoginScreenStyle = StyleSheet.create({
+  appButtonContainer: {
+    borderRadius: 50,
+    fontFamily: 'Poppins',
+    height: 46,
+    width: 46,
+  },
+
   container: {
-    display: 'flex',
     alignItems: 'center',
-    width: '100%',
-    height: '100%',
     backgroundColor: '#ffffff',
-    fontFamily: 'Poppins',
-  },
-
-  loginText: {
-    marginTop: '25%',
-    fontStyle: 'normal',
-    fontWeight: '700',
-    height: 56,
-    fontSize: 44,
-    color: '#333333',
-    fontFamily: 'Poppins',
-  },
-
-  inputsContainer: {
-    marginTop: '15%',
     display: 'flex',
-    width: '80%',
-    justifyContent: 'space-around',
-    height: 160,
+    fontFamily: 'Poppins',
+    height: '100%',
+    width: '100%',
+  },
+
+  create: {
+    color: '#000',
+    fontWeight: '700',
+    marginLeft: 6,
+    textDecorationLine: 'underline',
+  },
+
+  eyeIcon: {
+    fontSize: 22,
+    height: 24,
+    marginLeft: 10,
+    opacity: 0.75,
+    width: 24,
   },
 
   inputFieldContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
     height: 120,
+    justifyContent: 'space-between',
   },
 
-  userInputContainer: {
+  inputsContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 50,
-    borderWidth: 2,
-    borderRadius: 20,
-    borderColor: '#E8E8E8',
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    paddingLeft: 20,
-  },
-
-  userIcon: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: 0.75,
-    width: 24,
-    height: 24,
-    fontSize: 22,
-    marginRight: 10,
-  },
-
-  userInput: {
-    width: '70%',
-  },
-
-  passIcon: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: 0.75,
-    width: 24,
-    height: 24,
-    fontSize: 22,
-    marginRight: 10,
-  },
-
-  passInput: {
-    width: '70%',
-  },
-  eyeIcon: {
-    fontSize: 22,
-    width: 24,
-    height: 24,
-    marginLeft: 10,
-    opacity: 0.75,
-  },
-
-  textInput: {
-    textAlign: 'right',
-    color: 'rgba(100, 100, 100, 0.5)',
-    fontWeight: '500',
-    fontSize: 14,
+    height: 160,
+    justifyContent: 'space-around',
+    marginTop: '15%',
+    width: '80%',
   },
 
   loginButtonContainer: {
-    marginTop: 40,
-    display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    width: 130,
-    height: 40,
-    borderWidth: 2,
-    borderColor: '#00CA39',
     backgroundColor: '#ffffff',
+    borderColor: '#00CA39',
     borderRadius: 50,
+    borderWidth: 2,
+    display: 'flex',
+    elevation: 8,
+    height: 40,
+    justifyContent: 'center',
+    marginTop: 40,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -113,66 +65,114 @@ export const LoginScreenStyle = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
 
-    elevation: 8,
+    width: 130,
   },
 
   loginButtonText: {
     color: '#000',
-    width: 130,
-    textAlign: 'center',
-    fontWeight: '600',
     fontSize: 20,
     fontStyle: 'normal',
+    fontWeight: '600',
     letterSpacing: 1,
+    textAlign: 'center',
+    width: 130,
   },
 
-  socialContainer: {
-    marginTop: '15%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-
-  socialText: {
-    fontWeight: '800',
-    fontSize: 14,
-    opacity: 0.75,
-    color: '#666666',
+  loginText: {
+    color: '#333333',
     fontFamily: 'Poppins',
+    fontSize: 44,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    height: 56,
+    marginTop: '25%',
+  },
+  noAccount: {
+    display: 'flex',
+    flexDirection: 'row',
+    fontFamily: 'Poppins',
+    paddingTop: '25%',
+  },
+
+  passIcon: {
+    alignItems: 'center',
+    display: 'flex',
+    fontSize: 22,
+    height: 24,
+    justifyContent: 'center',
+    marginRight: 10,
+    opacity: 0.75,
+    width: 24,
+  },
+
+  passInput: {
+    width: '70%',
+  },
+
+  socialButton: {
+    alignSelf: 'center',
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 
   socialButtons: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: '60%',
     marginTop: 14,
+    width: '60%',
   },
 
-  appButtonContainer: {
-    width: 46,
-    height: 46,
-    borderRadius: 50,
-    fontFamily: 'Poppins',
+  socialContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '15%',
   },
 
-  socialButton: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textTransform: 'uppercase',
-  },
-  noAccount: {
-    paddingTop: '25%',
+  socialText: {
+    color: '#666666',
     fontFamily: 'Poppins',
+    fontSize: 14,
+    fontWeight: '800',
+    opacity: 0.75,
+  },
+
+  textInput: {
+    color: 'rgba(100, 100, 100, 0.5)',
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'right',
+  },
+
+  userIcon: {
+    alignItems: 'center',
+    display: 'flex',
+    fontSize: 22,
+    height: 24,
+    justifyContent: 'center',
+    marginRight: 10,
+    opacity: 0.75,
+    width: 24,
+  },
+  userInput: {
+    width: '70%',
+  },
+  userInputContainer: {
+    alignItems: 'center',
+    borderColor: '#E8E8E8',
+    borderRadius: 20,
+    borderWidth: 2,
     display: 'flex',
     flexDirection: 'row',
-  },
-  create: {
-    color: '#000',
-    marginLeft: 6,
-    fontWeight: '700',
-    textDecorationLine: 'underline',
+    height: 50,
+    paddingLeft: 20,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
   },
 })
