@@ -1,5 +1,8 @@
+import { firebase } from '@react-native-firebase/auth'
 import { firebaseDb } from '../configs/firebase/firebaseWebConfig'
 import { mockProduct } from '../mocks/mockProd'
+
+export const currentUserInfo = firebase.auth().currentUser
 
 export const nullOrCreateCollectionsOnFirebase = (userTemplate, uid) => {
   firebaseDb()
@@ -12,6 +15,7 @@ export const nullOrCreateCollectionsOnFirebase = (userTemplate, uid) => {
   firebaseDb().ref('products/').update(mockProduct)
   firebaseDb().ref('statistics/').update({ 'mockStatistics': 0 })
 }
+export const getCurrentUserStatistics = (uid) => firebaseDb().ref(`users/${uid}/`).once('value')
 
 export const writeDataToFirebase = (path, data) => {
   firebaseDb().ref(`${path}/`).set({ 'latest_products': data })

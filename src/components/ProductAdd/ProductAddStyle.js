@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 export const ProductAddStyle = StyleSheet.create({
-  AddIngredientButtonStyle: {
+  AddIngredientButton: {
     alignItems: 'center',
     borderRadius: 10,
     color: '#fff',
@@ -13,7 +13,7 @@ export const ProductAddStyle = StyleSheet.create({
     textAlignVertical: 'center',
     width: 56,
   },
-  AddIngredientContainerStyle: {
+  AddIngredientContainer: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
@@ -21,7 +21,7 @@ export const ProductAddStyle = StyleSheet.create({
     marginBottom: 25,
   },
 
-  AddIngredientInputStyle: {
+  AddIngredientInput: {
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
@@ -43,19 +43,19 @@ export const ProductAddStyle = StyleSheet.create({
     width: '100%',
   },
 
-  AdditionalDetailsBorderStyle: {
+  AdditionalDetailsBorder: {
     borderBottomColor: '#2f2f2f55',
     borderBottomWidth: 1,
     width: '75%',
   },
 
-  AdditionalDetailsContainerStyle: {
+  AdditionalDetailsContainer: {
     alignItems: 'center',
     display: 'flex',
     paddingBottom: 4,
   },
 
-  AdditionalDetailsTextStyle: {
+  AdditionalDetailsText: {
     color: '#000',
     fontSize: 18,
     fontWeight: '600',
@@ -69,7 +69,7 @@ export const ProductAddStyle = StyleSheet.create({
     height: '10%',
   },
 
-  BackIconStyle: {
+  BackIcon: {
     alignItems: 'center',
     display: 'flex',
     height: '100%',
@@ -79,7 +79,7 @@ export const ProductAddStyle = StyleSheet.create({
     zIndex: 10,
   },
 
-  DescriptionInputStyle: {
+  DescriptionInput: {
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
@@ -89,7 +89,7 @@ export const ProductAddStyle = StyleSheet.create({
     textAlignVertical: 'top',
   },
 
-  IngredientContainerStyle: {
+  IngredientContainer: {
     alignItems: 'center',
     backgroundColor: '#2980b9C6',
     borderColor: '#fff',
@@ -103,23 +103,30 @@ export const ProductAddStyle = StyleSheet.create({
     padding: 3,
   },
 
-  IngredientDeleteIconStyle: {
+  IngredientDeleteIcon: {
     color: '#fff',
     marginRight: 5,
   },
 
-  IngredientTextStyle: {
+  IngredientText: {
     color: '#fff',
     fontWeight: '600',
     marginHorizontal: 15,
   },
 
-  ManufactureNameStyle: {
+  ManufactureName: {
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
     marginTop: 20,
     paddingHorizontal: 20,
+  },
+
+  NutritionalValuesCalories: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: '800',
+    width: '70%',
   },
 
   NutritionalValuesCaloriesContainer: {
@@ -128,31 +135,18 @@ export const ProductAddStyle = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  NutritionalValuesCaloriesStyle: {
-    color: '#000',
-    fontSize: 16,
-    fontWeight: '800',
-    width: '70%',
-  },
-
-  NutritionalValuesCaloriesTextStyle: {
+  NutritionalValuesCaloriesText: {
     backgroundColor: 'red',
     width: '70%',
   },
 
-  NutritionalValuesContainerStyle: {
+  NutritionalValuesContainer: {
     marginBottom: 20,
     marginHorizontal: 4,
     marginTop: 10,
   },
 
-  NutritionalValuesTextsContainerStyle: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-  },
-
-  NutritionalValuesTextsStyle: {
+  NutritionalValuesTexts: {
     color: '#000',
     fontSize: 16,
     fontWeight: '800',
@@ -160,7 +154,13 @@ export const ProductAddStyle = StyleSheet.create({
     width: '30%',
   },
 
-  ProductContainerStyle: {
+  NutritionalValuesTextsContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+  },
+
+  ProductContainer: {
     alignItems: 'center',
     borderRadius: 5,
     display: 'flex',
@@ -168,7 +168,7 @@ export const ProductAddStyle = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  ProductNameStyle: {
+  ProductName: {
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
@@ -176,13 +176,13 @@ export const ProductAddStyle = StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  ProductTypeTextStyle: {
+  ProductTypeText: {
     color: '#000',
     fontSize: 20,
     marginTop: 20,
   },
 
-  ProductTypeZoneStyle: {
+  ProductTypeZone: {
     marginTop: 10,
   },
 
@@ -222,7 +222,7 @@ export const ProductAddStyle = StyleSheet.create({
     backgroundColor: 'green',
     width: '50%',
   },
-  containFoodOrLiquidContainerStyle: {
+  containFoodOrLiquidContainer: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
@@ -230,7 +230,7 @@ export const ProductAddStyle = StyleSheet.create({
     marginVertical: 20,
   },
 
-  containFoodOrLiquidTextStyle: {
+  containFoodOrLiquidText: {
     color: '#000',
   },
   screenContainer: {

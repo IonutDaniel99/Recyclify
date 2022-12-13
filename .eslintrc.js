@@ -24,7 +24,7 @@ module.exports = {
     'react-native/no-inline-styles': 0,
     'react-native/no-raw-text': 2,
     'jsx-quotes': 0,
-    'react-native/sort-styles': 2,
+    'react-native/sort-styles': ['error', 'asc', { 'ignoreClassNames': true, 'ignoreStyleProperties': false }],
     'no-unused-vars': ['error', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }],
   },
 }

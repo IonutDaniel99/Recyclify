@@ -120,7 +120,7 @@ const ProductAdd = ({ route, navigation }) => {
       <View style={style.BackAndTitleContainer}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={style.BackIconStyle}
+          style={style.BackIcon}
         >
           <Icon
             color={'#fff'}
@@ -159,7 +159,7 @@ const ProductAdd = ({ route, navigation }) => {
           multiline
           onChangeText={(val) => setProductName(val)}
           placeholder='Product Name'
-          style={style.ProductNameStyle}
+          style={style.ProductName}
           value={productName}
         />
 
@@ -167,7 +167,7 @@ const ProductAdd = ({ route, navigation }) => {
           multiline
           onChangeText={(val) => setCompanyName(val)}
           placeholder='Company Name'
-          style={style.ManufactureNameStyle}
+          style={style.ManufactureName}
           value={companyName}
         />
         <TextInput
@@ -175,7 +175,7 @@ const ProductAdd = ({ route, navigation }) => {
           multiline
           onChangeText={(val) => setDescription(val)}
           placeholder='Description'
-          style={style.DescriptionInputStyle}
+          style={style.DescriptionInput}
         />
         <FlatGrid
           data={items.slice(0, 6)}
@@ -189,7 +189,7 @@ const ProductAdd = ({ route, navigation }) => {
                 setEcoType(item.value)
               }}
               style={[
-                style.ProductContainerStyle,
+                style.ProductContainer,
                 {
                   backgroundColor: ecoTypeSelected === 0 ? item.code : ecoTypeSelected === item.id ? item.code : `${item.code}B3`,
                 },
@@ -209,13 +209,13 @@ const ProductAdd = ({ route, navigation }) => {
           )}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          style={style.ProductTypeZoneStyle}
+          style={style.ProductTypeZone}
         />
         {showFoodSection && (
           <View>
-            <View style={style.AdditionalDetailsContainerStyle}>
-              <Text style={style.AdditionalDetailsTextStyle}>Ingredients Details</Text>
-              <View style={style.AdditionalDetailsBorderStyle} />
+            <View style={style.AdditionalDetailsContainer}>
+              <Text style={style.AdditionalDetailsText}>Ingredients Details</Text>
+              <View style={style.AdditionalDetailsBorder} />
             </View>
             <FlatGrid
               data={ingredientsList}
@@ -227,13 +227,13 @@ const ProductAdd = ({ route, navigation }) => {
                   activeOpacity={1}
                   key={index}
                   onPress={() => removeIngredient(index)}
-                  style={style.IngredientContainerStyle}
+                  style={style.IngredientContainer}
                 >
-                  <Text style={style.IngredientTextStyle}>{item}</Text>
+                  <Text style={style.IngredientText}>{item}</Text>
                   <Icon
                     name='close'
                     size={14}
-                    style={style.IngredientDeleteIconStyle}
+                    style={style.IngredientDeleteIcon}
                   />
                 </TouchableOpacity>
               )}
@@ -241,27 +241,27 @@ const ProductAdd = ({ route, navigation }) => {
               staticDimension={52}
             />
 
-            <View style={[{ marginTop: ingredientsList.length !== 0 ? 10 : 20 }, style.AddIngredientContainerStyle]}>
+            <View style={[{ marginTop: ingredientsList.length !== 0 ? 10 : 20 }, style.AddIngredientContainer]}>
               <TextInput
                 maxLength={20}
                 onChangeText={(val) => setIngredient(val)}
                 onSubmitEditing={() => handleAddIngredients()}
                 placeholder='Add Ingredient'
-                style={style.AddIngredientInputStyle}
+                style={style.AddIngredientInput}
                 value={ingredient}
               />
               <TouchableOpacity
                 activeOpacity={1}
                 disabled={!ingredient}
                 onPress={() => handleAddIngredients()}
-                style={style.AddIngredientButtonStyle}
+                style={style.AddIngredientButton}
               >
                 <Text
                   style={[
                     {
                       backgroundColor: !ingredient ? '#32CD32A1' : '#32CD32',
                     },
-                    style.AddIngredientButtonStyle,
+                    style.AddIngredientButton,
                   ]}
                 >
                   Add
@@ -269,14 +269,14 @@ const ProductAdd = ({ route, navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <View style={style.AdditionalDetailsContainerStyle}>
-              <Text style={style.AdditionalDetailsTextStyle}>Nutritional Values</Text>
-              <View style={style.AdditionalDetailsBorderStyle} />
+            <View style={style.AdditionalDetailsContainer}>
+              <Text style={style.AdditionalDetailsText}>Nutritional Values</Text>
+              <View style={style.AdditionalDetailsBorder} />
             </View>
-            <View style={style.NutritionalValuesContainerStyle}>
-              <View style={style.NutritionalValuesTextsContainerStyle}>
-                <Text style={style.NutritionalValuesCaloriesStyle}>Calories</Text>
-                <Text style={style.NutritionalValuesTextsStyle}>Per 100g</Text>
+            <View style={style.NutritionalValuesContainer}>
+              <View style={style.NutritionalValuesTextsContainer}>
+                <Text style={style.NutritionalValuesCalories}>Calories</Text>
+                <Text style={style.NutritionalValuesTexts}>Per 100g</Text>
               </View>
               <NutritionalValueContainer
                 mainText={'Total Fat'}
@@ -358,14 +358,14 @@ const ProductAdd = ({ route, navigation }) => {
                 }
               />
             </View>
-            <View style={style.AdditionalDetailsContainerStyle}>
-              <Text style={style.AdditionalDetailsTextStyle}>Other Details</Text>
-              <View style={style.AdditionalDetailsBorderStyle} />
+            <View style={style.AdditionalDetailsContainer}>
+              <Text style={style.AdditionalDetailsText}>Other Details</Text>
+              <View style={style.AdditionalDetailsBorder} />
             </View>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
-              style={style.containFoodOrLiquidContainerStyle}
+              style={style.containFoodOrLiquidContainer}
             >
               <SwitchToggle
                 backgroundColorOff='#fff'
@@ -390,7 +390,7 @@ const ProductAdd = ({ route, navigation }) => {
                 onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
                 switchOn={containFoodOrLiquid ? true : false}
               />
-              <Text style={style.containFoodOrLiquidTextStyle}>Contain Food or Liquid?</Text>
+              <Text style={style.containFoodOrLiquidText}>Contain Food or Liquid?</Text>
             </TouchableOpacity>
           </View>
         )}
