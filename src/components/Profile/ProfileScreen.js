@@ -5,23 +5,8 @@ import { getCurrentUserStatistics } from '../../helpers/firebaseHelpers'
 import { ProfileScreenStyle } from './ProfileScreenStyle'
 import { firebase } from '@react-native-firebase/auth'
 
-import Bottle from '../../assets/images/AddProduct/bottle.png'
-import Metal from '../../assets/images/AddProduct/can.png'
-import Microchip from '../../assets/images/AddProduct/microchip.png'
-import Organic from '../../assets/images/AddProduct/apple.png'
-import Paper from '../../assets/images/AddProduct/document.png'
-import Plastic from '../../assets/images/AddProduct/plastic.png'
-import _ from 'lodash'
 import { FlatGrid } from 'react-native-super-grid'
-
-const items = [
-  { label: 'Plastic', value: 'plastic', code: '#3498db', id: 1, icon: Plastic },
-  { label: 'Paper', value: 'paper', code: '#2ecc71', id: 2, icon: Paper },
-  { label: 'Metal', value: 'metal', code: '#95a5a6', id: 3, icon: Metal },
-  { label: 'Electronic', value: 'ewaste', code: '#34495e', id: 4, icon: Microchip },
-  { label: 'Glass', value: 'glass', code: '#a8ccd7', id: 5, icon: Bottle },
-  { label: 'Organic', value: 'organic', code: '#e67e22', id: 6, icon: Organic },
-]
+import { containerItemsMapper } from '../../helpers/containerItemsMapper'
 
 const PorfileScreen = () => {
   const style = ProfileScreenStyle
@@ -47,23 +32,27 @@ const PorfileScreen = () => {
 
   const getFavoritePet = (cb) => {
     const bigElement = Object.entries(userStatistics.totalProductsScanned).sort((x, y) => y[1] - x[1])[0]
-    const item = items.find((x) => bigElement[0] === x.value)
+    const item = containerItemsMapper.find((x) => bigElement[0] === x.value)
     return cb({ favNumber: bigElement[1], ...item })
   }
 
   return (
     <View style={style.ProfileScreenContiner}>
       {isLoading ? (
-        <Text>isLoading...</Text>
+        <Text>Loading...</Text>
       ) : (
         <>
           <View style={style.UserProfileContainer}>
-            <Image
-              source={{ uri: userStatistics.photoURL }}
-              style={style.ProfileImage}
-            />
             <View style={style.UserProfileTexts}>
-              <Text style={style.UserProfileName}>{userStatistics.displayName}</Text>
+              <Image
+                source={{ uri: userStatistics.photoURL }}
+                style={style.ProfileImage}
+              />
+              <Text style={style.UserProfileName}>Hi, {userStatistics.displayName}!</Text>
+            </View>
+            <View style={style.UserProfileBadges}>
+              <Text style={style.UserProfileJoinedDate}>Joined at {computeJoinedAtDate(userStatistics.creationTime)}</Text>
+              <Text style={style.UserProfileJoinedDate}>Joined at {computeJoinedAtDate(userStatistics.creationTime)}</Text>
               <Text style={style.UserProfileJoinedDate}>Joined at {computeJoinedAtDate(userStatistics.creationTime)}</Text>
             </View>
           </View>
@@ -105,7 +94,7 @@ const PorfileScreen = () => {
           </View>
           <Text style={style.ScoreboardText}>Overall, your scoreboard looks like this</Text>
           <FlatGrid
-            data={items.slice(0, 6)}
+            data={containerItemsMapper.slice(0, 6)}
             itemDimension={90}
             renderItem={({ item }) => (
               <TouchableOpacity
@@ -125,7 +114,10 @@ const PorfileScreen = () => {
                     height: 36,
                   }}
                 />
-                <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600', marginTop: 5 }}>{item.label}</Text>
+                <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>{item.label}</Text>
+                <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>
+                  {Object.entries(userStatistics.totalProductsScanned).map((x) => (x[0] === item.value ? x[1] : ''))}
+                </Text>
               </TouchableOpacity>
             )}
             showsHorizontalScrollIndicator={false}

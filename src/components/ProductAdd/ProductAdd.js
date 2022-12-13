@@ -7,26 +7,11 @@ import { FlatGrid } from 'react-native-super-grid'
 
 import { NutritionalValueContainer } from './NutritionalValueContainer'
 
-import Bottle from '../../assets/images/AddProduct/bottle.png'
-import Metal from '../../assets/images/AddProduct/can.png'
-import Microchip from '../../assets/images/AddProduct/microchip.png'
-import Organic from '../../assets/images/AddProduct/apple.png'
-import Paper from '../../assets/images/AddProduct/document.png'
-import Plastic from '../../assets/images/AddProduct/plastic.png'
-
 import Icon from 'react-native-vector-icons/AntDesign'
 import IconEntypo from 'react-native-vector-icons/MaterialIcons'
 
 import SwitchToggle from 'react-native-switch-toggle'
-
-const items = [
-  { label: 'Plastic', value: 'plastic', code: '#3498db', id: 1, icon: Plastic },
-  { label: 'Paper', value: 'paper', code: '#2ecc71', id: 2, icon: Paper },
-  { label: 'Metal', value: 'metal', code: '#95a5a6', id: 3, icon: Metal },
-  { label: 'Electronic', value: 'ewaste', code: '#34495e', id: 4, icon: Microchip },
-  { label: 'Glass', value: 'glass', code: '#a8ccd7', id: 5, icon: Bottle },
-  { label: 'Organic', value: 'organic', code: '#e67e22', id: 6, icon: Organic },
-]
+import { containerItemsMapper } from '../../helpers/containerItemsMapper'
 
 const barCodeMapper = {
   'CODE_128': 'CODE128',
@@ -178,7 +163,7 @@ const ProductAdd = ({ route, navigation }) => {
           style={style.DescriptionInput}
         />
         <FlatGrid
-          data={items.slice(0, 6)}
+          data={containerItemsMapper.slice(0, 6)}
           itemDimension={90}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -369,8 +354,8 @@ const ProductAdd = ({ route, navigation }) => {
             >
               <SwitchToggle
                 backgroundColorOff='#fff'
-                backgroundColorOn={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
-                circleColorOff={ecoTypeSelected === 0 ? '#2f2f2f' : items[ecoTypeSelected - 1].code}
+                backgroundColorOn={ecoTypeSelected === 0 ? '#2f2f2f' : containerItemsMapper[ecoTypeSelected - 1].code}
+                circleColorOff={ecoTypeSelected === 0 ? '#2f2f2f' : containerItemsMapper[ecoTypeSelected - 1].code}
                 circleColorOn='#fff'
                 circleStyle={{
                   width: 14,
@@ -401,7 +386,7 @@ const ProductAdd = ({ route, navigation }) => {
         onPress={() => handleSaveProduct()}
         style={[
           {
-            backgroundColor: ecoTypeSelected === 0 ? '#2f2f2f99' : items[ecoTypeSelected - 1].code,
+            backgroundColor: ecoTypeSelected === 0 ? '#2f2f2f99' : containerItemsMapper[ecoTypeSelected - 1].code,
             opacity: !productName || !companyName || ecoTypeSelected === 0 ? 0.5 : 1,
           },
           style.SaveButton,
