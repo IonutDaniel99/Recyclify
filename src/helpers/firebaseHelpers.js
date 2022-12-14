@@ -32,3 +32,13 @@ export const writeDataToUser = (uid, product) => {
 export const getProductOrNull = (productCodeNumber) => firebaseDb().ref(`products/${productCodeNumber}`).once('value')
 
 export const saveProductToFirebase = (productObject) => firebaseDb().ref('products/').update(productObject)
+
+export const resetUserTotalProductsScanned = (uid) =>
+  firebaseDb().ref(`users/${uid}/totalProductsScanned`).update({
+    ewaste: 0,
+    plastic: 0,
+    metal: 0,
+    glass: 0,
+    paper: 0,
+    organic: 0,
+  })

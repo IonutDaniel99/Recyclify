@@ -1,20 +1,38 @@
 import { StyleSheet } from 'react-native'
 
 export const ProfileScreenStyle = StyleSheet.create({
+  DragToRefreshContainer: {
+    alignItems: 'center',
+    borderRadius: 50,
+    display: 'flex',
+    height: 50,
+    position: 'absolute',
+    top: -20,
+    width: '100%',
+    zIndex: 10,
+  },
+  DragToRefreshText: {
+    backgroundColor: '#F4F4F5',
+    borderRadius: 10,
+    color: '#000',
+    paddingHorizontal: 30,
+    paddingVertical: 6,
+    position: 'relative',
+    top: 35,
+  },
   ProfileScreenContiner: {
     backgroundColor: '#ffffff',
     height: '100%',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    position: 'relative',
     width: '100%',
+    zIndex: 5,
   },
   UserProfileContainer: {
     alignItems: 'center',
-    backgroundColor: 'green',
     display: 'flex',
     flexDirection: 'column',
-    height: 200,
-    justifyContent: 'center',
-    marginBottom: 30,
     padding: 20,
   },
   UserProfileTexts: {
@@ -23,7 +41,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     flexDirection: 'row',
     height: 64,
     justifyContent: 'center',
-    marginBottom: 5,
+    marginBottom: 25,
   },
   ProfileImage: {
     borderRadius: 50,
@@ -37,9 +55,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     fontWeight: '700',
   },
   UserProfileJoinedDate: {
-    borderBottomColor: '#EF4637',
-    borderBottomWidth: 1,
-    color: '#EF4637',
+    color: '#787879',
     fontSize: 10,
     fontWeight: '700',
   },
@@ -47,7 +63,29 @@ export const ProfileScreenStyle = StyleSheet.create({
   UserProfileBadges: {
     display: 'flex',
     flexDirection: 'row',
-    flex: '0.33',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  ContainerBadge: {
+    alignItems: 'center',
+    backgroundColor: '#F4F4F5',
+    borderColor: '#96A0D0',
+    borderRadius: 8,
+    borderWidth: 1,
+    display: 'flex',
+    height: 72,
+    justifyContent: 'center',
+    width: '46%',
+  },
+  ContainerText: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+  },
+  ContainerDate: {
+    fontFamily: 'Poppins',
+    fontSize: 14,
+    textAlign: 'center',
+    width: '60%',
   },
 
   UserFavMostContainer: {
@@ -58,6 +96,7 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   UserFavoriteTypeContainer: {
     alignItems: 'center',
+    borderColor: '#96A0D0',
     borderRadius: 4,
     borderWidth: 1,
     display: 'flex',
@@ -96,5 +135,26 @@ export const ProfileScreenStyle = StyleSheet.create({
     display: 'flex',
     height: 100,
     justifyContent: 'center',
+  },
+  resetStatisticsContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    marginTop: 20,
+    width: '100%',
+  },
+  resetStatistics: {
+    alignItems: 'center',
+    backgroundColor: '#266DD3',
+    borderColor: '#000',
+    borderRadius: 20,
+    borderWidth: 1.5,
+    display: 'flex',
+    height: 40,
+    justifyContent: 'center',
+    width: 192,
+  },
+  resetStatisticsText: {
+    color: '#fff',
+    fontWeight: '600',
   },
 })
