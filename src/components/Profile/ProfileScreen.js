@@ -5,7 +5,6 @@ import { getCurrentUserStatistics, resetUserTotalProductsScanned } from '../../h
 import { ProfileScreenStyle } from './ProfileScreenStyle'
 import { firebase } from '@react-native-firebase/auth'
 
-import { FlatGrid } from 'react-native-super-grid'
 import { containerItemsMapper } from '../../helpers/containerItemsMapper'
 import { useFocusEffect } from '@react-navigation/native'
 
@@ -124,7 +123,7 @@ const PorfileScreen = ({ route }) => {
                     />
                     <View style={style.UserFavoriteTexts}>
                       <Text style={style.UserFavoriteTextLabel}>
-                        Your favorite PET type is{' '}
+                        Your favorite PET type is
                         <Text
                           style={{
                             fontWeight: '700',
@@ -135,7 +134,7 @@ const PorfileScreen = ({ route }) => {
                         </Text>
                       </Text>
                       <Text style={style.UserFavoriteTextNumber}>
-                        You scanned over{' '}
+                        You scanned over
                         <Text
                           style={{
                             fontWeight: '700',
@@ -144,7 +143,7 @@ const PorfileScreen = ({ route }) => {
                           }}
                         >
                           {cb.favNumber}
-                        </Text>{' '}
+                        </Text>
                         of this type!
                       </Text>
                     </View>
@@ -158,15 +157,17 @@ const PorfileScreen = ({ route }) => {
                 ),
               )}
             </View>
-            <Text style={style.ScoreboardText}>Overall, your scoreboard looks like this</Text>
-            <FlatGrid
-              data={containerItemsMapper.slice(0, 6)}
-              disableScrollViewPanResponder
-              disableVirtualization
-              itemDimension={90}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  activeOpacity={1}
+            <Text style={style.ScoreboardText}>Overall, your scoreboard looks like this:</Text>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+              }}
+            >
+              {containerItemsMapper.map((item) => (
+                <View
                   key={item.id}
                   style={[
                     style.ProductContainer,
@@ -186,15 +187,9 @@ const PorfileScreen = ({ route }) => {
                   <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>
                     {Object.entries(userStatistics.totalProductsScanned).map((x) => (x[0] === item.value ? x[1] : ''))}
                   </Text>
-                </TouchableOpacity>
-              )}
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              style={{
-                marginTop: 10,
-                maxHeight: 230,
-              }}
-            />
+                </View>
+              ))}
+            </View>
             <View style={style.resetStatisticsContainer}>
               <TouchableOpacity
                 activeOpacity={0.8}

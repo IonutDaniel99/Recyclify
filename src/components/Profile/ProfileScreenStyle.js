@@ -128,6 +128,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     marginTop: 18,
+    textAlign: 'center',
   },
   ProductContainer: {
     alignItems: 'center',
@@ -135,6 +136,8 @@ export const ProfileScreenStyle = StyleSheet.create({
     display: 'flex',
     height: 100,
     justifyContent: 'center',
+    margin: 8,
+    width: 100,
   },
   resetStatisticsContainer: {
     alignItems: 'center',
