@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-raw-text */
-import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl, Animated, LogBox } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl, Animated, LogBox, Dimensions, Alert } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { getCurrentUserStatistics, resetUserTotalProductsScanned } from '../../helpers/firebaseHelpers'
 import { ProfileScreenStyle } from './ProfileScreenStyle'
@@ -7,8 +7,11 @@ import { firebase } from '@react-native-firebase/auth'
 
 import { containerItemsMapper } from '../../helpers/containerItemsMapper'
 import { useFocusEffect } from '@react-navigation/native'
+import { FlatGrid } from 'react-native-super-grid'
 
-const PorfileScreen = ({ route }) => {
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
+const PorfileScreen = ({ route, navigation }) => {
   const style = ProfileScreenStyle
   const userId = firebase.auth().currentUser.uid
 
@@ -52,6 +55,7 @@ const PorfileScreen = ({ route }) => {
   const getUserDataPromise = () =>
     getCurrentUserStatistics(userId)
       .then((data) => {
+        console.log(data)
         setUserStatistics(data.val())
       })
       .then(() => setIsLoading(false))
@@ -70,10 +74,43 @@ const PorfileScreen = ({ route }) => {
     return cb({ favNumber: bigElement[1], ...item })
   }
   const resetStatistics = () => {
+    console.log('d')
     setIsLoading(true)
     resetUserTotalProductsScanned(userId).then(() => {
       getUserDataPromise()
     })
+  }
+
+  const signOutUser = async () => {
+    try {
+      await firebase.auth().signOut()
+      navigation.navigate('WelcomeScreen')
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const handleResetStatistics = () => {
+    Alert.alert('', 'Are you sure you want to reset account statistics?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      { text: 'YES', onPress: () => resetStatistics() },
+    ])
+    return true
+  }
+  const handleLogOut = () => {
+    Alert.alert('', 'Are you sure you want to log off?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      { text: 'YES', onPress: () => signOutUser() },
+    ])
+    return true
   }
 
   return (
@@ -92,13 +129,16 @@ const PorfileScreen = ({ route }) => {
                 refreshing={refreshing}
               />
             }
+            style={{ marginBottom: 140 }}
           >
             <View style={style.UserProfileContainer}>
               <View style={style.UserProfileTexts}>
-                <Image
-                  source={{ uri: userStatistics.photoURL }}
-                  style={style.ProfileImage}
-                />
+                {userStatistics.photoURL && (
+                  <Image
+                    source={{ uri: userStatistics.photoURL }}
+                    style={style.ProfileImage}
+                  />
+                )}
                 <Text style={style.UserProfileName}>Hi, {userStatistics.displayName}!</Text>
               </View>
               <View style={style.UserProfileBadges}>
@@ -123,7 +163,7 @@ const PorfileScreen = ({ route }) => {
                     />
                     <View style={style.UserFavoriteTexts}>
                       <Text style={style.UserFavoriteTextLabel}>
-                        Your favorite PET type is
+                        Your favorite PET type is <Text />
                         <Text
                           style={{
                             fontWeight: '700',
@@ -134,17 +174,16 @@ const PorfileScreen = ({ route }) => {
                         </Text>
                       </Text>
                       <Text style={style.UserFavoriteTextNumber}>
-                        You scanned over
+                        You scanned over <Text />
                         <Text
                           style={{
                             fontWeight: '700',
-
                             textDecorationLine: 'underline',
                           }}
                         >
                           {cb.favNumber}
                         </Text>
-                        of this type!
+                        <Text /> of this type!
                       </Text>
                     </View>
                   </View>
@@ -158,16 +197,18 @@ const PorfileScreen = ({ route }) => {
               )}
             </View>
             <Text style={style.ScoreboardText}>Overall, your scoreboard looks like this:</Text>
-            <View
-              style={{
+            <FlatGrid
+              contentContainerStyle={{
                 display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
                 justifyContent: 'space-between',
               }}
-            >
-              {containerItemsMapper.map((item) => (
-                <View
+              data={containerItemsMapper.slice(0, 6)}
+              disableScrollViewPanResponder
+              disableVirtualization
+              itemDimension={Dimensions.get('window').width / 4}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  activeOpacity={1}
                   key={item.id}
                   style={[
                     style.ProductContainer,
@@ -187,16 +228,34 @@ const PorfileScreen = ({ route }) => {
                   <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>
                     {Object.entries(userStatistics.totalProductsScanned).map((x) => (x[0] === item.value ? x[1] : ''))}
                   </Text>
-                </View>
-              ))}
-            </View>
+                </TouchableOpacity>
+              )}
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              style={{
+                marginTop: 10,
+                maxHeight: 300,
+              }}
+            />
             <View style={style.resetStatisticsContainer}>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => resetStatistics()}
+                onPress={() => handleResetStatistics()}
                 style={style.resetStatistics}
               >
                 <Text style={style.resetStatisticsText}>Reset Statistics</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => handleLogOut()}
+                style={style.logOut}
+              >
+                <Icon
+                  color='#ffffff'
+                  name='logout'
+                  size={28}
+                />
+                <Text style={style.logOutText}>Log Out</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>

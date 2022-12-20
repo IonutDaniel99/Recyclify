@@ -128,6 +128,10 @@ def reactNativeArchitectures() {
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
 }
 
+def getDate() {
+    return new Date().format('HH.dd.MM.yyyy')
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -138,7 +142,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName getDate()
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         missingDimensionStrategy 'react-native-camera', 'mlkit'
 

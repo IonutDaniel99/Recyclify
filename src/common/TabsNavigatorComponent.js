@@ -5,7 +5,6 @@ import ProductDetails from '../components/ProductDetailsComponent/ProductDetails
 import Icon from 'react-native-vector-icons/Feather'
 import PorfileScreen from '../components/Profile/ProfileScreen'
 import CameraBarcodeScanner from '../components/CameraBarcodeScanner/CameraBarcodeScanner'
-import SettingsScreen from '../components/Settings/SettingsScreen'
 import HomeScreen from '../components/Home/HomeScreen'
 import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar'
 
@@ -28,14 +27,14 @@ const TabsNavigatorComponent = () => {
         }}
       >
         <Tab.Screen
-          component={PorfileScreen}
-          name='ProfileScreen'
+          component={HomeScreen}
+          name='HomeScreen'
           options={{
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (
               <Icon
                 color={color}
-                name='user'
+                name='home'
                 size={24}
               />
             ),
@@ -56,20 +55,6 @@ const TabsNavigatorComponent = () => {
           }}
         />
         <Tab.Screen
-          component={HomeScreen}
-          name='HomeScreen'
-          options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color }) => (
-              <Icon
-                color={color}
-                name='home'
-                size={24}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
           component={ProductDetails}
           name='ProductDetailsScreen'
           options={{
@@ -84,14 +69,14 @@ const TabsNavigatorComponent = () => {
           }}
         />
         <Tab.Screen
-          component={SettingsScreen}
-          name='SettingsScreen'
+          component={PorfileScreen}
+          name='ProfileScreen'
           options={{
-            tabBarLabel: 'Settings',
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
               <Icon
                 color={color}
-                name='settings'
+                name='user'
                 size={24}
               />
             ),
