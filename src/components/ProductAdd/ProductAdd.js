@@ -144,6 +144,7 @@ const ProductAdd = ({ route, navigation }) => {
           multiline
           onChangeText={(val) => setProductName(val)}
           placeholder='Product Name'
+          placeholderTextColor={'#8c8c8c'}
           style={style.ProductName}
           value={productName}
         />
@@ -152,6 +153,7 @@ const ProductAdd = ({ route, navigation }) => {
           multiline
           onChangeText={(val) => setCompanyName(val)}
           placeholder='Company Name'
+          placeholderTextColor={'#8c8c8c'}
           style={style.ManufactureName}
           value={companyName}
         />
@@ -160,6 +162,7 @@ const ProductAdd = ({ route, navigation }) => {
           multiline
           onChangeText={(val) => setDescription(val)}
           placeholder='Description'
+          placeholderTextColor={'#8c8c8c'}
           style={style.DescriptionInput}
         />
         <FlatGrid
@@ -232,6 +235,7 @@ const ProductAdd = ({ route, navigation }) => {
                 onChangeText={(val) => setIngredient(val)}
                 onSubmitEditing={() => handleAddIngredients()}
                 placeholder='Add Ingredient'
+                placeholderTextColor={'#8c8c8c'}
                 style={style.AddIngredientInput}
                 value={ingredient}
               />

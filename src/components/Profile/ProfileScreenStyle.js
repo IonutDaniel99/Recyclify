@@ -36,6 +36,7 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   UserProfileTexts: {
     alignItems: 'center',
+    color: '#000',
     display: 'flex',
     flexDirection: 'row',
     height: 64,
@@ -83,10 +84,12 @@ export const ProfileScreenStyle = StyleSheet.create({
     width: '46%',
   },
   ContainerText: {
+    color: '#000',
     fontFamily: 'Poppins',
     fontSize: 16,
   },
   ContainerDate: {
+    color: '#000',
     fontFamily: 'Poppins',
     fontSize: 14,
     textAlign: 'center',
@@ -119,6 +122,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     width: 46,
   },
   UserFavoriteTexts: {
+    color: '#fff',
     display: 'flex',
   },
   UserFavoriteTextLabel: {
@@ -130,6 +134,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     fontSize: 16,
   },
   ScoreboardText: {
+    font: '#d0d0d0',
     fontSize: 18,
     fontWeight: '700',
     marginTop: 30,

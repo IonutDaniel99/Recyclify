@@ -66,6 +66,7 @@ export const NutritionalValueContainer = ({ mainText, subText, editable, parentV
           maxLength={4}
           onChangeText={(e) => setValue(e || null)}
           placeholder='___'
+          placeholderTextColor={'#8c8c8c'}
           selectTextOnFocus={!editable}
           style={{
             height: 24,
