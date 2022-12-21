@@ -23,7 +23,6 @@ export const ProfileScreenStyle = StyleSheet.create({
   ProfileScreenContiner: {
     backgroundColor: '#ffffff',
     height: '100%',
-    paddingHorizontal: 20,
     paddingTop: 20,
     position: 'relative',
     width: '100%',
@@ -53,6 +52,12 @@ export const ProfileScreenStyle = StyleSheet.create({
     color: '#000',
     fontSize: 20,
     fontWeight: '700',
+  },
+  logOut: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: 25,
   },
   UserProfileJoinedDate: {
     color: '#787879',
@@ -127,14 +132,14 @@ export const ProfileScreenStyle = StyleSheet.create({
   ScoreboardText: {
     fontSize: 18,
     fontWeight: '700',
-    marginTop: 60,
+    marginTop: 30,
     textAlign: 'center',
   },
   ProductContainer: {
     alignItems: 'center',
     borderRadius: 5,
     display: 'flex',
-    height: 120,
+    height: 100,
     justifyContent: 'center',
     margin: 8,
   },
@@ -143,7 +148,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginVertical: 60,
+    marginVertical: 20,
     width: '100%',
   },
   resetStatistics: {
@@ -162,18 +167,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  logOut: {
-    alignItems: 'center',
-    backgroundColor: '#d32626',
-    borderColor: '#000',
-    borderRadius: 20,
-    borderWidth: 1.5,
-    display: 'flex',
-    flexDirection: 'row',
-    height: 48,
-    justifyContent: 'center',
-    width: 156,
-  },
+
   logOutText: {
     color: '#fff',
     fontSize: 16,

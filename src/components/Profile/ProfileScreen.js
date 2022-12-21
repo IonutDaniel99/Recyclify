@@ -129,7 +129,10 @@ const PorfileScreen = ({ route, navigation }) => {
                 refreshing={refreshing}
               />
             }
-            style={{ marginBottom: 140 }}
+            style={{
+              marginBottom: '25%',
+              paddingHorizontal: 20,
+            }}
           >
             <View style={style.UserProfileContainer}>
               <View style={style.UserProfileTexts}>
@@ -140,6 +143,17 @@ const PorfileScreen = ({ route, navigation }) => {
                   />
                 )}
                 <Text style={style.UserProfileName}>Hi, {userStatistics.displayName}!</Text>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => handleLogOut()}
+                  style={style.logOut}
+                >
+                  <Icon
+                    color='#000000'
+                    name='logout'
+                    size={28}
+                  />
+                </TouchableOpacity>
               </View>
               <View style={style.UserProfileBadges}>
                 <View style={style.ContainerBadge}>
@@ -234,7 +248,6 @@ const PorfileScreen = ({ route, navigation }) => {
               showsVerticalScrollIndicator={false}
               style={{
                 marginTop: 10,
-                maxHeight: 300,
               }}
             />
             <View style={style.resetStatisticsContainer}>
@@ -244,18 +257,6 @@ const PorfileScreen = ({ route, navigation }) => {
                 style={style.resetStatistics}
               >
                 <Text style={style.resetStatisticsText}>Reset Statistics</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => handleLogOut()}
-                style={style.logOut}
-              >
-                <Icon
-                  color='#ffffff'
-                  name='logout'
-                  size={28}
-                />
-                <Text style={style.logOutText}>Log Out</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
