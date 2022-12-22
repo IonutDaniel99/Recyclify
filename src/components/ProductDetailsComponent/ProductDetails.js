@@ -1,9 +1,11 @@
-import { View, Text, TextInput, Button, Alert, InteractionManager } from 'react-native'
+import { View, Text, TextInput, Button, Alert, InteractionManager, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
 import { useFocusEffect } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
+
+import Icon from 'react-native-vector-icons/Fontisto'
 
 const barcodeObject = (data, dataRaw, format, type) => {
   return {
@@ -113,42 +115,70 @@ const ProductDetails = ({ route, navigation }) => {
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
           <TextInput
+            autoFocus={true}
+            clearButtonMode='never'
             keyboardType='numeric'
             onChangeText={(val) => setProductCodeData(barcodeObject(val.replace(/[^0-9]/g, '')))}
+            onSubmitEditing={productCodeData.data ? () => handleSearchButton() : false}
+            placeholder='Search'
+            placeholderTextColor={'#000'}
+            returnKeyType='search'
+            style={{
+              textAlignVertical: 'center',
+              height: 40,
+            }}
             value={productCodeData.data}
           />
+          {/* {productCodeData.data && ( */}
+          <TouchableOpacity
+            onPress={() => handleResetProductsView()}
+            style={style.resetButtonTouchable}
+            title='Reset'
+          >
+            <Text style={style.resetButtonText}>Reset</Text>
+          </TouchableOpacity>
+          {/* )} */}
         </View>
-        <Button
+        <TouchableOpacity
           disabled={isSearchDisable}
           onPress={() => handleSearchButton()}
-          style={style.searchButton}
-          title='Search 🔍'
-        />
-        <Button
-          onPress={() => handleResetProductsView()}
-          style={style.searchButton}
-          title='Reset'
-        />
+          style={!isSearchDisable ? style.searchButtonTouchable : style.searchButtonTouchableDisable}
+        >
+          <Icon
+            color={'#fff'}
+            name='search'
+            size={22}
+          />
+        </TouchableOpacity>
       </View>
-      {isInitialView ? (
-        <Text> Initial View </Text>
-      ) : (
-        <View>
-          {isLoading ? (
-            <Text>Loading</Text>
-          ) : (
-            <View>
-              {Object.entries(product).map((v, id) => {
-                if (typeof v[1] === 'object') {
-                  Object.entries(v[1]).map((y) => <Text key={id}>{y}</Text>)
-                } else {
-                  return <Text key={id}>{v[1]}</Text>
-                }
-              })}
-            </View>
-          )}
-        </View>
-      )}
+      <View
+        style={{
+          maxHeight: '80%',
+          backgroundColor: 'yellow',
+        }}
+      >
+        {isInitialView ? (
+          <View>
+            <Text> Initial View </Text>
+          </View>
+        ) : (
+          <View>
+            {isLoading ? (
+              <Text>Loading</Text>
+            ) : (
+              <View>
+                {Object.entries(product).map((v, id) => {
+                  if (typeof v[1] === 'object') {
+                    Object.entries(v[1]).map((y) => <Text key={id}>{y}</Text>)
+                  } else {
+                    return <Text key={id}>{v[1]}</Text>
+                  }
+                })}
+              </View>
+            )}
+          </View>
+        )}
+      </View>
     </View>
   )
 }
