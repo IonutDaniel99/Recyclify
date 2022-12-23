@@ -1,11 +1,13 @@
-import { View, Text, TextInput, Button, Alert, InteractionManager, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, TextInput, Alert, InteractionManager, ScrollView, TouchableOpacity } from 'react-native'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
-import { getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
+import { getCurrentUserLatestProducts, getCurrentUserStatistics, getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
 import { useFocusEffect } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
 
 import Icon from 'react-native-vector-icons/Fontisto'
+import ProductCard from './ProductCard'
+import _ from 'lodash'
 
 const barcodeObject = (data, dataRaw, format, type) => {
   return {
@@ -24,14 +26,18 @@ const ProductDetails = ({ route, navigation }) => {
   const [isSearchDisable, setIsSearchDisabled] = useState(false)
 
   const [product, setProduct] = useState({})
+  const [userInfo, setUserInfo] = useState({})
   const [isInitialView, setIsInitialView] = useState(true)
 
   useFocusEffect(
     React.useCallback(() => {
       const task = InteractionManager.runAfterInteractions(() => {
+        getUserDataPromise
+
         if (!route.params?.barcodeData) return
         const { data, dataRaw, format, type } = route.params.barcodeData
         const obj = barcodeObject(data, dataRaw, format, type)
+
         setProductCodeData(obj)
         setIsSearchDisabled(false)
         getProduct(obj)
@@ -45,8 +51,9 @@ const ProductDetails = ({ route, navigation }) => {
   )
 
   useEffect(() => {
-    if (!route.params?.productDetailsCallback) return
+    getUserDataPromise
 
+    if (!route.params?.productDetailsCallback) return
     const { data, format } = route.params.productDetailsCallback
     const obj = barcodeObject(data, data, format, null)
     setIsLoading(true)
@@ -76,6 +83,7 @@ const ProductDetails = ({ route, navigation }) => {
   }
 
   const handleResetProductsView = () => {
+    getUserDataPromise
     setProductCodeData(barcodeObject())
     setIsInitialView(true)
   }
@@ -83,7 +91,10 @@ const ProductDetails = ({ route, navigation }) => {
     Alert.alert('', 'This product doesnt exist! Would u like to add?', [
       {
         text: 'Cancel',
-        onPress: () => null,
+        onPress: () => {
+          getUserDataPromise
+          setIsInitialView(true)
+        },
         style: 'cancel',
       },
       { text: 'YES', onPress: () => navigation.navigate('ProductAdd', { barcode }) },
@@ -100,8 +111,9 @@ const ProductDetails = ({ route, navigation }) => {
           writeDataToUser(uid, res.val())
           setIsInitialView(false)
         } else {
-          setIsInitialView(true)
+          getUserDataPromise
           handleAddNewItemScreen(barcode)
+          setIsInitialView(true)
           return
         }
       })
@@ -109,6 +121,18 @@ const ProductDetails = ({ route, navigation }) => {
         setIsLoading(false)
       })
   }
+
+  const getUserDataPromise = useMemo(
+    () =>
+      getCurrentUserStatistics(uid)
+        .then((data) => {
+          const { latestProductsScanned } = data.val()
+          setUserInfo(latestProductsScanned)
+        })
+        .then(() => setIsLoading(false))
+        .catch((e) => console.log(e)),
+    [isInitialView],
+  )
 
   return (
     <View style={style.screenContainer}>
@@ -118,7 +142,7 @@ const ProductDetails = ({ route, navigation }) => {
             autoFocus={true}
             clearButtonMode='never'
             keyboardType='numeric'
-            onChangeText={(val) => setProductCodeData(barcodeObject(val.replace(/[^0-9]/g, '')))}
+            onChangeText={(val) => setProductCodeData(barcodeObject(val))}
             onSubmitEditing={productCodeData.data ? () => handleSearchButton() : false}
             placeholder='Search'
             placeholderTextColor={'#000'}
@@ -154,12 +178,23 @@ const ProductDetails = ({ route, navigation }) => {
       <View
         style={{
           height: '80%',
-          backgroundColor: 'yellow',
+          marginTop: 30,
         }}
       >
         {isInitialView ? (
-          <View>
-            <Text> Initial View </Text>
+          <View style={style.initialViewContainer}>
+            <Text style={style.latestScannedProductsText}>Latest scanned products</Text>
+            <ScrollView
+              horizontal
+              style={style.latestScannedProductsScrollView}
+            >
+              {Object.entries(userInfo).map((item, id) => (
+                <ProductCard
+                  key={id}
+                  productItem={item}
+                />
+              ))}
+            </ScrollView>
           </View>
         ) : (
           <View>

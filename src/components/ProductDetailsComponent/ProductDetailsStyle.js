@@ -1,11 +1,18 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 export const ProductDetailsStyle = StyleSheet.create({
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+
   screenContainer: {
     backgroundColor: '#ffffff',
     height: '100%',
+    paddingHorizontal: 20,
   },
-
   searchContainer: {
     backgroundColor: '#ffffff',
     display: 'flex',
@@ -23,7 +30,7 @@ export const ProductDetailsStyle = StyleSheet.create({
     height: 48,
     justifyContent: 'center',
     paddingLeft: 16,
-    width: '70%',
+    width: '85%',
   },
   resetButtonTouchable: {
     position: 'absolute',
@@ -53,5 +60,27 @@ export const ProductDetailsStyle = StyleSheet.create({
     height: 48,
     justifyContent: 'center',
     width: 60,
+  },
+
+  initialViewContainer: {},
+  latestScannedProductsText: {
+    color: '#000',
+    fontFamily: 'Poppins-Bold',
+    fontSize: 28,
+    marginBottom: 10,
+  },
+
+  latestScannedProductsScrollView: {
+    height: '80%',
+  },
+
+  productCardContainer: {
+    backgroundColor: '#F7F4FA',
+    borderRadius: 25,
+    height: '95%',
+    marginHorizontal: 20,
+    marginVertical: 20,
+    padding: 20,
+    width: Dimensions.get('window').width * 0.8,
   },
 })

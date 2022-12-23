@@ -31,8 +31,8 @@ export const ProfileScreenStyle = StyleSheet.create({
   UserProfileContainer: {
     alignItems: 'center',
     borderColor: '#E4E7EA',
-    borderRadius: 20,
-    borderWidth: 2,
+    borderRadius: 25,
+    borderWidth: 3,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -50,8 +50,8 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   ProfileImage: {
     borderRadius: 50,
-    height: 64,
-    width: 64,
+    height: 72,
+    width: 72,
   },
   UserProfileName: {
     color: '#000',
@@ -84,7 +84,6 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
 
   UserFavMostContainer: {
-    borderRadius: 20,
     display: 'flex',
     flexDirection: 'row',
     height: 80,
@@ -93,7 +92,7 @@ export const ProfileScreenStyle = StyleSheet.create({
   },
   UserFavoriteTypeContainer: {
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 25,
     color: '#ffffff',
     display: 'flex',
     justifyContent: 'center',
@@ -129,13 +128,15 @@ export const ProfileScreenStyle = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 20,
     display: 'flex',
+    elevation: 2,
     justifyContent: 'center',
     minHeight: 120,
     minWidth: 120,
+    shadowColor: '#171717',
   },
   resetStatisticsContainer: {
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 25,
     display: 'flex',
     flexDirection: 'row',
     height: 80,
@@ -161,7 +162,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FEEBE6',
     borderColor: '#fcc0b1',
-    borderRadius: 20,
+    borderRadius: 25,
     display: 'flex',
     flexDirection: 'row',
     height: 80,
@@ -182,5 +183,11 @@ export const ProfileScreenStyle = StyleSheet.create({
     color: '#000',
     fontSize: 20,
     fontWeight: '500',
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
 })

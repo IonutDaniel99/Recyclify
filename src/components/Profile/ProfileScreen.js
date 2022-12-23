@@ -11,6 +11,7 @@ import { FlatGrid } from 'react-native-super-grid'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import LinearGradient from 'react-native-linear-gradient'
+import DropShadow from 'react-native-drop-shadow'
 
 const PorfileScreen = ({ route, navigation }) => {
   const style = ProfileScreenStyle
@@ -181,6 +182,7 @@ const PorfileScreen = ({ route, navigation }) => {
                 </View>
               ))}
             </View>
+
             <Text style={style.ScoreboardText}>Overall, your scoreboard looks like this:</Text>
             <FlatGrid
               contentContainerStyle={{
@@ -221,41 +223,45 @@ const PorfileScreen = ({ route, navigation }) => {
                 marginTop: 10,
               }}
             />
-            <LinearGradient
-              colors={['#0FAE66cc', '#1EC577cc']}
-              end={{ x: 1, y: 1 }}
-              start={{ x: 0, y: 0 }}
-              style={style.resetStatisticsContainer}
-            >
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => handleResetStatistics()}
-                style={style.resetStatistics}
+            <DropShadow style={style.shadowProp}>
+              <LinearGradient
+                colors={['#0FAE66cc', '#1EC577cc']}
+                end={{ x: 1, y: 1 }}
+                start={{ x: 0, y: 0 }}
+                style={style.resetStatisticsContainer}
               >
-                <Text style={style.resetStatisticsText}>Reset Statistics</Text>
-                <Icon
-                  color='#fff'
-                  name='delete'
-                  size={44}
-                  style={style.logoutIcon}
-                />
-              </TouchableOpacity>
-            </LinearGradient>
-            <View style={style.logOutContainer}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => handleLogOut()}
-                style={style.logOutTouchable}
-              >
-                <Text style={style.logOutText}>Log out account</Text>
-                <Icon
-                  color='#000'
-                  name='logout'
-                  size={40}
-                  style={style.logoutIcon}
-                />
-              </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={() => handleResetStatistics()}
+                  style={style.resetStatistics}
+                >
+                  <Text style={style.resetStatisticsText}>Reset Statistics</Text>
+                  <Icon
+                    color='#fff'
+                    name='delete'
+                    size={44}
+                    style={style.logoutIcon}
+                  />
+                </TouchableOpacity>
+              </LinearGradient>
+            </DropShadow>
+            <DropShadow style={style.shadowProp}>
+              <View style={style.logOutContainer}>
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={() => handleLogOut()}
+                  style={style.logOutTouchable}
+                >
+                  <Text style={style.logOutText}>Log out account</Text>
+                  <Icon
+                    color='#000'
+                    name='logout'
+                    size={40}
+                    style={style.logoutIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+            </DropShadow>
           </ScrollView>
         )}
       </View>
