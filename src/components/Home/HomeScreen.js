@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { firebase } from '@react-native-firebase/auth'
 import { nullOrCreateCollectionsOnFirebase } from '../../helpers/firebaseHelpers'
-import { delay } from 'lodash'
 
 const HomeScreen = () => {
   const {

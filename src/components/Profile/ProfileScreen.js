@@ -10,6 +10,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { FlatGrid } from 'react-native-super-grid'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import LinearGradient from 'react-native-linear-gradient'
 
 const PorfileScreen = ({ route, navigation }) => {
   const style = ProfileScreenStyle
@@ -55,7 +56,6 @@ const PorfileScreen = ({ route, navigation }) => {
   const getUserDataPromise = () =>
     getCurrentUserStatistics(userId)
       .then((data) => {
-        console.log(data)
         setUserStatistics(data.val())
       })
       .then(() => setIsLoading(false))
@@ -70,11 +70,11 @@ const PorfileScreen = ({ route, navigation }) => {
 
   const getFavoritePet = (cb) => {
     const bigElement = Object.entries(userStatistics.totalProductsScanned).sort((x, y) => y[1] - x[1])[0]
+    const totalScans = Object.values(userStatistics.totalProductsScanned).reduce((partialSum, a) => partialSum + a, 0)
     const item = containerItemsMapper.find((x) => bigElement[0] === x.value)
-    return cb({ favNumber: bigElement[1], ...item })
+    return cb({ totalScans: totalScans, ...item })
   }
   const resetStatistics = () => {
-    console.log('d')
     setIsLoading(true)
     resetUserTotalProductsScanned(userId).then(() => {
       getUserDataPromise()
@@ -123,6 +123,9 @@ const PorfileScreen = ({ route, navigation }) => {
           <Text>Loading...</Text>
         ) : (
           <ScrollView
+            contentContainerStyle={{
+              paddingTop: '15%',
+            }}
             refreshControl={
               <RefreshControl
                 onRefresh={onRefresh}
@@ -131,90 +134,57 @@ const PorfileScreen = ({ route, navigation }) => {
             }
             style={{
               marginBottom: '25%',
-              paddingHorizontal: 20,
+              paddingHorizontal: 30,
             }}
           >
             <View style={style.UserProfileContainer}>
               <View style={style.UserProfileTexts}>
-                {userStatistics.photoURL && (
-                  <Image
-                    source={{ uri: userStatistics.photoURL }}
-                    style={style.ProfileImage}
-                  />
-                )}
-                <Text style={style.UserProfileName}>Hi, {userStatistics.displayName}!</Text>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => handleLogOut()}
-                  style={style.logOut}
-                >
-                  <Icon
-                    color='#000000'
-                    name='logout'
-                    size={28}
-                  />
-                </TouchableOpacity>
+                <Text style={style.UserProfileName}>{userStatistics.displayName}</Text>
+                <Text style={style.ContainerDate}>Joined at {computeJoinedAtDate(userStatistics.creationTime)}</Text>
+                <View style={style.greenBarProfile} />
               </View>
-              <View style={style.UserProfileBadges}>
-                <View style={style.ContainerBadge}>
-                  <Text style={style.ContainerText}>Created At</Text>
-                  <Text style={style.ContainerDate}>{computeJoinedAtDate(userStatistics.creationTime)}</Text>
-                </View>
-                <View style={style.ContainerBadge}>
-                  <Text style={style.ContainerText}>Last Singin</Text>
-                  <Text style={style.ContainerDate}>{computeJoinedAtDate(userStatistics.lastSignInTime)}</Text>
-                </View>
-              </View>
+              {userStatistics.photoURL && (
+                <Image
+                  source={{ uri: userStatistics.photoURL }}
+                  style={style.ProfileImage}
+                />
+              )}
             </View>
 
             <View style={style.UserFavMostContainer}>
-              {getFavoritePet((cb) =>
-                cb.favNumber !== 0 ? (
-                  <View style={[{ backgroundColor: cb.code }, style.UserFavoriteTypeContainer]}>
-                    <Image
-                      source={cb.icon}
-                      style={style.UserFavoritePetIcon}
-                    />
-                    <View style={style.UserFavoriteTexts}>
-                      <Text style={style.UserFavoriteTextLabel}>
-                        Your favorite PET type is <Text />
-                        <Text
-                          style={{
-                            fontWeight: '700',
-                            textDecorationLine: 'underline',
-                          }}
-                        >
-                          {cb.label}!
-                        </Text>
+              {getFavoritePet((cb) => (
+                <View style={[{ backgroundColor: '#4F70FF' }, style.UserFavoriteTypeContainer]}>
+                  <View style={style.UserFavoriteTexts}>
+                    <Text style={style.UserFavoriteTextLabel}>
+                      Total scans: <Text />
+                      <Text
+                        style={{
+                          fontWeight: '700',
+                          textDecorationLine: 'underline',
+                        }}
+                      >
+                        {cb.totalScans}
                       </Text>
-                      <Text style={style.UserFavoriteTextNumber}>
-                        You scanned over <Text />
-                        <Text
-                          style={{
-                            fontWeight: '700',
-                            textDecorationLine: 'underline',
-                          }}
-                        >
-                          {cb.favNumber}
-                        </Text>
-                        <Text /> of this type!
+                    </Text>
+                    <Text style={style.UserFavoriteTextNumber}>
+                      Most scanned: <Text />
+                      <Text
+                        style={{
+                          fontWeight: '700',
+                          textDecorationLine: 'underline',
+                        }}
+                      >
+                        {cb.label}
                       </Text>
-                    </View>
+                    </Text>
                   </View>
-                ) : (
-                  <View style={[{ backgroundColor: '#F4F4F5' }, style.UserFavoriteTypeContainer]}>
-                    <View style={style.UserFavoriteTexts}>
-                      <Text style={{ fontSize: 16 }}>You don't have a favourite recycled PET</Text>
-                    </View>
-                  </View>
-                ),
-              )}
+                </View>
+              ))}
             </View>
             <Text style={style.ScoreboardText}>Overall, your scoreboard looks like this:</Text>
             <FlatGrid
               contentContainerStyle={{
                 display: 'flex',
-                justifyContent: 'space-between',
               }}
               data={containerItemsMapper.slice(0, 6)}
               disableScrollViewPanResponder
@@ -234,12 +204,13 @@ const PorfileScreen = ({ route, navigation }) => {
                   <Image
                     source={item.icon}
                     style={{
-                      width: 36,
-                      height: 36,
+                      width: 40,
+                      height: 40,
+                      marginBottom: 6,
                     }}
                   />
-                  <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>{item.label}</Text>
-                  <Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>
+                  <Text style={{ fontSize: 16, color: '#fff', fontWeight: '600' }}>{item.label}</Text>
+                  <Text style={{ fontSize: 16, color: '#fff', fontWeight: '600' }}>
                     {Object.entries(userStatistics.totalProductsScanned).map((x) => (x[0] === item.value ? x[1] : ''))}
                   </Text>
                 </TouchableOpacity>
@@ -250,13 +221,39 @@ const PorfileScreen = ({ route, navigation }) => {
                 marginTop: 10,
               }}
             />
-            <View style={style.resetStatisticsContainer}>
+            <LinearGradient
+              colors={['#0FAE66cc', '#1EC577cc']}
+              end={{ x: 1, y: 1 }}
+              start={{ x: 0, y: 0 }}
+              style={style.resetStatisticsContainer}
+            >
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => handleResetStatistics()}
                 style={style.resetStatistics}
               >
                 <Text style={style.resetStatisticsText}>Reset Statistics</Text>
+                <Icon
+                  color='#fff'
+                  name='clear'
+                  size={44}
+                  style={style.logoutIcon}
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+            <View style={style.logOutContainer}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => handleLogOut()}
+                style={style.logOutTouchable}
+              >
+                <Text style={style.logOutText}>Log out account</Text>
+                <Icon
+                  color='#faa893'
+                  name='logout'
+                  size={40}
+                  style={style.logoutIcon}
+                />
               </TouchableOpacity>
             </View>
           </ScrollView>

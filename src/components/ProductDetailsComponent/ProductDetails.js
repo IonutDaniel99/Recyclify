@@ -153,7 +153,7 @@ const ProductDetails = ({ route, navigation }) => {
       </View>
       <View
         style={{
-          maxHeight: '80%',
+          height: '80%',
           backgroundColor: 'yellow',
         }}
       >

@@ -1,9 +1,13 @@
 import { StyleSheet } from 'react-native'
 
 export const ProductDetailsStyle = StyleSheet.create({
-  screenContainer: {},
+  screenContainer: {
+    backgroundColor: '#ffffff',
+    height: '100%',
+  },
 
   searchContainer: {
+    backgroundColor: '#ffffff',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
