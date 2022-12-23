@@ -235,7 +235,7 @@ const PorfileScreen = ({ route, navigation }) => {
                 <Text style={style.resetStatisticsText}>Reset Statistics</Text>
                 <Icon
                   color='#fff'
-                  name='clear'
+                  name='delete'
                   size={44}
                   style={style.logoutIcon}
                 />
@@ -249,7 +249,7 @@ const PorfileScreen = ({ route, navigation }) => {
               >
                 <Text style={style.logOutText}>Log out account</Text>
                 <Icon
-                  color='#faa893'
+                  color='#000'
                   name='logout'
                   size={40}
                   style={style.logoutIcon}
