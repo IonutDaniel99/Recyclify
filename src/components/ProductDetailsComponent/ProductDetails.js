@@ -188,12 +188,15 @@ const ProductDetails = ({ route, navigation }) => {
               horizontal
               style={style.latestScannedProductsScrollView}
             >
-              {Object.entries(userInfo).map((item, id) => (
-                <ProductCard
-                  key={id}
-                  productItem={item}
-                />
-              ))}
+              {Object.entries(userInfo)
+                .filter((item) => item[1] !== 0)
+                .sort((a, b) => b[1] - a[1])
+                .map((item, id) => (
+                  <ProductCard
+                    key={id}
+                    productItem={item}
+                  />
+                ))}
             </ScrollView>
           </View>
         ) : (

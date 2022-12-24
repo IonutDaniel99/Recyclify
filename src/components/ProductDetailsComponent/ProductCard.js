@@ -29,7 +29,6 @@ const ProductCard = ({ productItem }) => {
   }
 
   const parseDate = (unixTime) => {
-    console.log(new Date().getSeconds())
     const dater = new Date(unixTime)
     return `${dater}`
   }
