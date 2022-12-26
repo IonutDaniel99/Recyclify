@@ -73,14 +73,4 @@ export const ProductDetailsStyle = StyleSheet.create({
   latestScannedProductsScrollView: {
     height: '80%',
   },
-
-  productCardContainer: {
-    backgroundColor: '#F7F4FA',
-    borderRadius: 25,
-    height: '95%',
-    marginHorizontal: 20,
-    marginVertical: 20,
-    padding: 20,
-    width: Dimensions.get('window').width * 0.8,
-  },
 })

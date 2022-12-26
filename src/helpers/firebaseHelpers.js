@@ -5,7 +5,14 @@ import { mockProduct } from '../mocks/mockProd'
 export const currentUserInfo = firebase.auth().currentUser
 
 export const nullOrCreateCollectionsOnFirebase = (userTemplate) => {
-  firebaseDb().ref('users/').update(userTemplate)
+  const { userId } = Object.values(userTemplate)[0]
+  firebaseDb()
+    .ref(`users/${userId}/`)
+    .once('value', (snapshot) => {
+      if (!snapshot.exists()) {
+        firebaseDb().ref('users/').update(userTemplate)
+      }
+    })
   firebaseDb().ref('products/').update(mockProduct)
   firebaseDb().ref('statistics/').update({ 'mockStatistics': 0 })
 }

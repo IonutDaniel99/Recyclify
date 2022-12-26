@@ -1,13 +1,12 @@
 import { View, Text, TextInput, Alert, InteractionManager, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
-import { getCurrentUserLatestProducts, getCurrentUserStatistics, getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
+import { getCurrentUserStatistics, getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
 import { useFocusEffect } from '@react-navigation/native'
 import { firebase } from '@react-native-firebase/auth'
 
 import Icon from 'react-native-vector-icons/Fontisto'
-import ProductCard from './ProductCard'
-import _ from 'lodash'
+import ProductCard from './ProductCard/ProductCard'
 
 const barcodeObject = (data, dataRaw, format, type) => {
   return {

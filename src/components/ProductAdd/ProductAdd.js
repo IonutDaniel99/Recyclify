@@ -69,7 +69,7 @@ const ProductAdd = ({ route, navigation }) => {
         ingredients: ingredientsList,
         companyName: companyName,
         modifiedAt: Math.floor(new Date().getTime()),
-        nutrionalValues: nutritionalValues,
+        nutritionalValues: nutritionalValues,
         productName: productName,
         description: description,
       },
