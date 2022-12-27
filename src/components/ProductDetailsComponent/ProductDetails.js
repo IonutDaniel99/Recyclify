@@ -138,7 +138,6 @@ const ProductDetails = ({ route, navigation }) => {
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
           <TextInput
-            autoFocus={true}
             clearButtonMode='never'
             keyboardType='numeric'
             onChangeText={(val) => setProductCodeData(barcodeObject(val))}
@@ -182,7 +181,13 @@ const ProductDetails = ({ route, navigation }) => {
       >
         {isInitialView ? (
           <View style={style.initialViewContainer}>
-            <Text style={style.latestScannedProductsText}>Latest scanned products</Text>
+            <Text
+              adjustsFontSizeToFit
+              numberOfLines={1}
+              style={style.latestScannedProductsText}
+            >
+              Latest scanned products
+            </Text>
             <ScrollView
               horizontal
               style={style.latestScannedProductsScrollView}

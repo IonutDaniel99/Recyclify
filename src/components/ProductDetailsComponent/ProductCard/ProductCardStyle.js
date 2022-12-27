@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native'
 
 const primaryTextColor = '#494949'
 const secondaryTextColor = '#828282'
@@ -6,16 +6,14 @@ const secondaryTextColor = '#828282'
 export const ProductCardStyle = StyleSheet.create({
   CirclePositioning: {
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#232323',
     borderColor: '#ffffff00',
     borderRadius: 50,
     borderWidth: 2,
     display: 'flex',
     height: 16,
     position: 'absolute',
-    right: -34,
     width: 16,
-    zIndex: 10,
   },
   shadowProp: {
     shadowColor: '#171717',
@@ -29,8 +27,9 @@ export const ProductCardStyle = StyleSheet.create({
     height: '95%',
     marginHorizontal: 20,
     marginVertical: 20,
-    padding: 20,
+    overflow: 'visible',
     width: Dimensions.get('window').width * 0.8,
+    zIndex: 10,
   },
   nameCompanyPropContainer: {
     display: 'flex',
@@ -150,7 +149,7 @@ export const ProductCardStyle = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ffffff00',
     display: 'flex',
-    height: 48,
+    height: 36,
     justifyContent: 'center',
     position: 'relative',
   },
@@ -164,7 +163,7 @@ export const ProductCardStyle = StyleSheet.create({
     color: '#fff',
     display: 'flex',
     fontWeight: '600',
-    height: 48,
+    height: 36,
     justifyContent: 'center',
     paddingHorizontal: 20,
     position: 'relative',
