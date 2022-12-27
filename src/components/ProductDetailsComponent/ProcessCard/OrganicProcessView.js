@@ -28,7 +28,7 @@ export const OrganicProcessView = ({ bgColor }) => {
           />
           <Text
             numberOfLines={2}
-            style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
+            style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 16 }}
           >
             Plastic Factory
           </Text>
@@ -74,7 +74,7 @@ export const OrganicProcessView = ({ bgColor }) => {
               textAlign: 'center',
               color: '#474747',
               fontWeight: '600',
-              fontSize: 12,
+              fontSize: 16,
               width: 50,
               paddingTop: 4,
             }}
@@ -97,7 +97,7 @@ export const OrganicProcessView = ({ bgColor }) => {
               color: '#474747',
               fontWeight: '600',
               marginTop: 6,
-              fontSize: 12,
+              fontSize: 16,
             }}
           >
             Reusable Bottle
@@ -120,7 +120,7 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderRightWidth: 2,
             height: 24,
-            right: 20,
+            right: '6.25%',
           }}
         />
         <View
@@ -128,8 +128,8 @@ export const OrganicProcessView = ({ bgColor }) => {
             position: 'absolute',
             borderColor: '#232323',
             borderBottomWidth: 2,
-            width: '86%',
-            right: 22,
+            width: '87%',
+            right: '6%',
             top: 22,
           }}
         />
@@ -147,7 +147,7 @@ export const OrganicProcessView = ({ bgColor }) => {
           color={'#232323'}
           name='caretdown'
           size={16}
-          style={{ position: 'absolute', height: 35, left: '3.25%', top: 50 }}
+          style={{ position: 'absolute', height: 35, left: '4%', top: 50 }}
         />
         <View
           style={{
@@ -155,8 +155,8 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderBottomWidth: 2,
             width: '8%',
-            left: 60,
-            top: 125,
+            left: '17%',
+            top: 120,
           }}
         />
         <View
@@ -165,7 +165,7 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderRightWidth: 2,
             height: 100,
-            left: 80,
+            left: '25%',
             top: 70,
           }}
         />
@@ -175,7 +175,7 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderBottomWidth: 2,
             width: '8%',
-            left: 80,
+            left: '25%',
             top: 70,
           }}
         />
@@ -183,7 +183,7 @@ export const OrganicProcessView = ({ bgColor }) => {
           color={'#232323'}
           name='caretright'
           size={16}
-          style={{ position: 'absolute', height: 35, left: 95, top: 63 }}
+          style={{ position: 'absolute', height: 35, left: '30%', top: 63 }}
         />
         <View
           style={{
@@ -191,7 +191,7 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderBottomWidth: 2,
             width: '8%',
-            left: 80,
+            left: '25%',
             top: 170,
           }}
         />
@@ -199,7 +199,7 @@ export const OrganicProcessView = ({ bgColor }) => {
           color={'#232323'}
           name='caretright'
           size={16}
-          style={{ position: 'absolute', height: 35, left: 95, top: 163 }}
+          style={{ position: 'absolute', height: 35, left: '30%', top: 163 }}
         />
         <View
           style={{
@@ -207,7 +207,7 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderBottomWidth: 2,
             width: '8%',
-            left: 170,
+            left: '60%',
             top: 70,
           }}
         />
@@ -215,7 +215,7 @@ export const OrganicProcessView = ({ bgColor }) => {
           color={'#232323'}
           name='caretright'
           size={16}
-          style={{ position: 'absolute', height: 35, left: 185, top: 63 }}
+          style={{ position: 'absolute', height: 35, left: '66%', top: 63 }}
         />
         <View
           style={{
@@ -223,7 +223,7 @@ export const OrganicProcessView = ({ bgColor }) => {
             borderColor: '#232323',
             borderBottomWidth: 2,
             width: '8%',
-            left: 170,
+            left: '60%',
             top: 170,
           }}
         />
@@ -231,7 +231,7 @@ export const OrganicProcessView = ({ bgColor }) => {
           color={'#232323'}
           name='caretright'
           size={16}
-          style={{ position: 'absolute', height: 35, left: 185, top: 163 }}
+          style={{ position: 'absolute', height: 35, left: '66%', top: 163 }}
         />
       </View>
       {/* END LINES */}

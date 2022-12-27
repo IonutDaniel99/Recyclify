@@ -222,7 +222,7 @@ const ProductCard = ({ productItem }) => {
                   borderColor: '#232323',
                   borderRightWidth: 2,
                   height: 10,
-                  right: 62,
+                  right: '18%',
                   top: 0,
                 }}
               />
@@ -231,8 +231,8 @@ const ProductCard = ({ productItem }) => {
                   position: 'absolute',
                   borderColor: '#232323',
                   borderBottomWidth: 2,
-                  width: 40,
-                  right: 22,
+                  width: '12%',
+                  right: '6.25%',
                   top: 8,
                 }}
               />
@@ -242,7 +242,7 @@ const ProductCard = ({ productItem }) => {
                   borderColor: '#232323',
                   borderRightWidth: 2,
                   height: '90%',
-                  right: '7.5%',
+                  right: '6.25%',
                   top: 8,
                   zIndex: -10,
                 }}
