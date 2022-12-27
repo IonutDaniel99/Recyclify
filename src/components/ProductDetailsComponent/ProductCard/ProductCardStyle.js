@@ -32,14 +32,13 @@ export const ProductCardStyle = StyleSheet.create({
     zIndex: 10,
   },
   nameCompanyPropContainer: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
   },
-  nameCompanyContainer: {
-    marginTop: 10,
-  },
+  nameCompanyContainer: {},
   productNameText: {
     color: primaryTextColor,
     flexShrink: 1,
@@ -49,7 +48,8 @@ export const ProductCardStyle = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '800',
     marginBottom: 10,
-    maxWidth: 220,
+    marginTop: 10,
+    maxWidth: 190,
   },
   companyNamePH: {
     color: secondaryTextColor,
@@ -63,6 +63,10 @@ export const ProductCardStyle = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
   },
+  ImageTypeProp: {
+    height: 100,
+    width: 100,
+  },
   ecoTypeContainer: {
     alignItems: 'flex-end',
     display: 'flex',
@@ -71,9 +75,9 @@ export const ProductCardStyle = StyleSheet.create({
   },
   ecoTypeText: {
     color: primaryTextColor,
-    fontSize: 20,
+    fontSize: 16,
+
     fontWeight: '600',
-    marginRight: 10,
     textAlign: 'center',
     width: 100,
   },
@@ -155,13 +159,10 @@ export const ProductCardStyle = StyleSheet.create({
   },
   scanndedAtDate: {
     alignItems: 'center',
-    backgroundColor: '#61B785',
-    borderColor: 'rgba(16, 63, 23, 0.36)',
     borderRadius: 4,
-    borderStyle: 'solid',
-    borderWidth: 1,
     color: '#fff',
     display: 'flex',
+    fontSize: 16,
     fontWeight: '600',
     height: 36,
     justifyContent: 'center',
