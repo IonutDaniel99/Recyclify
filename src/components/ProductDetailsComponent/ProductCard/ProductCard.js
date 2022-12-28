@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import DropShadow from 'react-native-drop-shadow'
 import { getProductOrNull } from '../../../helpers/firebaseHelpers'
 
-import PlasticBottleProp from '../../../assets/images/LatestProducts/Plastic/PlasticBottle.png'
+import PlasticBottleDirtyProp from '../../../assets/images/LatestProducts/Plastic/PlasticBottleDirty.png'
+import FruitProp from '../../../assets/images/LatestProducts/Organic/fruit.png'
 import { ProductCardStyle } from './ProductCardStyle'
 import { FlatGrid } from 'react-native-super-grid'
 import { PlasticProcessView } from '../ProcessCard/PlasticProcessView'
@@ -19,31 +20,37 @@ const ecoMapper = {
     text: 'E-Waste',
     scannedAtBg: '#6F8AA9',
     bgColor: '#DFE5EC',
+    image: null,
   },
   plastic: {
     text: 'Plastic',
     scannedAtBg: '#6198B7',
     bgColor: '#DCE8EF',
+    image: PlasticBottleDirtyProp,
   },
   metal: {
     text: 'Metal',
     scannedAtBg: '#8C61B7',
     bgColor: '#F7F4FA',
+    image: null,
   },
   glass: {
     text: 'Glass',
     scannedAtBg: '#62A5B7',
     bgColor: '#DCEBEF',
+    image: null,
   },
   paper: {
     text: 'Paper',
     scannedAtBg: '#61B785',
     bgColor: '#DCEFE4',
+    image: null,
   },
   organic: {
     text: 'Organic',
     scannedAtBg: '#E88731',
     bgColor: '#FAE4D1',
+    image: FruitProp,
   },
 }
 
@@ -68,7 +75,6 @@ const ProductCard = ({ productItem }) => {
         delay(() => setIsLoading(false), 1000)
       })
   }
-
   const parseDate = (unixTime) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const dater = new Date(unixTime)
@@ -99,6 +105,7 @@ const ProductCard = ({ productItem }) => {
             <View style={style.nameCompanyPropContainer}>
               <View style={style.nameCompanyContainer}>
                 <Text
+                  adjustsFontSizeToFit={product.productName.length > 24}
                   numberOfLines={2}
                   style={style.productNameText}
                 >
@@ -106,21 +113,27 @@ const ProductCard = ({ productItem }) => {
                 </Text>
                 <View>
                   <Text style={style.companyNamePH}>Company Name:</Text>
-                  <Text style={style.companyName}>{product.companyName}</Text>
+                  <Text
+                    adjustsFontSizeToFit={product.companyName.length < 40}
+                    numberOfLines={product.companyName.length >= 24 ? 2 : 1}
+                    style={style.companyName}
+                  >
+                    {product.companyName}
+                  </Text>
                 </View>
               </View>
               <View style={style.ImageTypeProp}>
                 <Image
-                  source={PlasticBottleProp}
+                  source={ecoMapper[product.ecoType].image}
                   style={{
                     height: 100,
                     width: 100,
                   }}
                 />
+                <View style={style.ecoTypeContainer}>
+                  <Text style={style.ecoTypeText}>{ecoMapper[product.ecoType].text}</Text>
+                </View>
               </View>
-            </View>
-            <View style={style.ecoTypeContainer}>
-              <Text style={style.ecoTypeText}>{ecoMapper[product.ecoType].text}</Text>
             </View>
 
             <View style={style.descriptionContainer}>
@@ -141,27 +154,23 @@ const ProductCard = ({ productItem }) => {
               <View style={style.descriptionContainer}>
                 <Text style={style.descriptionText}>Ingredients</Text>
                 <View style={style.ingredientContent}>
-                  {product.ingredients && (
-                    <>
-                      <FlatGrid
-                        data={product.ingredients}
-                        disableVirtualization
-                        horizontal={false}
-                        key={product.length * Math.random()}
-                        maxItemsPerRow={2}
-                        renderItem={({ item, index }) => (
-                          <View
-                            key={index}
-                            style={style.ingredientContainer}
-                          >
-                            <Text style={style.ingredientText}>{item}</Text>
-                          </View>
-                        )}
-                        spacing={12}
-                      />
-                      <View style={[ProductCardStyle.CirclePositioning, { top: '45%', right: '-11.5%' }]} />
-                    </>
-                  )}
+                  <FlatGrid
+                    data={product.ingredients}
+                    disableVirtualization
+                    horizontal={false}
+                    key={product.length * Math.random()}
+                    maxItemsPerRow={2}
+                    renderItem={({ item, index }) => (
+                      <View
+                        key={index}
+                        style={style.ingredientContainer}
+                      >
+                        <Text style={style.ingredientText}>{item}</Text>
+                      </View>
+                    )}
+                    spacing={12}
+                  />
+                  <View style={[ProductCardStyle.CirclePositioning, { top: '45%', right: '-11.5%' }]} />
                 </View>
               </View>
             )}
@@ -222,7 +231,7 @@ const ProductCard = ({ productItem }) => {
                   borderColor: '#232323',
                   borderRightWidth: 2,
                   height: 10,
-                  right: '18%',
+                  right: 64,
                   top: 0,
                 }}
               />
@@ -231,8 +240,8 @@ const ProductCard = ({ productItem }) => {
                   position: 'absolute',
                   borderColor: '#232323',
                   borderBottomWidth: 2,
-                  width: '12%',
-                  right: '6.25%',
+                  width: 44,
+                  right: 22,
                   top: 8,
                 }}
               />

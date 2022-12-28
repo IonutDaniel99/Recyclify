@@ -195,6 +195,7 @@ const ProductDetails = ({ route, navigation }) => {
               {Object.entries(userInfo)
                 .filter((item) => item[1] !== 0)
                 .sort((a, b) => b[1] - a[1])
+                .slice(0, 5)
                 .map((item, id) => (
                   <ProductCard
                     key={id}
