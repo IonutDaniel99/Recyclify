@@ -14,6 +14,7 @@ import { EWasteProcessView } from '../ProcessCard/EWasteProcessView'
 import { GlassProcessView } from '../ProcessCard/GlassProcessView'
 import { OrganicProcessView } from '../ProcessCard/OrganicProcessView'
 import { delay } from 'lodash'
+import LoadingContainer from '../../../common/LoadingContainer'
 
 const ecoMapper = {
   ewaste: {
@@ -92,9 +93,9 @@ const ProductCard = ({ productItem }) => {
   return (
     <DropShadow style={style.shadowProp}>
       {isLoading ? (
-        <>
-          <Text>Loading</Text>
-        </>
+        <View style={style.productCardContainerLoading}>
+          <LoadingContainer text={'Loadings'} />
+        </View>
       ) : (
         <View style={[ProductCardStyle.productCardContainer, { backgroundColor: ecoMapper[product.ecoType].bgColor }]}>
           <ScrollView

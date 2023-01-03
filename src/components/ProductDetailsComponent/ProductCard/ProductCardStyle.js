@@ -21,6 +21,17 @@ export const ProductCardStyle = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
   },
+  productCardContainerLoading: {
+    backgroundColor: '#fff',
+    borderColor: secondaryTextColor + '22',
+    borderRadius: 25,
+    borderWidth: 1,
+    height: '95%',
+    marginRight: 20,
+    overflow: 'visible',
+    width: 375,
+    zIndex: 10,
+  },
   productCardContainer: {
     backgroundColor: '#F7F4FA',
     borderRadius: 25,

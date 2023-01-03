@@ -7,6 +7,7 @@ import { firebase } from '@react-native-firebase/auth'
 
 import Icon from 'react-native-vector-icons/Fontisto'
 import ProductCard from './ProductCard/ProductCard'
+import LoadingContainer from '../../common/LoadingContainer'
 
 const barcodeObject = (data, dataRaw, format, type) => {
   return {
@@ -133,6 +134,11 @@ const ProductDetails = ({ route, navigation }) => {
     [isInitialView],
   )
 
+  const cardItems = Object.entries(userInfo)
+    .filter((item) => item[1] !== 0 && item[1] !== null)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+
   return (
     <View style={style.screenContainer}>
       <View style={style.searchContainer}>
@@ -192,16 +198,15 @@ const ProductDetails = ({ route, navigation }) => {
               horizontal
               style={style.latestScannedProductsScrollView}
             >
-              {Object.entries(userInfo)
-                .filter((item) => item[1] !== 0)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 5)
-                .map((item, id) => (
-                  <ProductCard
-                    key={id}
-                    productItem={item}
-                  />
-                ))}
+              {cardItems &&
+                cardItems.map((item, id) => {
+                  return (
+                    <ProductCard
+                      key={id}
+                      productItem={item}
+                    />
+                  )
+                })}
             </ScrollView>
           </View>
         ) : (
