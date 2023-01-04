@@ -41,6 +41,14 @@ export const ProductCardStyle = StyleSheet.create({
     width: 375,
     zIndex: 10,
   },
+  productCardContainer2: {
+    backgroundColor: '#F7F4FA',
+    borderRadius: 25,
+    height: '95%',
+    marginRight: 20,
+    overflow: 'visible',
+    width: 375,
+  },
   nameCompanyPropContainer: {
     alignItems: 'center',
     display: 'flex',

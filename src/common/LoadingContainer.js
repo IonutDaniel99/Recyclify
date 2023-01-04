@@ -2,7 +2,7 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { Fade, Placeholder, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder'
 
-const LoadingContainer = ({ text }) => {
+const LoadingContainer = () => {
   return (
     <View style={{ height: '100%', width: '100%', padding: 20 }}>
       <Placeholder Animation={Fade}>

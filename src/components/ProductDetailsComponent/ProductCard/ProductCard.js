@@ -64,10 +64,6 @@ const ProductCard = ({ productItem }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [product, setProduct] = useState(undefined)
 
-  useEffect(() => {
-    getProduct()
-  }, [])
-
   const getProduct = async () => {
     await getProductOrNull(productItem[0])
       .then((res) => {
@@ -93,11 +89,15 @@ const ProductCard = ({ productItem }) => {
     return _stringDate
   }
 
+  useEffect(() => {
+    getProduct()
+  }, [])
+
   return (
     <DropShadow style={style.shadowProp}>
       {isLoading ? (
         <View style={style.productCardContainerLoading}>
-          <LoadingContainer text={'Loadings'} />
+          <LoadingContainer />
         </View>
       ) : (
         <View style={[ProductCardStyle.productCardContainer, { backgroundColor: ecoMapper[product.ecoType].bgColor }]}>

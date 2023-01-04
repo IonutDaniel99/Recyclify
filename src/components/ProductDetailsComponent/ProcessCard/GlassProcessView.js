@@ -3,7 +3,10 @@ import { Image, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 export const GlassProcessView = ({ bgColor }) => {
-  const melting = require('../../../assets/images/LatestProducts/Glass/bottle.png')
+  const bottle = require('../../../assets/images/LatestProducts/Glass/bottle.png')
+  const smash = require('../../../assets/images/LatestProducts/Glass/smash.png')
+  const sort = require('../../../assets/images/LatestProducts/Glass/sort.png')
+  const casting = require('../../../assets/images/LatestProducts/Glass/casting.png')
 
   return (
     <View
@@ -20,7 +23,7 @@ export const GlassProcessView = ({ bgColor }) => {
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: '25%', height: '100%', display: 'flex', justifyContent: 'center' }}>
           <Image
-            source={melting}
+            source={sort}
             style={{
               height: 64,
               width: 64,
@@ -30,14 +33,14 @@ export const GlassProcessView = ({ bgColor }) => {
             numberOfLines={2}
             style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
           >
-            Plastic Factory
+            Sorting
           </Text>
         </View>
         <View style={{ width: '20%', height: '100%', display: 'flex', justifyContent: 'center' }} />
         <View style={{ width: '20%', display: 'flex', justifyContent: 'space-between', marginLeft: 2 }}>
           <View style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Image
-              source={melting}
+              source={smash}
               style={{
                 height: 44,
                 width: 44,
@@ -47,12 +50,12 @@ export const GlassProcessView = ({ bgColor }) => {
               numberOfLines={1}
               style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
             >
-              Melting
+              Smashing
             </Text>
           </View>
           <View style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Image
-              source={melting}
+              source={casting}
               style={{
                 height: 44,
                 width: 44,
@@ -62,7 +65,7 @@ export const GlassProcessView = ({ bgColor }) => {
               numberOfLines={1}
               style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
             >
-              Clean
+              Casting
             </Text>
           </View>
         </View>
@@ -83,7 +86,7 @@ export const GlassProcessView = ({ bgColor }) => {
           </Text>
           <View style={{ paddingTop: 6 }}>
             <Image
-              source={melting}
+              source={bottle}
               style={{
                 height: 64,
                 width: 64,
