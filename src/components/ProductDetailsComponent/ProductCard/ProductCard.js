@@ -5,6 +5,9 @@ import { getProductOrNull } from '../../../helpers/firebaseHelpers'
 
 import PlasticBottleDirtyProp from '../../../assets/images/LatestProducts/Plastic/PlasticBottleDirty.png'
 import FruitProp from '../../../assets/images/LatestProducts/Organic/fruit.png'
+import PaperProp from '../../../assets/images/LatestProducts/Paper/paper.png'
+import GlassProp from '../../../assets/images/LatestProducts/Glass/bottle.png'
+
 import { ProductCardStyle } from './ProductCardStyle'
 import { FlatGrid } from 'react-native-super-grid'
 import { PlasticProcessView } from '../ProcessCard/PlasticProcessView'
@@ -39,13 +42,13 @@ const ecoMapper = {
     text: 'Glass',
     scannedAtBg: '#62A5B7',
     bgColor: '#DCEBEF',
-    image: null,
+    image: GlassProp,
   },
   paper: {
     text: 'Paper',
     scannedAtBg: '#61B785',
     bgColor: '#DCEFE4',
-    image: null,
+    image: PaperProp,
   },
   organic: {
     text: 'Organic',

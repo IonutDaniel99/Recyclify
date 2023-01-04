@@ -3,7 +3,7 @@ import { Image, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 export const GlassProcessView = ({ bgColor }) => {
-  const melting = require('../../../assets/images/LatestProducts/Plastic/industry.png')
+  const melting = require('../../../assets/images/LatestProducts/Glass/bottle.png')
 
   return (
     <View

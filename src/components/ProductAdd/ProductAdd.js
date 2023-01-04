@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, LogBox } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, LogBox, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { saveProductToFirebase } from '../../helpers/firebaseHelpers'
 import { ProductAddStyle } from './ProductAddStyle'
@@ -166,8 +166,11 @@ const ProductAdd = ({ route, navigation }) => {
           style={style.DescriptionInput}
         />
         <FlatGrid
+          contentContainerStyle={{
+            display: 'flex',
+          }}
           data={containerItemsMapper.slice(0, 6)}
-          itemDimension={90}
+          itemDimension={Dimensions.get('window').width / 4}
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={1}

@@ -75,6 +75,7 @@ export const NutritionalValueContainer = ({ mainText, subText, editable, parentV
             display: 'flex',
             alignItems: 'flex-end',
             paddingRight: 5,
+            color: '#000',
           }}
           value={value}
         />

@@ -7,7 +7,6 @@ import { firebase } from '@react-native-firebase/auth'
 
 import Icon from 'react-native-vector-icons/Fontisto'
 import ProductCard from './ProductCard/ProductCard'
-import LoadingContainer from '../../common/LoadingContainer'
 
 const barcodeObject = (data, dataRaw, format, type) => {
   return {
@@ -74,7 +73,8 @@ const ProductDetails = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    productCodeData.data === null ? setIsSearchDisabled(true) : setIsSearchDisabled(false)
+    const regexTest = !/^[0-9]+$/.test(productCodeData.data)
+    productCodeData.data === null || regexTest ? setIsSearchDisabled(true) : setIsSearchDisabled(false)
   }, [productCodeData.data])
 
   const handleSearchButton = () => {
@@ -145,7 +145,7 @@ const ProductDetails = ({ route, navigation }) => {
         <View style={style.searchInput}>
           <TextInput
             clearButtonMode='never'
-            keyboardType='numeric'
+            keyboardType='number-pad'
             onChangeText={(val) => setProductCodeData(barcodeObject(val))}
             onSubmitEditing={productCodeData.data ? () => handleSearchButton() : false}
             placeholder='Search'
@@ -154,6 +154,7 @@ const ProductDetails = ({ route, navigation }) => {
             style={{
               textAlignVertical: 'center',
               height: 40,
+              color: '#000',
             }}
             value={productCodeData.data}
           />

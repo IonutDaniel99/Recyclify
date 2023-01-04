@@ -3,7 +3,10 @@ import { Image, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 export const PaperProcessView = ({ bgColor }) => {
-  const melting = require('../../../assets/images/LatestProducts/Plastic/fondue.png')
+  const dry = require('../../../assets/images/LatestProducts/Paper/dry.png')
+  const ink = require('../../../assets/images/LatestProducts/Paper/ink.png')
+  const shreed = require('../../../assets/images/LatestProducts/Paper/shreed.png')
+  const scroll = require('../../../assets/images/LatestProducts/Paper/scroll.png')
 
   return (
     <View
@@ -20,7 +23,7 @@ export const PaperProcessView = ({ bgColor }) => {
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: '25%', height: '100%', display: 'flex', justifyContent: 'center' }}>
           <Image
-            source={melting}
+            source={shreed}
             style={{
               height: 64,
               width: 64,
@@ -28,16 +31,16 @@ export const PaperProcessView = ({ bgColor }) => {
           />
           <Text
             numberOfLines={2}
-            style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
+            style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 16 }}
           >
-            Plastic Factory
+            Shreed
           </Text>
         </View>
         <View style={{ width: '20%', height: '100%', display: 'flex', justifyContent: 'center' }} />
         <View style={{ width: '20%', display: 'flex', justifyContent: 'space-between', marginLeft: 2 }}>
           <View style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Image
-              source={melting}
+              source={ink}
               style={{
                 height: 44,
                 width: 44,
@@ -47,12 +50,12 @@ export const PaperProcessView = ({ bgColor }) => {
               numberOfLines={1}
               style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
             >
-              Melting
+              De-Inking
             </Text>
           </View>
           <View style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Image
-              source={melting}
+              source={dry}
               style={{
                 height: 44,
                 width: 44,
@@ -62,7 +65,7 @@ export const PaperProcessView = ({ bgColor }) => {
               numberOfLines={1}
               style={{ textAlign: 'center', color: '#474747', fontWeight: '600', fontSize: 12 }}
             >
-              Clean
+              Dry
             </Text>
           </View>
         </View>
@@ -79,11 +82,11 @@ export const PaperProcessView = ({ bgColor }) => {
               paddingTop: 4,
             }}
           >
-            New Bottle
+            New Paper Roll
           </Text>
           <View style={{ paddingTop: 6 }}>
             <Image
-              source={melting}
+              source={scroll}
               style={{
                 height: 64,
                 width: 64,

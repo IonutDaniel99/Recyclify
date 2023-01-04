@@ -25,6 +25,7 @@ export const ProductAddStyle = StyleSheet.create({
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
+    color: '#000',
     height: 42,
     paddingLeft: 20,
     width: '70%',
@@ -83,6 +84,7 @@ export const ProductAddStyle = StyleSheet.create({
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
+    color: '#000',
     height: 100,
     marginTop: 20,
     paddingHorizontal: 20,
@@ -118,6 +120,7 @@ export const ProductAddStyle = StyleSheet.create({
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
+    color: '#000',
     marginTop: 20,
     paddingHorizontal: 20,
   },
@@ -162,16 +165,18 @@ export const ProductAddStyle = StyleSheet.create({
 
   ProductContainer: {
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 20,
     display: 'flex',
-    height: 90,
     justifyContent: 'center',
+    minHeight: 120,
+    minWidth: 120,
   },
 
   ProductName: {
     borderColor: '#D0D0D0',
     borderRadius: 6,
     borderWidth: 1,
+    color: '#000',
     marginTop: 20,
     paddingHorizontal: 20,
   },
@@ -207,7 +212,7 @@ export const ProductAddStyle = StyleSheet.create({
   },
   barCodeText: {
     background: 'blue',
-    color: 'black',
+    color: '#000',
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 10,
