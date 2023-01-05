@@ -79,7 +79,7 @@ const ProductCard = ({ productItem }) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const dater = new Date(unixTime)
     const day = dater.getDate()
-    const month = dater.getMonth()
+    const month = dater.getMonth() + 1
     const year = dater.getFullYear()
     const hour = dater.getHours()
     const minutes = dater.getMinutes() < 10 ? '0' + dater.getMinutes() : dater.getMinutes()

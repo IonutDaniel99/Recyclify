@@ -37,7 +37,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           </Text>
         </View>
         <View style={{ width: '20%', height: '100%', display: 'flex', justifyContent: 'center' }} />
-        <View style={{ width: '20%', display: 'flex', justifyContent: 'space-between', marginLeft: 2 }}>
+        <View style={{ width: '20%', display: 'flex', justifyContent: 'space-between', marginLeft: -4 }}>
           <View style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Image
               source={melting}

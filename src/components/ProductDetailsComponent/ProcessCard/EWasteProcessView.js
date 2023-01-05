@@ -15,7 +15,7 @@ export const EWasteProcessView = ({ bgColor }) => {
       }}
     >
       <Text style={{ textAlign: 'center', color: '#2D2D2Da6', fontWeight: '700', fontFamily: 'Poppins', lineHeight: 18 }}>
-        Process of Metal Recycle
+        Process of Electronic Waste Recycle
       </Text>
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         <View style={{ width: '25%', height: '100%', display: 'flex', justifyContent: 'center' }}>

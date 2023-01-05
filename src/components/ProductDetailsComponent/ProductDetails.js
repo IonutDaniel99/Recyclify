@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert, InteractionManager, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, Alert, InteractionManager, ScrollView, TouchableOpacity, Keyboard } from 'react-native'
 import React, { useEffect, useMemo, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getCurrentUserStatistics, getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
@@ -65,6 +65,7 @@ const ProductDetails = ({ route, navigation }) => {
   }, [route.params?.productDetailsCallback])
 
   const resetScreen = (task) => {
+    Keyboard.dismiss()
     route.params = null
     setIsInitialView(true)
     setIsLoading(false)
@@ -78,20 +79,23 @@ const ProductDetails = ({ route, navigation }) => {
   }, [productCodeData.data])
 
   const handleSearchButton = () => {
+    Keyboard.dismiss()
     if (productCodeData.data === null) return
     getProduct(productCodeData)
   }
 
   const handleResetProductsView = () => {
+    Keyboard.dismiss()
     getUserDataPromise
     setProductCodeData(barcodeObject())
     setIsInitialView(true)
   }
   const handleAddNewItemScreen = (barcode) => {
-    Alert.alert('', 'This product doesnt exist! Would u like to add?', [
+    Alert.alert('', 'This product doesnt exist! Would you like to add?', [
       {
         text: 'Cancel',
         onPress: () => {
+          Keyboard.dismiss()
           getUserDataPromise
           setIsInitialView(true)
         },
@@ -144,6 +148,7 @@ const ProductDetails = ({ route, navigation }) => {
       <View style={style.searchContainer}>
         <View style={style.searchInput}>
           <TextInput
+            autoFocus={false}
             clearButtonMode='never'
             keyboardType='number-pad'
             onChangeText={(val) => setProductCodeData(barcodeObject(val))}
@@ -158,7 +163,6 @@ const ProductDetails = ({ route, navigation }) => {
             }}
             value={productCodeData.data}
           />
-          {/* {productCodeData.data && ( */}
           <TouchableOpacity
             onPress={() => handleResetProductsView()}
             style={style.resetButtonTouchable}
@@ -166,7 +170,6 @@ const ProductDetails = ({ route, navigation }) => {
           >
             <Text style={style.resetButtonText}>Reset</Text>
           </TouchableOpacity>
-          {/* )} */}
         </View>
         <TouchableOpacity
           disabled={isSearchDisable}
