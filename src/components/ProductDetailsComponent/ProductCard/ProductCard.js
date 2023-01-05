@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-raw-text */
 import { View, Text, ScrollView, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import DropShadow from 'react-native-drop-shadow'
@@ -7,6 +8,8 @@ import PlasticBottleDirtyProp from '../../../assets/images/LatestProducts/Plasti
 import FruitProp from '../../../assets/images/LatestProducts/Organic/fruit.png'
 import PaperProp from '../../../assets/images/LatestProducts/Paper/paper.png'
 import GlassProp from '../../../assets/images/LatestProducts/Glass/bottle.png'
+import MetalProp from '../../../assets/images/LatestProducts/Metal/can.png'
+import CompProp from '../../../assets/images/LatestProducts/EWaste/comp.png'
 
 import { ProductCardStyle } from './ProductCardStyle'
 import { FlatGrid } from 'react-native-super-grid'
@@ -24,7 +27,7 @@ const ecoMapper = {
     text: 'E-Waste',
     scannedAtBg: '#6F8AA9',
     bgColor: '#DFE5EC',
-    image: null,
+    image: CompProp,
   },
   plastic: {
     text: 'Plastic',
@@ -36,7 +39,7 @@ const ecoMapper = {
     text: 'Metal',
     scannedAtBg: '#8C61B7',
     bgColor: '#F7F4FA',
-    image: null,
+    image: MetalProp,
   },
   glass: {
     text: 'Glass',
@@ -139,7 +142,21 @@ const ProductCard = ({ productItem }) => {
                 </View>
               </View>
             </View>
-
+            {product.ingredients && (
+              <View style={style.scannedAtContainer}>
+                <View style={style.scannedAtContent}>
+                  <Text
+                    adjustsFontSizeToFit
+                    numberOfLines={2}
+                    style={[style.containOther, { backgroundColor: ecoMapper[product.ecoType].scannedAtBg + 'd6' }]}
+                  >
+                    Package of this product is <Text style={{ fontWeight: '800' }}>{ecoMapper[product.ecoType].text.toUpperCase()}</Text>,
+                    but it`s content might be different!
+                  </Text>
+                  <View style={[ProductCardStyle.CirclePositioning, { top: '35%', right: '-11.5%' }]} />
+                </View>
+              </View>
+            )}
             <View style={style.descriptionContainer}>
               <Text style={style.descriptionText}>Description</Text>
               <View style={style.descriptionContent}>

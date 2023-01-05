@@ -78,11 +78,10 @@ export const PlasticProcessView = ({ bgColor }) => {
               color: '#474747',
               fontWeight: '600',
               fontSize: 14,
-              width: 50,
               paddingTop: 4,
             }}
           >
-            New Bottle
+            New Bottle/Bag
           </Text>
           <View style={{ paddingTop: 6 }}>
             <Image
@@ -103,7 +102,7 @@ export const PlasticProcessView = ({ bgColor }) => {
               fontSize: 14,
             }}
           >
-            Reusable Bottle
+            Reusable Bottle/Bag
           </Text>
         </View>
       </View>

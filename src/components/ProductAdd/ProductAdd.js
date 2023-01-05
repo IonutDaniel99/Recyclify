@@ -382,7 +382,7 @@ const ProductAdd = ({ route, navigation }) => {
                 onPress={() => setContainFoodOrLiquid(!containFoodOrLiquid)}
                 switchOn={containFoodOrLiquid ? true : false}
               />
-              <Text style={style.containFoodOrLiquidText}>Contain Food or Liquid?</Text>
+              <Text style={style.containFoodOrLiquidText}>Is package content Eco-Type different?</Text>
             </TouchableOpacity>
           </View>
         )}

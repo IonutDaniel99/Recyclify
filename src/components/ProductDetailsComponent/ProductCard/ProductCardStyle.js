@@ -1,4 +1,4 @@
-import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 const primaryTextColor = '#494949'
 const secondaryTextColor = '#828282'
@@ -190,6 +190,19 @@ export const ProductCardStyle = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     height: 36,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    position: 'relative',
+    textAlignVertical: 'center',
+  },
+  containOther: {
+    alignItems: 'center',
+    borderRadius: 4,
+    color: '#fff',
+    display: 'flex',
+    fontSize: 16,
+    fontWeight: '600',
+    height: 56,
     justifyContent: 'center',
     paddingHorizontal: 20,
     position: 'relative',
