@@ -1,0 +1,1 @@
+export const GOOGLE_NEWS_API = '2334c88bcf65427c8739252543fdea8f'

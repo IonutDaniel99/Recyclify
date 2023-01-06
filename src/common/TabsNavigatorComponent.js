@@ -3,9 +3,10 @@ import React from 'react'
 import ProductDetails from '../components/ProductDetailsComponent/ProductDetails'
 
 import Icon from 'react-native-vector-icons/Feather'
+import IconF from 'react-native-vector-icons/FontAwesome'
 import PorfileScreen from '../components/Profile/ProfileScreen'
 import CameraBarcodeScanner from '../components/CameraBarcodeScanner/CameraBarcodeScanner'
-import HomeScreen from '../components/Home/HomeScreen'
+import NewsScreen from '../components/News/NewsScreen'
 import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar'
 
 const Tab = AnimatedTabBarNavigator()
@@ -19,7 +20,7 @@ const TabsNavigatorComponent = () => {
           whenInactiveShow: 'icon-only',
         }}
         backBehavior='none'
-        initialRouteName='HomeScreen'
+        initialRouteName='NewsScreen'
         sceneAnimationEnabled='true'
         tabBarOptions={{
           activeBackgroundColor: '#00B000',
@@ -27,14 +28,14 @@ const TabsNavigatorComponent = () => {
         }}
       >
         <Tab.Screen
-          component={HomeScreen}
-          name='HomeScreen'
+          component={NewsScreen}
+          name='NewsScreen'
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'News',
             tabBarIcon: ({ color }) => (
-              <Icon
+              <IconF
                 color={color}
-                name='home'
+                name='newspaper-o'
                 size={24}
               />
             ),
