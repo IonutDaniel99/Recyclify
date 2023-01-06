@@ -12,6 +12,7 @@ import { FlatGrid } from 'react-native-super-grid'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import LinearGradient from 'react-native-linear-gradient'
 import DropShadow from 'react-native-drop-shadow'
+import ProfileScreenLoading from './ProfileScreenLoading'
 
 const PorfileScreen = ({ route, navigation }) => {
   const style = ProfileScreenStyle
@@ -121,7 +122,7 @@ const PorfileScreen = ({ route, navigation }) => {
       </Animated.View>
       <View style={style.ProfileScreenContiner}>
         {isLoading ? (
-          <Text>Loading...</Text>
+          <ProfileScreenLoading />
         ) : (
           <ScrollView
             contentContainerStyle={{

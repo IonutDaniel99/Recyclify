@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert, InteractionManager, ScrollView, TouchableOpacity, Keyboard } from 'react-native'
+import { View, Text, TextInput, Alert, InteractionManager, ScrollView, TouchableOpacity, Keyboard, Dimensions } from 'react-native'
 import React, { useEffect, useMemo, useState } from 'react'
 import { ProductDetailsStyle } from './ProductDetailsStyle'
 import { getCurrentUserStatistics, getProductOrNull, writeDataToUser } from '../../helpers/firebaseHelpers'
@@ -7,6 +7,8 @@ import { firebase } from '@react-native-firebase/auth'
 
 import Icon from 'react-native-vector-icons/Fontisto'
 import ProductCard from './ProductCard/ProductCard'
+import ScannedCard from './ProductCard/ScannedCard'
+import LoadingContainer from '../../common/LoadingContainer'
 
 const barcodeObject = (data, dataRaw, format, type) => {
   return {
@@ -81,6 +83,7 @@ const ProductDetails = ({ route, navigation }) => {
   const handleSearchButton = () => {
     Keyboard.dismiss()
     if (productCodeData.data === null) return
+    setIsInitialView(false)
     getProduct(productCodeData)
   }
 
@@ -185,7 +188,7 @@ const ProductDetails = ({ route, navigation }) => {
       </View>
       <View
         style={{
-          height: '80%',
+          height: Dimensions.get('screen').height * 0.9,
           marginTop: 30,
         }}
       >
@@ -214,21 +217,29 @@ const ProductDetails = ({ route, navigation }) => {
             </ScrollView>
           </View>
         ) : (
-          <View>
+          <>
             {isLoading ? (
-              <Text>Loading</Text>
+              <View style={style.productCardContainerLoading}>
+                <LoadingContainer />
+              </View>
             ) : (
-              <View>
-                {Object.entries(product).map((v, id) => {
-                  if (typeof v[1] === 'object') {
-                    Object.entries(v[1]).map((y) => <Text key={id}>{y}</Text>)
-                  } else {
-                    return <Text key={id}>{v[1]}</Text>
-                  }
-                })}
+              <View style={style.initialViewContainer}>
+                <Text
+                  adjustsFontSizeToFit
+                  numberOfLines={1}
+                  style={style.latestScannedProductsText}
+                >
+                  Barcode: {product.barCode}
+                </Text>
+                <ScrollView
+                  horizontal
+                  style={style.latestScannedProductsScrollView}
+                >
+                  <ScannedCard productItem={product} />
+                </ScrollView>
               </View>
             )}
-          </View>
+          </>
         )}
       </View>
     </View>

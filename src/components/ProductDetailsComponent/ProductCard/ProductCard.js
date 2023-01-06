@@ -201,7 +201,7 @@ const ProductCard = ({ productItem }) => {
               </View>
             </View>
 
-            {!product.ingredients && (
+            {product.ingredients && (
               <View style={style.descriptionContainer}>
                 <Text style={style.descriptionText}>Ingredients</Text>
                 <View style={style.ingredientContent}>
@@ -233,8 +233,11 @@ const ProductCard = ({ productItem }) => {
                 </View>
                 <View style={style.nutritionalContent}>
                   <View>
-                    {sortedNutritionals().map((x) => (
-                      <NutritionalValueViewer data={x} />
+                    {sortedNutritionals().map((x, id) => (
+                      <NutritionalValueViewer
+                        data={x}
+                        key={id}
+                      />
                     ))}
                   </View>
                   <View
