@@ -120,7 +120,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
+            borderWidth: 1,
             height: 24,
             right: 21,
           }}
@@ -129,7 +129,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 284,
             right: 22,
             top: 22,
@@ -139,7 +139,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
+            borderWidth: 1,
             height: 36,
             left: 28,
             top: 22,
@@ -155,7 +155,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 22,
             left: 66,
             top: 120,
@@ -165,7 +165,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
+            borderWidth: 1,
             height: 100,
             left: 86,
             top: 70,
@@ -175,7 +175,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: '8%',
             left: 86,
             top: 70,
@@ -191,7 +191,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: '8%',
             left: 86,
             top: 170,
@@ -207,7 +207,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: '8%',
             left: 210,
             top: 70,
@@ -223,7 +223,7 @@ export const PlasticProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: '8%',
             left: 210,
             top: 170,

@@ -82,6 +82,7 @@ export const MetalProcessView = ({ bgColor }) => {
               style={{
                 height: 64,
                 width: 64,
+                transform: [{ scaleX: -1 }],
               }}
             />
           </View>
@@ -113,7 +114,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 3,
+            borderWidth: 1,
             height: 24,
             right: 21,
           }}
@@ -122,7 +123,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: '87%',
             right: 22,
             top: 22,
@@ -132,7 +133,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 3,
+            borderWidth: 1,
             height: 35,
             left: '6%',
             top: 22,
@@ -142,13 +143,13 @@ export const MetalProcessView = ({ bgColor }) => {
           color={'#232323'}
           name='caretdown'
           size={16}
-          style={{ position: 'absolute', height: 35, left: '4%', top: 50 }}
+          style={{ position: 'absolute', height: 35, left: '3.75%', top: 50 }}
         />
         <View
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 16,
             left: 60,
             top: 125,
@@ -158,17 +159,17 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
-            height: 56,
+            borderWidth: 1,
+            height: 54,
             left: 74,
-            top: 70,
+            top: 72,
           }}
         />
         <View
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 20,
             left: 74,
             top: 71,
@@ -184,7 +185,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
+            borderWidth: 1,
             height: 46,
             left: 142,
             top: 102,
@@ -194,7 +195,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 20,
             left: 142,
             top: 146,
@@ -210,7 +211,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 16,
             left: 222,
             top: 146,
@@ -220,7 +221,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
+            borderWidth: 1,
             height: 98,
             left: 238,
             top: 50,
@@ -230,7 +231,7 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderBottomWidth: 2,
+            borderWidth: 1,
             width: 44,
             left: 240,
             top: 50,
@@ -240,8 +241,8 @@ export const MetalProcessView = ({ bgColor }) => {
           style={{
             position: 'absolute',
             borderColor: '#232323',
-            borderRightWidth: 2,
-            height: 18,
+            borderWidth: 1,
+            height: 14,
             left: 282,
             top: 50,
           }}

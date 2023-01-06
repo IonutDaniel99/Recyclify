@@ -21,6 +21,7 @@ import { GlassProcessView } from '../ProcessCard/GlassProcessView'
 import { OrganicProcessView } from '../ProcessCard/OrganicProcessView'
 import { delay } from 'lodash'
 import LoadingContainer from '../../../common/LoadingContainer'
+import { NutritionalValueViewer } from './NutritionalValueViewer'
 
 const ecoMapper = {
   ewaste: {
@@ -61,6 +62,23 @@ const ecoMapper = {
   },
 }
 
+const nutritionalSortMapper = [
+  'energeticValue',
+  'totalFat',
+  'saturatedFat',
+  'transFat',
+  'polyFat',
+  'monoFat',
+  'cholesterol',
+  'sodium',
+  'totalCarbohydrate',
+  'dietaryFiber',
+  'sugar',
+  'protein',
+  'fiber',
+  'salt',
+]
+
 const ProductCard = ({ productItem }) => {
   const style = ProductCardStyle
 
@@ -95,6 +113,18 @@ const ProductCard = ({ productItem }) => {
   useEffect(() => {
     getProduct()
   }, [])
+
+  const sortedNutritionals = () => {
+    var _newArray = []
+    nutritionalSortMapper.map((x) => {
+      Object.entries(product.nutritionalValues).map((y) => {
+        if (x === y[0]) {
+          _newArray.push(y)
+        }
+      })
+    })
+    return _newArray
+  }
 
   return (
     <DropShadow style={style.shadowProp}>
@@ -142,7 +172,7 @@ const ProductCard = ({ productItem }) => {
                 </View>
               </View>
             </View>
-            {product.ingredients && (
+            {!product.containFoodOrLiquid && (
               <View style={style.scannedAtContainer}>
                 <View style={style.scannedAtContent}>
                   <Text
@@ -171,7 +201,7 @@ const ProductCard = ({ productItem }) => {
               </View>
             </View>
 
-            {product.ingredients && (
+            {!product.ingredients && (
               <View style={style.descriptionContainer}>
                 <Text style={style.descriptionText}>Ingredients</Text>
                 <View style={style.ingredientContent}>
@@ -191,20 +221,22 @@ const ProductCard = ({ productItem }) => {
                     )}
                     spacing={12}
                   />
-                  <View style={[ProductCardStyle.CirclePositioning, { top: '45%', right: '-11.5%' }]} />
+                  <View style={[ProductCardStyle.CirclePositioning, { top: '35%', right: '-11.5%' }]} />
                 </View>
               </View>
             )}
             {product.nutritionalValues && (
               <View style={style.nutritionalContainer}>
-                <Text style={style.descriptionText}>Nutritional Values</Text>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10 }}>
+                  <Text style={style.descriptionText}>Nutritional Values</Text>
+                  <Text style={style.descriptionText}>Per 100g</Text>
+                </View>
                 <View style={style.nutritionalContent}>
-                  <Text>Total Fat</Text>
-                  <Text>Saturated Fat</Text>
-                  <Text>Cholesterol Fat</Text>
-                  <Text>Sodium Fat</Text>
-                  <Text>Total Carbohydrate Fat</Text>
-                  <Text>Protein Fat</Text>
+                  <View>
+                    {sortedNutritionals().map((x) => (
+                      <NutritionalValueViewer data={x} />
+                    ))}
+                  </View>
                   <View
                     style={[
                       ProductCardStyle.CirclePositioning,

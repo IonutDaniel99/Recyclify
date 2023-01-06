@@ -143,7 +143,7 @@ const ProductAdd = ({ route, navigation }) => {
         <TextInput
           multiline
           onChangeText={(val) => setProductName(val)}
-          placeholder='Product Name'
+          placeholder='Product Name (Required)'
           placeholderTextColor={'#8c8c8c'}
           style={style.ProductName}
           value={productName}
@@ -152,7 +152,7 @@ const ProductAdd = ({ route, navigation }) => {
         <TextInput
           multiline
           onChangeText={(val) => setCompanyName(val)}
-          placeholder='Company Name'
+          placeholder='Company Name (Required)'
           placeholderTextColor={'#8c8c8c'}
           style={style.ManufactureName}
           value={companyName}
@@ -161,7 +161,7 @@ const ProductAdd = ({ route, navigation }) => {
           maxLength={600}
           multiline
           onChangeText={(val) => setDescription(val)}
-          placeholder='Description'
+          placeholder='Description (Required)'
           placeholderTextColor={'#8c8c8c'}
           style={style.DescriptionInput}
         />
@@ -237,7 +237,7 @@ const ProductAdd = ({ route, navigation }) => {
                 maxLength={20}
                 onChangeText={(val) => setIngredient(val)}
                 onSubmitEditing={() => handleAddIngredients()}
-                placeholder='Add Ingredient'
+                placeholder='Add Ingredient (Optional)'
                 placeholderTextColor={'#8c8c8c'}
                 style={style.AddIngredientInput}
                 value={ingredient}
@@ -262,7 +262,7 @@ const ProductAdd = ({ route, navigation }) => {
             </View>
 
             <View style={style.AdditionalDetailsContainer}>
-              <Text style={style.AdditionalDetailsText}>Nutritional Values</Text>
+              <Text style={style.AdditionalDetailsText}>Nutritional Values (Optional)</Text>
               <View style={style.AdditionalDetailsBorder} />
             </View>
             <View style={style.NutritionalValuesContainer}>
@@ -271,6 +271,17 @@ const ProductAdd = ({ route, navigation }) => {
                 <Text style={style.NutritionalValuesTexts}>Per 100g</Text>
               </View>
               <NutritionalValueContainer
+                isKcal
+                mainText={'Energetic Value'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    energeticValue: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                isG
                 mainText={'Total Fat'}
                 onValChange={(val) =>
                   setNutritionalValues({
@@ -281,6 +292,7 @@ const ProductAdd = ({ route, navigation }) => {
               />
               <NutritionalValueContainer
                 editable={nutritionalValues.totalFat == null}
+                isG
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
@@ -291,6 +303,43 @@ const ProductAdd = ({ route, navigation }) => {
                 subText={'Saturated Fat'}
               />
               <NutritionalValueContainer
+                editable={nutritionalValues.totalFat == null}
+                isG
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    transFat: val,
+                  })
+                }
+                parentValue={nutritionalValues.totalFat}
+                subText={'Trans Fat'}
+              />
+              <NutritionalValueContainer
+                editable={nutritionalValues.totalFat == null}
+                isG
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    polyFat: val,
+                  })
+                }
+                parentValue={nutritionalValues.totalFat}
+                subText={'Polyunsaturated Fat'}
+              />
+              <NutritionalValueContainer
+                editable={nutritionalValues.totalFat == null}
+                isG
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    monoFat: val,
+                  })
+                }
+                parentValue={nutritionalValues.totalFat}
+                subText={'Monounsaturated Fat'}
+              />
+              <NutritionalValueContainer
+                isG
                 mainText={'Cholesterol'}
                 onValChange={(val) =>
                   setNutritionalValues({
@@ -310,6 +359,7 @@ const ProductAdd = ({ route, navigation }) => {
                 }
               />
               <NutritionalValueContainer
+                isG
                 mainText={'Total Carbohydrate'}
                 onValChange={(val) =>
                   setNutritionalValues({
@@ -320,6 +370,7 @@ const ProductAdd = ({ route, navigation }) => {
               />
               <NutritionalValueContainer
                 editable={nutritionalValues.totalCarbohydrate == null}
+                isG
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
@@ -331,6 +382,7 @@ const ProductAdd = ({ route, navigation }) => {
               />
               <NutritionalValueContainer
                 editable={nutritionalValues.totalCarbohydrate == null}
+                isG
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
@@ -341,11 +393,32 @@ const ProductAdd = ({ route, navigation }) => {
                 subText={'Sugar'}
               />
               <NutritionalValueContainer
+                isG
                 mainText={'Protein'}
                 onValChange={(val) =>
                   setNutritionalValues({
                     ...nutritionalValues,
                     protein: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                isG
+                mainText={'Fiber'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    fiber: val,
+                  })
+                }
+              />
+              <NutritionalValueContainer
+                isG
+                mainText={'Salt'}
+                onValChange={(val) =>
+                  setNutritionalValues({
+                    ...nutritionalValues,
+                    salt: val,
                   })
                 }
               />
