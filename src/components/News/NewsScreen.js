@@ -87,7 +87,7 @@ const NewsScreen = () => {
           <Text style={style.newsScreenTitle}>News</Text>
           <Icon
             color={'#000'}
-            name={isFilterOpen ? 'filter-menu-outline' : 'filter-off-outline'}
+            name={isFilterOpen ? 'filter-outline' : 'filter-off-outline'}
             onPress={() => setIsFilterOpen(!isFilterOpen)}
             size={42}
             style={{ paddingRight: 20 }}
