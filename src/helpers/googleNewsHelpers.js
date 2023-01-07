@@ -43,14 +43,6 @@ export const getGoogleNews = async (topic, fromDate, sort, newsSize) => {
 
   const sortBy = sortByMapped[sort]
 
-  const url = `https://newsapi.org/v2/everything?q=${topic}&from=${stringManipulator}&language=en&pageSize=${newsSize}$sortBy=${sortBy}&apiKey=${GOOGLE_NEWS_API}`
-  console.log(url)
-  //   await fetch(url)
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       console.log(json)
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
+  const url = `https://newsapi.org/v2/everything?q=${topic}&from=${stringManipulator}&language=en&pageSize=${newsSize}&sortBy=${sortBy}&searchIn=title&apiKey=${GOOGLE_NEWS_API}`
+  return fetch(url)
 }

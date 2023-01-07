@@ -5,6 +5,7 @@ export const NewsScreenStyle = StyleSheet.create({
     backgroundColor: '#fff',
     height: '100%',
     padding: 20,
+    width: '100%',
   },
   container: {
     alignItems: 'flex-start',

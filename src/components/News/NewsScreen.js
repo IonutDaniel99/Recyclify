@@ -1,11 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 import { firebase } from '@react-native-firebase/auth'
 import { nullOrCreateCollectionsOnFirebase } from '../../helpers/firebaseHelpers'
 import { getGoogleNews } from '../../helpers/googleNewsHelpers'
 import { NewsScreenStyle } from './NewsScreenStyle'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Placeholder, PlaceholderLine, PlaceholderMedia, Shine } from 'rn-placeholder'
+import NewsCard from './NewsCard'
 
 const topicMapper = {
   1: 'Recycle',
@@ -38,12 +40,22 @@ const NewsScreen = () => {
 
   useEffect(() => {
     nullOrCreateCollectionsOnFirebase(userTemplate)
-    getGoogleNews(topicMapper[1], 1)
+    handleSearchFilter(2)
     return () => {}
   }, [])
 
-  const handleSearchFilter = () => {
-    getGoogleNews(topicMapper[newsTopic], newsDate, newsSort, newsSize)
+  const handleSearchFilter = (otherDate) => {
+    setIsFilterOpen(false)
+    setIsNewsLoading(true)
+    getGoogleNews(topicMapper[newsTopic], otherDate || newsDate, newsSort, newsSize)
+      .then((response) => response.json())
+      .then((json) => {
+        setNewsCollection(json.articles.slice(0, newsSize))
+      })
+      .finally(() => setIsNewsLoading(false))
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   const userTemplate = {
@@ -88,7 +100,17 @@ const NewsScreen = () => {
             width: '100%',
           }}
         />
-        <View style={{ marginVertical: 10, width: '100%', display: isFilterOpen ? 'flex' : 'none' }}>
+        <View
+          style={{
+            marginVertical: 10,
+            width: '100%',
+            position: 'absolute',
+            backgroundColor: '#fff',
+            zIndex: 30,
+            marginTop: 70,
+            display: isFilterOpen ? 'flex' : 'none',
+          }}
+        >
           <View style={style.topicAndDateContainer}>
             <Text style={style.topicDateText}>Topic:</Text>
             <TouchableOpacity
@@ -193,7 +215,7 @@ const NewsScreen = () => {
               ]}
             >
               <Text style={[style.topicDateButtonText, newsSort === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
-                Published at
+                Newest
               </Text>
             </TouchableOpacity>
           </View>
@@ -247,7 +269,45 @@ const NewsScreen = () => {
             }}
           />
         </View>
-        <Text>Ren Traveolta</Text>
+        <View style={{ marginTop: 20, marginBottom: '10%', width: '100%', height: '85%' }}>
+          {isNewsLoading ? (
+            <Placeholder
+              Animation={Shine}
+              Left={() => <PlaceholderMedia style={{ height: 80, width: 128 }} />}
+              style={{ marginVertical: 10 }}
+            >
+              <Placeholder style={{ width: '85%', marginLeft: 30 }}>
+                <PlaceholderLine height={22} />
+                <PlaceholderLine />
+                <PlaceholderLine />
+              </Placeholder>
+            </Placeholder>
+          ) : (
+            <ScrollView style={{ height: '100%' }}>
+              {newsCollection.length > 0 ? (
+                newsCollection?.map((article, id) => (
+                  <NewsCard
+                    article={article}
+                    key={id}
+                  />
+                ))
+              ) : (
+                <Text
+                  style={{
+                    fontSize: 24,
+                    textAlign: 'center',
+                    textAlignVertical: 'center',
+                    fontFamily: 'Poppins-Medium',
+                    color: 'gray',
+                    minHeight: 120,
+                  }}
+                >
+                  There are no news for the current filters!
+                </Text>
+              )}
+            </ScrollView>
+          )}
+        </View>
       </View>
     </View>
   )
