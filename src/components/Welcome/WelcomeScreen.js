@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, TouchableOpacity } from 'react-native'
-import auth, { firebase } from '@react-native-firebase/auth'
+import { View, Image, Text, TouchableOpacity, ToastAndroid } from 'react-native'
+import auth from '@react-native-firebase/auth'
 import LinearGradient from 'react-native-linear-gradient'
+import NetInfo from '@react-native-community/netinfo'
 
 import recyclifyLogo from '../../assets/images/Login/appLogo.png'
-import firebaseConfig from '../../configs/firebase/firebaseWebConfig'
 import { WelcomeScreenStyle } from './WelcomeScreenStyle'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 const WelcomeScreen = ({ navigation }) => {
   const style = WelcomeScreenStyle
-  // Initialization
-  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
-
   // Constants
   const [users, setUsers] = useState()
+  const [isConnectedToNet, setIsConnectedToNet] = useState(false)
 
   // Effects
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged)
     return subscriber
+  }, [])
+
+  useEffect(() => {
+    const internetEventListener = NetInfo.addEventListener((state) => {
+      setIsConnectedToNet(state.isInternetReachable)
+    })
+    return internetEventListener
   }, [])
 
   // Functions
@@ -27,25 +33,17 @@ const WelcomeScreen = ({ navigation }) => {
   }
 
   const handlePressToContinue = () => {
-    if (!users) {
-      navigation.navigate('LoginScreen')
+    if (isConnectedToNet === true) {
+      if (!users) {
+        navigation.navigate('LoginScreen')
+      } else {
+        navigation.navigate('TabsNavigator', { userData: users })
+      }
     } else {
-      navigation.navigate('TabsNavigator', { userData: users })
+      ToastAndroid.showWithGravity('There is no access to internet. Activate mobile data or wi-fi!', 3, 35)
     }
   }
 
-  // const signOut = async () => {
-  //   try {
-  //     await GoogleSignin.revokeAccess()
-  //     await GoogleSignin.signOut()
-  //     auth()
-  //       .signOut()
-  //       .then(() => alert('Your are signed out!'))
-  //     // setuserInfo([]);
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
   return (
     <LinearGradient
       colors={['#BBFF62', '#1D6000']}
@@ -55,7 +53,7 @@ const WelcomeScreen = ({ navigation }) => {
     >
       <TouchableOpacity
         activeOpacity={1}
-        onPress={handlePressToContinue}
+        onPress={() => handlePressToContinue()}
         style={style.TouchableOpacity}
       >
         <View style={style.logoContainer}>
@@ -68,9 +66,18 @@ const WelcomeScreen = ({ navigation }) => {
           <Text style={style.logoText}>Welcome to Recyclify</Text>
         </View>
         <View style={style.continueView}>
-          <Text style={style.continueText}>Press Anywhere To Continue</Text>
+          {isConnectedToNet ? (
+            <Text style={style.continueText}>Press Anywhere To Continue</Text>
+          ) : (
+            <Text style={style.continueText}>There is no internet connection</Text>
+          )}
         </View>
-        <Text style={style.rightArrowText}>→</Text>
+        <Icon
+          color={'#fff'}
+          name={'arrowright'}
+          size={40}
+          style={[style.rightArrowText, { color: isConnectedToNet ? 'white' : 'transparent' }]}
+        />
       </TouchableOpacity>
     </LinearGradient>
   )

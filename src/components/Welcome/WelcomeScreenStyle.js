@@ -67,9 +67,7 @@ export const WelcomeScreenStyle = StyleSheet.create({
     zIndex: 10,
   },
   rightArrowText: {
-    color: 'white',
     display: 'flex',
-    fontSize: 40,
     fontWeight: '600',
     marginRight: 36,
     textAlign: 'right',
