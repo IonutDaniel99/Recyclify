@@ -291,12 +291,11 @@ const NewsScreen = () => {
               </Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => handleSearchFilter()}
-            style={style.searchButtonContainer}
-          >
-            <Text style={style.searchButtonText}>Search</Text>
-          </TouchableOpacity>
+          <View style={style.searchButtonContainer}>
+            <TouchableOpacity onPress={() => handleSearchFilter()}>
+              <Text style={style.searchButtonText}>Search</Text>
+            </TouchableOpacity>
+          </View>
           <View
             style={{
               borderColor: '#23232366',
@@ -305,7 +304,7 @@ const NewsScreen = () => {
             }}
           />
         </View>
-        <View style={{ marginTop: 20, marginBottom: '10%', width: '100%', height: '85%' }}>
+        <View style={{ marginTop: 20, marginBottom: '10%', width: '100%', height: Dimensions.get('screen').height / 1.45 }}>
           {isNewsLoading ? (
             <Placeholder
               Animation={Shine}

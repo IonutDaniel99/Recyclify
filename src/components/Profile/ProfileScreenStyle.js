@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 export const ProfileScreenStyle = StyleSheet.create({
   DragToRefreshContainer: {
@@ -121,7 +121,6 @@ export const ProfileScreenStyle = StyleSheet.create({
     font: '#d0d0d0',
     fontSize: 20,
     fontWeight: '700',
-    marginTop: 40,
     textAlign: 'center',
   },
   ProductContainer: {
@@ -130,8 +129,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     display: 'flex',
     elevation: 2,
     justifyContent: 'center',
-    minHeight: 120,
-    minWidth: 120,
+    paddingVertical: 24,
     shadowColor: '#171717',
   },
   resetStatisticsContainer: {

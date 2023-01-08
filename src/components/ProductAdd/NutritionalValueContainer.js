@@ -3,7 +3,6 @@ import { Text, TextInput, ToastAndroid, View } from 'react-native'
 import React from 'react'
 export const NutritionalValueContainer = ({ mainText, subText, editable, parentValue, isMg, isG, isKcal, onValChange }) => {
   const [value, setValue] = useState(null)
-  console.log(parentValue)
   useEffect(() => {
     onValChange(value)
   }, [value])
@@ -79,9 +78,9 @@ export const NutritionalValueContainer = ({ mainText, subText, editable, parentV
           }}
           value={value}
         />
-        {isMg && <Text>mg</Text>}
-        {isG && <Text>g</Text>}
-        {isKcal && <Text>Kcal</Text>}
+        {isMg && <Text style={{ color: '#9fa1a1' }}>mg</Text>}
+        {isG && <Text style={{ color: '#9fa1a1' }}>g</Text>}
+        {isKcal && <Text style={{ color: '#9fa1a1' }}>Kcal</Text>}
       </View>
     </View>
   )

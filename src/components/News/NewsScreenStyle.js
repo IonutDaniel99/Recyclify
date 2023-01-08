@@ -25,7 +25,7 @@ export const NewsScreenStyle = StyleSheet.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    height: 64,
+    height: 42,
     marginTop: 10,
     width: '100%',
   },
@@ -39,12 +39,13 @@ export const NewsScreenStyle = StyleSheet.create({
   topicDateButtonContainer: {
     borderRadius: 10,
     borderWidth: 1,
-    marginRight: 20,
+    marginRight: 10,
     paddingHorizontal: 14,
-    paddingVertical: 10,
+    paddingVertical: 6,
   },
   topicDateButtonContainerChecked: {
-    backgroundColor: '#000',
+    backgroundColor: '#006b30',
+    borderColor: '#006b30',
   },
   topicDateButtonContainerNotChecked: {
     backgroundColor: '#fff',

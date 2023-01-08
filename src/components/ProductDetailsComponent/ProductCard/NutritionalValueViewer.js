@@ -170,9 +170,9 @@ export const NutritionalValueViewer = ({ data }) => {
         >
           {value}
         </Text>
-        {nutritionalObject.isG && <Text>mg</Text>}
-        {nutritionalObject.isMg && <Text>g</Text>}
-        {nutritionalObject.isKcal && <Text>kcal</Text>}
+        {nutritionalObject.isG && <Text style={{ color: '#9fa1a1' }}>mg</Text>}
+        {nutritionalObject.isMg && <Text style={{ color: '#9fa1a1' }}>g</Text>}
+        {nutritionalObject.isKcal && <Text style={{ color: '#9fa1a1' }}>kcal</Text>}
       </View>
     </View>
   )

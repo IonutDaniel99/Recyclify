@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 export const ProductAddStyle = StyleSheet.create({
   AddIngredientButton: {
@@ -168,8 +168,7 @@ export const ProductAddStyle = StyleSheet.create({
     borderRadius: 20,
     display: 'flex',
     justifyContent: 'center',
-    minHeight: 120,
-    minWidth: 120,
+    minHeight: Dimensions.get('screen').height / 10,
   },
 
   ProductName: {

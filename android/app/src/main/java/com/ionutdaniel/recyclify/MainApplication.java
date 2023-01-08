@@ -15,6 +15,7 @@ import java.util.List;
 import io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
+import com.github.wumke.RNExitApp.RNExitAppPackage;
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =

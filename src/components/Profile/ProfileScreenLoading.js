@@ -18,12 +18,6 @@ const ProfileScreenLoading = () => {
         <Placeholder style={{ height: 265 }}>
           <PlaceholderLine height={250} />
         </Placeholder>
-        <Placeholder style={{ height: 100 }}>
-          <PlaceholderLine height={90} />
-        </Placeholder>
-        <Placeholder style={{ height: 100 }}>
-          <PlaceholderLine height={90} />
-        </Placeholder>
       </Placeholder>
     </View>
   )

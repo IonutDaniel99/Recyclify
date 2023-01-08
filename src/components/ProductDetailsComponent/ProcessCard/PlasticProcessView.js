@@ -72,12 +72,12 @@ export const PlasticProcessView = ({ bgColor }) => {
         <View style={{ width: '15%', height: '100%', display: 'flex', justifyContent: 'center' }} />
         <View style={{ width: '20%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Text
+            adjustsFontSizeToFit
             numberOfLines={2}
             style={{
               textAlign: 'center',
               color: '#474747',
               fontWeight: '600',
-              fontSize: 14,
               paddingTop: 4,
             }}
           >
@@ -93,13 +93,13 @@ export const PlasticProcessView = ({ bgColor }) => {
             />
           </View>
           <Text
+            adjustsFontSizeToFit
             numberOfLines={2}
             style={{
               textAlign: 'center',
               color: '#474747',
               fontWeight: '600',
               marginTop: 6,
-              fontSize: 14,
             }}
           >
             Reusable Bottle/Bag

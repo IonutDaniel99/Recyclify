@@ -86,13 +86,13 @@ export const GlassProcessView = ({ bgColor }) => {
             />
           </View>
           <Text
+            adjustsFontSizeToFit
             numberOfLines={2}
             style={{
               textAlign: 'center',
               color: '#474747',
               fontWeight: '600',
               marginTop: 2,
-              fontSize: 14,
             }}
           >
             New Glass Bottle
