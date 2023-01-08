@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 const primaryTextColor = '#494949'
 const secondaryTextColor = '#828282'
@@ -35,19 +35,11 @@ export const ProductCardStyle = StyleSheet.create({
   productCardContainer: {
     backgroundColor: '#F7F4FA',
     borderRadius: 25,
-    height: '95%',
+    height: Dimensions.get('screen').height / 1.75,
     marginRight: 20,
     overflow: 'visible',
     width: 375,
     zIndex: 10,
-  },
-  productCardContainer2: {
-    backgroundColor: '#F7F4FA',
-    borderRadius: 25,
-    height: '95%',
-    marginRight: 20,
-    overflow: 'visible',
-    width: 375,
   },
   nameCompanyPropContainer: {
     alignItems: 'center',

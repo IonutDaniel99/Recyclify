@@ -34,7 +34,7 @@ const NewsScreen = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
   const [newsTopic, setNewsTopic] = useState(1)
-  const [newsDate, setNewsDate] = useState(1)
+  const [newsDate, setNewsDate] = useState(2)
   const [newsSort, setNewsSort] = useState(1)
   const [newsSize, setNewsSize] = useState(10)
 
@@ -120,7 +120,10 @@ const NewsScreen = () => {
                 newsTopic === 1 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsTopic === 1 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsTopic === 1 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Recycle
               </Text>
             </TouchableOpacity>
@@ -131,7 +134,10 @@ const NewsScreen = () => {
                 newsTopic === 2 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsTopic === 2 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsTopic === 2 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Global Warm
               </Text>
             </TouchableOpacity>
@@ -142,7 +148,10 @@ const NewsScreen = () => {
                 newsTopic === 3 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsTopic === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsTopic === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Solar Energy
               </Text>
             </TouchableOpacity>
@@ -156,7 +165,10 @@ const NewsScreen = () => {
                 newsDate === 1 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsDate === 1 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsDate === 1 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Today
               </Text>
             </TouchableOpacity>
@@ -167,7 +179,10 @@ const NewsScreen = () => {
                 newsDate === 2 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsDate === 2 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsDate === 2 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 7 Days
               </Text>
             </TouchableOpacity>
@@ -178,7 +193,10 @@ const NewsScreen = () => {
                 newsDate === 3 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsDate === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsDate === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 30 Days
               </Text>
             </TouchableOpacity>
@@ -192,7 +210,10 @@ const NewsScreen = () => {
                 newsSort === 1 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsSort === 1 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsSort === 1 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Relevance
               </Text>
             </TouchableOpacity>
@@ -203,7 +224,10 @@ const NewsScreen = () => {
                 newsSort === 2 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsSort === 2 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsSort === 2 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Popularity
               </Text>
             </TouchableOpacity>
@@ -214,7 +238,10 @@ const NewsScreen = () => {
                 newsSort === 3 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsSort === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsSort === 3 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 Newest
               </Text>
             </TouchableOpacity>
@@ -228,7 +255,10 @@ const NewsScreen = () => {
                 newsSize === 10 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsSize === 10 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsSize === 10 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 10
               </Text>
             </TouchableOpacity>
@@ -239,7 +269,10 @@ const NewsScreen = () => {
                 newsSize === 25 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsSize === 25 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsSize === 25 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 25
               </Text>
             </TouchableOpacity>
@@ -250,7 +283,10 @@ const NewsScreen = () => {
                 newsSize === 50 ? style.topicDateButtonContainerChecked : style.topicDateButtonContainerNotChecked,
               ]}
             >
-              <Text style={[style.topicDateButtonText, newsSize === 50 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}>
+              <Text
+                adjustsFontSizeToFit
+                style={[style.topicDateButtonText, newsSize === 50 ? style.topicDateTextChecked : style.topicDateTextNotChecked]}
+              >
                 50
               </Text>
             </TouchableOpacity>

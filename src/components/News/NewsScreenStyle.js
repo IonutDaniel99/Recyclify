@@ -11,6 +11,7 @@ export const NewsScreenStyle = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#fff',
     display: 'flex',
+    height: '80%',
     justifyContent: 'flex-start',
     width: '100%',
   },
@@ -30,7 +31,7 @@ export const NewsScreenStyle = StyleSheet.create({
   },
   topicDateText: {
     color: '#000',
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     marginRight: 10,
     textAlign: 'center',
@@ -55,13 +56,12 @@ export const NewsScreenStyle = StyleSheet.create({
     color: '#000',
   },
 
-  topicDateButtonText: { fontSize: 16 },
+  topicDateButtonText: {},
 
   searchButtonContainer: {
     alignItems: 'flex-end',
     display: 'flex',
     marginVertical: 20,
-    minWidth: '100%',
   },
   searchButtonText: {
     backgroundColor: '#fff',

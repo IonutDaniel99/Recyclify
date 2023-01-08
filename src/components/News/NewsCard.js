@@ -40,17 +40,19 @@ const NewsCard = ({ article }) => {
             {article.description}
           </Text>
         </View>
-        {article.urlToImage && !article.urlToImage.includes('.png') ? (
-          <Image
-            source={{ 'uri': article.urlToImage }}
-            style={{ height: 80, width: 128 }}
-          />
-        ) : (
-          <Image
-            source={require('../../assets/images/Others/noimage.png')}
-            style={{ height: 80, width: 128 }}
-          />
-        )}
+        <View style={style.imageContainer}>
+          {article.urlToImage && !article.urlToImage.includes('.png') ? (
+            <Image
+              source={{ 'uri': article.urlToImage }}
+              style={{ height: 80, width: 128 }}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/images/Others/noimage.png')}
+              style={{ height: 80, width: 128 }}
+            />
+          )}
+        </View>
       </View>
       <View style={style.subCardDetails}>
         <Text style={style.sourceNameText}>Source: {article.source.name}</Text>
@@ -75,7 +77,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  titleDescSubContainer: { maxWidth: '70%' },
+  titleDescSubContainer: { width: '65%' },
   titleText: {
     color: '#000',
     fontSize: 16,
@@ -84,6 +86,7 @@ const style = StyleSheet.create({
     color: '#606060',
     fontSize: 14,
   },
+  imageContainer: { width: '30%' },
   subCardDetails: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 10, marginVertical: 10 },
   sourceNameText: {
     color: '#000',
