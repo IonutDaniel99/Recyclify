@@ -141,7 +141,7 @@ const PorfileScreen = ({ route, navigation }) => {
           >
             <View style={style.UserProfileContainer}>
               <View style={style.UserProfileTexts}>
-                <Text style={style.UserProfileName}>{userStatistics.displayName}</Text>
+                <Text style={style.UserProfileName}>{userStatistics.displayName || 'Anonymous'}</Text>
                 <Text style={style.ContainerDate}>Joined at {computeJoinedAtDate(userStatistics.creationTime)}</Text>
                 <View style={style.greenBarProfile} />
               </View>

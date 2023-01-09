@@ -17,7 +17,6 @@ const topicMapper = {
 
 const NewsScreen = () => {
   const style = NewsScreenStyle
-
   const {
     displayName,
     email,

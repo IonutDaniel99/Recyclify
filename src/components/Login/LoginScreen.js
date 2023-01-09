@@ -1,4 +1,4 @@
-import { View, ToastAndroid, TextInput, Text, TouchableOpacity, Image } from 'react-native'
+import { View, ToastAndroid, TextInput, Text, TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth'
@@ -6,8 +6,7 @@ import auth from '@react-native-firebase/auth'
 import { GoogleSingInConfigs } from '../../configs/google/googleSignInConfig'
 import { LoginScreenStyle } from './LoginScreenStyle'
 
-import Icon from 'react-native-vector-icons/SimpleLineIcons'
-import IconFeather from 'react-native-vector-icons/Feather'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { delay } from 'lodash'
 
 const LoginScreen = ({ navigation }) => {
@@ -17,8 +16,7 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
 
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [isPassSecured, setIsPassSecured] = useState(true)
+  const [phoneNumber, setPhoneNumber] = useState('')
 
   const showToast = (message) => {
     ToastAndroid.show(message, ToastAndroid.SHORT)
@@ -26,12 +24,13 @@ const LoginScreen = ({ navigation }) => {
 
   const handleNavigateToTabs = () => navigation.navigate('TabsNavigator')
 
-  const handleForgotPassword = () => {
-    console.log('Forgot Password')
-  }
-
-  const handleEmailAndPasswordLogin = () => {
-    console.log(`username: ${username} / password: ${password}`)
+  const loginAnonymous = async () => {
+    await auth()
+      .signInAnonymously()
+      .then(() => {
+        setLoading(true)
+        delay(handleNavigateToTabs, 1000)
+      })
   }
 
   async function onGoogleButtonPress() {
@@ -48,128 +47,77 @@ const LoginScreen = ({ navigation }) => {
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         showToast('Sing In Canceled')
-        // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
         showToast('Sing In is already in progress')
-        // operation (f.e. sign in) is in progress already
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         showToast('Play Services Not Available')
       } else {
         showToast('Unknown error')
-        console.log(error)
       }
     }
   }
 
-  async function onFacebookButtonPress() {
-    console.log('on Facebook login')
-  }
-
-  async function onMicrosoftButtonPress() {
-    console.log('on Microsoft login')
-  }
-
-  async function onAppleButtonPress() {
-    console.log('on Apple login')
-  }
-  async function onAccountCreate() {
-    console.log('on account Create')
-  }
   return (
     <>
       {!loading ? (
         <View style={style.container}>
-          <Text style={style.loginText}>Login</Text>
-          <View style={style.inputsContainer}>
-            <View style={style.inputFieldContainer}>
-              <View style={style.userInputContainer}>
-                <Icon
-                  name='user'
-                  style={style.userIcon}
-                />
-                <TextInput
-                  keyboardType='email-address'
-                  onChangeText={(val) => setUsername(val)}
-                  placeholder='E-mail'
-                  style={style.userInput}
-                  value={username}
-                />
-              </View>
-              <View style={style.userInputContainer}>
-                <Icon
-                  name='lock'
-                  style={style.passIcon}
-                />
-                <TextInput
-                  onChangeText={(val) => setPassword(val)}
-                  placeholder='Password'
-                  secureTextEntry={isPassSecured}
-                  style={style.passInput}
-                  value={password}
-                />
-                <IconFeather
-                  name={isPassSecured ? 'eye' : 'eye-off'}
-                  onPress={() => setIsPassSecured(!isPassSecured)}
-                  style={style.eyeIcon}
-                />
-              </View>
-            </View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => handleForgotPassword()}
+          <View style={style.loginContainer}>
+            <Text
+              adjustsFontSizeToFit
+              style={style.loginText}
             >
-              <Text style={style.textInput}>Forgot password?</Text>
-            </TouchableOpacity>
+              Login
+            </Text>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => handleEmailAndPasswordLogin()}
-            style={style.loginButtonContainer}
-          >
-            <Text style={style.loginButtonText}>Login</Text>
-          </TouchableOpacity>
           <View style={style.socialContainer}>
-            <Text style={style.socialText}>Or Sign Up Using</Text>
             <View style={style.socialButtons}>
               <TouchableOpacity
                 activeOpacity={0.8}
+                onPress={() => loginAnonymous()}
+                style={style.anonButtonContainer}
+              >
+                <View style={style.signanonImage}>
+                  <Icon
+                    color={'#868E9F'}
+                    name='person'
+                    size={28}
+                    style={style.signInanonImage}
+                  />
+                </View>
+                <Text style={style.signanonText}>Sign in Anonymously</Text>
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-Bold',
+                  fontSize: 20,
+                  color: '#000',
+                }}
+              >
+                Or
+              </Text>
+              <TouchableOpacity
+                activeOpacity={0.8}
                 onPress={() => onGoogleButtonPress()}
-                style={style.appButtonContainer}
+                style={style.googleButtonContainer}
               >
-                <Image source={require('../../assets/images/Login/Google.png')} />
+                <View style={style.signGoogleImage}>
+                  <Image
+                    source={require('../../assets/images/Login/Google.png')}
+                    style={style.signInGoogleImage}
+                  />
+                </View>
+                <Text style={style.signGoogleText}>Sign in with Google</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => onFacebookButtonPress()}
-                style={style.appButtonContainer}
+              <Text
+                adjustsFontSizeToFit
+                numberOfLines={2}
+                style={style.noteText}
               >
-                <Image source={require('../../assets/images/Login/Facebook.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => onMicrosoftButtonPress()}
-                style={style.appButtonContainer}
-              >
-                <Image source={require('../../assets/images/Login/Microsoft.png')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => onAppleButtonPress()}
-                style={style.appButtonContainer}
-              >
-                <Image source={require('../../assets/images/Login/Apple.png')} />
-              </TouchableOpacity>
+                Note: Anonymous login will keep your account until you sing out!
+              </Text>
             </View>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => onAccountCreate()}
-          >
-            <View style={style.noAccount}>
-              <Text>Dont have an account?</Text>
-              <Text style={style.create}>Create</Text>
-            </View>
-          </TouchableOpacity>
+          <View style={{ height: '20%' }} />
         </View>
       ) : (
         <>
