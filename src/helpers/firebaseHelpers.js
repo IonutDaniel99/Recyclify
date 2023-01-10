@@ -14,7 +14,6 @@ export const nullOrCreateCollectionsOnFirebase = (userTemplate) => {
       }
     })
   firebaseDb().ref('products/').update(mockProduct)
-  firebaseDb().ref('statistics/').update({ 'mockStatistics': 0 })
 }
 export const getCurrentUserStatistics = (uid) => firebaseDb().ref(`users/${uid}/`).once('value')
 

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 export const ProductDetailsStyle = StyleSheet.create({
   shadowProp: {

@@ -1,4 +1,4 @@
-import { Alert, Clipboard, Image, Linking, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { Clipboard, Image, Linking, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import RelativeTimeFormat from 'relative-time-format'
 import en from 'relative-time-format/locale/en.json'

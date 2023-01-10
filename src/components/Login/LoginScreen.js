@@ -1,4 +1,4 @@
-import { View, ToastAndroid, TextInput, Text, TouchableOpacity, Image, Alert } from 'react-native'
+import { View, ToastAndroid, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth'
@@ -14,9 +14,6 @@ const LoginScreen = ({ navigation }) => {
   GoogleSignin.configure(GoogleSingInConfigs)
 
   const [loading, setLoading] = useState(false)
-
-  const [username, setUsername] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
 
   const showToast = (message) => {
     ToastAndroid.show(message, ToastAndroid.SHORT)

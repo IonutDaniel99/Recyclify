@@ -3,7 +3,6 @@ import { Image, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 
 export const MetalProcessView = ({ bgColor }) => {
-  const can = require('../../../assets/images/LatestProducts/Metal/can.png')
   const melting = require('../../../assets/images/LatestProducts/Metal/fondue.png')
   const sort = require('../../../assets/images/LatestProducts/Metal/sorting.png')
   const preparation = require('../../../assets/images/LatestProducts/Metal/prep.png')
