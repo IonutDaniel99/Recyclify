@@ -147,8 +147,9 @@ export const ProfileScreenStyle = StyleSheet.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '85%',
+    height: '100%',
+    justifyContent: 'space-around',
+    width: '100%',
   },
   resetStatisticsText: {
     color: '#fff',
@@ -173,8 +174,9 @@ export const ProfileScreenStyle = StyleSheet.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '85%',
+    height: '100%',
+    justifyContent: 'space-around',
+    width: '100%',
   },
 
   logOutText: {

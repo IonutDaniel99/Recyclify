@@ -13,8 +13,6 @@ const LoginScreen = ({ navigation }) => {
   const style = LoginScreenStyle
   GoogleSignin.configure(GoogleSingInConfigs)
 
-  const [loading, setLoading] = useState(false)
-
   const showToast = (message) => {
     ToastAndroid.show(message, ToastAndroid.SHORT)
   }
@@ -25,7 +23,6 @@ const LoginScreen = ({ navigation }) => {
     await auth()
       .signInAnonymously()
       .then(() => {
-        setLoading(true)
         delay(handleNavigateToTabs, 1000)
       })
   }
@@ -38,8 +35,7 @@ const LoginScreen = ({ navigation }) => {
       await auth()
         .signInWithCredential(credential)
         .then(() => {
-          setLoading(true)
-          delay(handleNavigateToTabs, 1000)
+          handleNavigateToTabs()
         })
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -56,71 +52,65 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <>
-      {!loading ? (
-        <View style={style.container}>
-          <View style={style.loginContainer}>
+      <View style={style.container}>
+        <View style={style.loginContainer}>
+          <Text
+            adjustsFontSizeToFit
+            style={style.loginText}
+          >
+            Login
+          </Text>
+        </View>
+        <View style={style.socialContainer}>
+          <View style={style.socialButtons}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => loginAnonymous()}
+              style={style.anonButtonContainer}
+            >
+              <View style={style.signanonImage}>
+                <Icon
+                  color={'#868E9F'}
+                  name='person'
+                  size={28}
+                  style={style.signInanonImage}
+                />
+              </View>
+              <Text style={style.signanonText}>Sign in Anonymously</Text>
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Bold',
+                fontSize: 20,
+                color: '#000',
+              }}
+            >
+              Or
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => onGoogleButtonPress()}
+              style={style.googleButtonContainer}
+            >
+              <View style={style.signGoogleImage}>
+                <Image
+                  source={require('../../assets/images/Login/Google.png')}
+                  style={style.signInGoogleImage}
+                />
+              </View>
+              <Text style={style.signGoogleText}>Sign in with Google</Text>
+            </TouchableOpacity>
             <Text
               adjustsFontSizeToFit
-              style={style.loginText}
+              numberOfLines={2}
+              style={style.noteText}
             >
-              Login
+              Note: Anonymous login will keep your account until you sing out!
             </Text>
           </View>
-          <View style={style.socialContainer}>
-            <View style={style.socialButtons}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => loginAnonymous()}
-                style={style.anonButtonContainer}
-              >
-                <View style={style.signanonImage}>
-                  <Icon
-                    color={'#868E9F'}
-                    name='person'
-                    size={28}
-                    style={style.signInanonImage}
-                  />
-                </View>
-                <Text style={style.signanonText}>Sign in Anonymously</Text>
-              </TouchableOpacity>
-              <Text
-                style={{
-                  fontFamily: 'Poppins-Bold',
-                  fontSize: 20,
-                  color: '#000',
-                }}
-              >
-                Or
-              </Text>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => onGoogleButtonPress()}
-                style={style.googleButtonContainer}
-              >
-                <View style={style.signGoogleImage}>
-                  <Image
-                    source={require('../../assets/images/Login/Google.png')}
-                    style={style.signInGoogleImage}
-                  />
-                </View>
-                <Text style={style.signGoogleText}>Sign in with Google</Text>
-              </TouchableOpacity>
-              <Text
-                adjustsFontSizeToFit
-                numberOfLines={2}
-                style={style.noteText}
-              >
-                Note: Anonymous login will keep your account until you sing out!
-              </Text>
-            </View>
-          </View>
-          <View style={{ height: '20%' }} />
         </View>
-      ) : (
-        <>
-          <Text>Loading</Text>
-        </>
-      )}
+        <View style={{ height: '20%' }} />
+      </View>
     </>
   )
 }

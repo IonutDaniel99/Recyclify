@@ -232,7 +232,7 @@ const PorfileScreen = ({ route, navigation }) => {
                 style={style.resetStatisticsContainer}
               >
                 <TouchableOpacity
-                  activeOpacity={0.2}
+                  activeOpacity={0.8}
                   onPress={() => handleResetStatistics()}
                   style={style.resetStatistics}
                 >
