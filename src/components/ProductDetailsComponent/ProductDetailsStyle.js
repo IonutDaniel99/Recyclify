@@ -80,6 +80,12 @@ export const ProductDetailsStyle = StyleSheet.create({
     marginBottom: 10,
   },
 
+  noHistoryScannedProductsText: {
+    color: '#000',
+    fontSize: 16,
+    marginBottom: 10,
+  },
+
   latestScannedProductsScrollView: {
     height: '80%',
   },

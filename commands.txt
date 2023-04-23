@@ -13,3 +13,5 @@ cd android
 Step 3: Now in this android folder, run this command
 
 ./gradlew assembleDebug
+
+gradlew assembleRelease
