@@ -205,7 +205,7 @@ const ProductDetails = ({ route, navigation }) => {
               horizontal
               style={style.latestScannedProductsScrollView}
             >
-              {!!cardItems && <Text style={style.noHistoryScannedProductsText}>There is no history here! Start to scan!</Text>}
+              {cardItems.length < 0 && <Text style={style.noHistoryScannedProductsText}>There is no history here! Start to scan!</Text>}
               {cardItems &&
                 cardItems.map((item, id) => {
                   return (
